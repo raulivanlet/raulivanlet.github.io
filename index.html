@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Linux Crashcourse</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    body {padding: 10px;
+      background-color: rgb(65, 65, 65);
+      color: honeydew;
+      font-family: 'Open Sans', sans-serif;}
+    main{padding: 10px;}
+    h1{margin: 3px;
+      font-size: 40px;
+      display: inline-flexbox;
+      text-align: center;}
+    h2{
+      margin: 25px 0px 0px 0px;
+    }
+    button{
+      padding: 5px;
+      font-size: 25px;
+      background-color: rgb(116, 116, 116);
+      border: 1px solid oldlace;
+      color: oldlace;
+    }
+    .header{padding: 0px 30px 0px 30px;
+      display: inline-block;}
+    #compile{display: none;}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header">
+      <button onclick="Startup()">
+        Start-up
+      </button>
+    </div>
+    <div class="header">
+      <button onclick="Compile()">
+        GIT/Github
+      </button>
+    </div>
+    <div class="header">
+      <button onclick="">
+        Compile & Execute
+      </button>
+    </div>
+  </header>
+  <main>
+    <div id="startup">
+      <h1>Start-up</h1>
+      <h2>Update packages</h2>
+      <p>sudo pacman -Syu</p>
+
+      <h2>Remove packages</h2>
+      <P>sudo pacman -R [package name]</P>
+
+      <h2>Remove package caches</h2>
+      <p>sudo pacman -Scc</p>
+
+      <h2>Restart system</h2>
+      <p>sudo restart</p>
+    </div>
+    <div id="compile">
+      <h1>Compile & Execute</h1>
+      <h2>Install GIT</h2>
+      <p>sudo pacman -S git</p>
+
+      <h2>GIT version</h2>
+      <P>git --version</P>
+      <P>git version</P>
+
+      <h2>Setup config</h2>
+      <p>git config --global user.email "[user email]"</p>
+      <p>git --global user.name "[name for commits ,not username]"</p>
+
+      <h2>Clone repo</h2>
+      <p>git clone [github https link]</p>
+
+      <h2>Check new changes</h2>
+      <p>git status</p>
+
+      <h2>Save changed file</h2>
+      <p>git add [filename]</p>
+
+      <h2>Commit changes locally</h2>
+      <p>git commit -m "[commit comment]" [filename]</p>
+
+      <h2>Push changes on remote</h2>
+      <p>git push -u origin [branch name]</p>
+    </div>
+  </main>
+  <footer>
+
+  </footer>
+  <script>
+    function Startup(){
+      showStartup();
+      hideCompile();
+    }
+    function Compile(){
+      hideStartup();
+      showCompile();
+    }
+
+    function hideStartup(){
+      var x = document.getElementById("startup");
+      x.style.display = "none";}
+    function showStartup(){
+      var x = document.getElementById("startup");
+      x.style.display = "block";}
+    function hideCompile(){
+      var x = document.getElementById("compile");
+      x.style.display = "none";}
+    function showCompile(){
+      var x = document.getElementById("compile");
+      x.style.display = "block";}
+    
+  </script> 
+</body>
+</html>
