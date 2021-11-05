@@ -17,36 +17,33 @@
       display: inline-flexbox;
       text-align: center;}
     h2{
-      margin: 25px 0px 0px 0px;
-    }
+      margin: 25px 0px 0px 0px;}
     button{
       padding: 5px;
       font-size: 25px;
       background-color: rgb(116, 116, 116);
       border: 1px solid oldlace;
-      color: oldlace;
-    }
+      color: oldlace;}
     .header{padding: 0px 30px 0px 30px;
       display: inline-block;}
+    #git{display: none;}
+    #build{display: none;}
     #compile{display: none;}
   </style>
 </head>
 <body>
   <header>
     <div class="header">
-      <button onclick="Startup()">
-        Start-up
-      </button>
+      <button onclick="Startup()"> Start-up </button>
     </div>
     <div class="header">
-      <button onclick="Compile()">
-        GIT/Github
-      </button>
+      <button onclick="Git()"> GIT/Github </button>
     </div>
     <div class="header">
-      <button onclick="">
-        Compile & Execute
-      </button>
+      <button onclick="Build()"> Build from Source </button>
+    </div>
+    <div class="header">
+      <button onclick="Compile()"> Compile and Execute </button>
     </div>
   </header>
   <main>
@@ -63,9 +60,17 @@
 
       <h2>Restart system</h2>
       <p>sudo restart</p>
+
+      <h2>Install other apps</h2>
+      <p>sudo pacman -S virt-manager</p>
+      <p>sudo pacman -S gwenview</p>
+      <p>sudo pacman -S okular</p>
+      <p>sudo pacman -S libreoffice-still</p>
+      <p>sudo pacman -S virtualbox</p>
+      <p>sudo pacman -S vlc</p>
     </div>
-    <div id="compile">
-      <h1>Compile & Execute</h1>
+    <div id="git">
+      <h1>GIT/Github</h1>
       <h2>Install GIT</h2>
       <p>sudo pacman -S git</p>
 
@@ -75,10 +80,10 @@
 
       <h2>Setup config</h2>
       <p>git config --global user.email "[user email]"</p>
-      <p>git --global user.name "[name for commits ,not username]"</p>
+      <p>git config --global user.name "[name for commits ,not github username]"</p>
 
       <h2>Clone repo</h2>
-      <p>git clone [github https link]</p>
+      <p>git clone [github/AUR https link]</p>
 
       <h2>Check new changes</h2>
       <p>git status</p>
@@ -92,6 +97,48 @@
       <h2>Push changes on remote</h2>
       <p>git push -u origin [branch name]</p>
     </div>
+    <div id="build">
+      <h1>Build from Source</h1>
+      <h2>Install</h2>
+      <p>sudo pacman -S --needed base-devel git</p>
+
+      <h2>Clone App</h2>
+      <P>git clone [url]]</P>
+
+      <h2>Navigate to Folder and Print Files</h2>
+      <p>cd [folder]/[folder]/[folder] && ls</p>
+
+      <h2>Build from Source</h2>
+      <p>less PKGBUILD</p>
+      <p>makepkg -si</p>
+    </div>
+    <div id="compile">
+      <h1>Compile and Execute</h1>
+      <h2>Install C/C++ Language Packages</h2>
+      <p>sudo pacman -Syu gcc</p>
+      
+      <h2>Navigate to Folder and Print Files</h2>
+      <p>cd [folder]/[folder]/[folder] && ls</p>
+
+      <h2>Compile C++ Files</h2>
+      <p>g++ -o [executable file] [fileToBeCompiled.cpp]</p>
+      <h2>Compile C Files</h2>
+      <p>gcc -o [executable file] [fileToBeCompiled.c]</p>
+      
+      <h2>Execute the Executable File</h2>
+      <p>./[numeFisierExecutabil]</p>
+      <!--
+        --
+        heck for mono
+        sudo pacman -Syu mono
+        mono --version
+        mono -V
+        mcs -out:[numeFisierExecutabil (nu trebuie extensie)] [numeleFisieruluiDeCompilat.cs]
+        ./[numeFisierExecutabil]
+        mono [numeleFisierExecutabil]
+        --
+      -->
+    </div>
   </main>
   <footer>
 
@@ -99,26 +146,52 @@
   <script>
     function Startup(){
       showStartup();
-      hideCompile();
-    }
+      hideGit();
+      hideBuild();
+      hideCompile();}
+    function Git(){
+      hideStartup();
+      showGit();
+      hideBuild();
+      hideCompile();}
+    function Build(){
+      hideStartup();
+      hideGit();
+      showBuild();
+      hideCompile();}
     function Compile(){
       hideStartup();
-      showCompile();
-    }
-
+      hideGit();
+      hideBuild();
+      showCompile();}
+    
     function hideStartup(){
       var x = document.getElementById("startup");
       x.style.display = "none";}
     function showStartup(){
       var x = document.getElementById("startup");
       x.style.display = "block";}
+
+    function hideGit(){
+      var x = document.getElementById("git");
+      x.style.display = "none";}
+    function showGit(){
+      var x = document.getElementById("git");
+      x.style.display = "block";}
+
+    function hideBuild(){
+      var x = document.getElementById("build");
+      x.style.display = "none";}
+    function showBuild(){
+      var x = document.getElementById("build");
+      x.style.display = "block";}
+
     function hideCompile(){
       var x = document.getElementById("compile");
       x.style.display = "none";}
     function showCompile(){
       var x = document.getElementById("compile");
       x.style.display = "block";}
-    
   </script> 
 </body>
 </html>
