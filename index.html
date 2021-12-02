@@ -50,132 +50,199 @@
     </div>
   </header>
   <main>
-    <div id="startup">
-      <h1>Start-up</h1>
-      <h2>Update packages</h2>
-      <p>sudo pacman -Syu</p>
+      <div id="arch">
+          <h1>Start-up</h1>
+          <h2>Show disks and partitions</h2>
+          <p>lsblk</p>
 
-      <h2>Remove packages</h2>
-      <P>sudo pacman -R [package name]</P>
+          <h2>Enter Partition tool in disk sda</h2>
+          <P>cgdisk /dev/sda</P>
+          <ul>
+              <li> 500M     ef00     boot</li>
+              <li> 4G       8200     swap</li>
+              <li> ALL      8300     arch</li>
+          </ul>
 
-      <h2>Remove package caches</h2>
-      <p>sudo pacman -Scc</p>
+          <h2>Format Partitions</h2>
+          <p>mkfs.fat -F32 /dev/sda1</p>
+          <p>mkswap /dev/sda2 /mnt/boot</p>
+          <p>mkfs.ext4 /dev/sda3</p>
 
-      <h2>Restart system</h2>
-      <p>sudo restart</p>
+          <h2>Mount Partitions</h2>
+          <p>mount /dev/sda3 /mnt</p>
+          <p>swapon /dev/sda2</p>
+          <p>mkdir -p /mnt/boot</p>
+          <p>mount /dev/sda1 /mnt/boot</p>
 
-      <h2>Install other apps</h2>
-      <p>sudo pacman -S virt-manager</p>
-      <p>sudo pacman -S libreoffice-still</p>
-      <p>sudo pacman -S virtualbox</p>
-      <p>sudo pacman -S vlc</p>
-      <p>sudo pacman -S firefox</p>
-      <p>sudo pacman -S konsole</p>
-      <p>sudo pacman -S dolphin</p>
-    </div>
-    <div id="arch">
-      <h1>Start-up</h1>
-      <h2>Show disks and partitions</h2>
-      <p>lsblk</p>
+          <h2>Preinstall Packages</h2>
+          <p>pacstarap /mnt base linux linux-firmware base-devel nano networkmanager</p>
 
-      <h2>Enter Partition tool in disk sda</h2>
-      <P>cgdisk /dev/sda</P>
-      <ul>
-        <li> 500M   ef00    boot</li>
-        <li> 4G   8200    swap</li>
-        <li> remainder   8300    arch</li>
-      </ul>
+          <h2>Create drives linkin points</h2>
+          <p>genfstab -U /mnt >> /mnt/etc/fstab</p>
 
-      <h2>Format Partitions</h2>
-      <p>mkfs.fat -F32 /dev/sda1</p>
-      <p>mkswap /dev/sda2 /mnt/boot</p>
-      <p>mkfs.ext4 /dev/sda3</p>
+          <h2>Boot into arch instalation</h2>
+          <p>arch-chroot /mnt</p>
 
-      <h2>Mount Partitions</h2>
-      <p>mount /dev/sda3 /mnt</p>
-      <p>swapon /dev/sda2</p>
-      <p>mkdir -p /mnt/boot</p>
-      <p>mount /dev/sda1 /mnt/boot</p>
+          <h1>Inside ARCH install</h1>
+          <h2>Set local time</h2>
+          <p>ln -sf /usr/share/zoneinfo/Europe/Bucharest /etc/localtime</p>
+          <p>hwclock --systohc</p>
 
-      <h2>Preinstall Packages</h2>
-      <p>sudo pacman -S virt-manager</p>
-      <p>sudo pacman -S libreoffice-still</p>
-      <p>sudo pacman -S virtualbox</p>
-      <p>sudo pacman -S vlc</p>
-      <p>sudo pacman -S firefox</p>
-      <p>sudo pacman -S konsole</p>
-      <p>sudo pacman -S dolphin</p>
-    </div>
-    <div id="git">
-      <h1>GIT/Github</h1>
-      <h2>Install GIT</h2>
-      <p>sudo pacman -S git</p>
+          <h2>Set local date format , currency ,etc</h2>
+          <p>nano /etc/locale.gen</p>
+          <ul>
+              <li>ro_RO.UTF-8 UTF-8</li>
+          </ul>
+          <p>locale-gen</p>
 
-      <h2>GIT version</h2>
-      <P>git --version</P>
-      <P>git version</P>
+          <h2>Set language</h2>
+          <p>nano /etc/locale.conf</p>
+          <ul>
+              <li>LANG=en_US.UTF-8</li>
+          </ul>
+          <p>locale-gen</p>
 
-      <h2>Setup config</h2>
-      <p>git config --global user.email "[user email]"</p>
-      <p>git config --global user.name "[name for commits ,not github username]"</p>
+          <h2>Create root user</h2>
+          <p>nano /etc/hostname</p>
+          <ul>
+              <li>hostname</li>
+              <li>(hostname is irelevant , you login as root using root name)</li>
+          </ul>
+          <p>passwd</p>
 
-      <h2>Clone repo</h2>
-      <p>git clone [github/AUR https link]</p>
+          <h2>IDK Why</h2>
+          <p>mkinitcpio -P</p>
 
-      <h2>Check new changes</h2>
-      <p>git status</p>
+          <h2>Install GRUB</h2>
+          <p>pacman -Sy grub efibootmgr</p>
+          <p>grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB</p>
+          <p>grub-mkconfig -o /boot/grub/grub.cfg</p>
 
-      <h2>Save changed file</h2>
-      <p>git add [filename]</p>
 
-      <h2>Commit changes locally</h2>
-      <p>git commit -m "[commit comment]" [filename]</p>
+          <h2>Finished Basic ARCH Install</h2>
+          <p>exit</p>
+          <p>unmount -R /mnt</p>
+          <p>reboot</p>
 
-      <h2>Push changes on remote</h2>
-      <p>git push -u origin [branch name]</p>
-    </div>
-    <div id="build">
-      <h1>Build from Source</h1>
-      <h2>Install</h2>
-      <p>sudo pacman -S --needed base-devel git</p>
 
-      <h2>Clone App</h2>
-      <P>git clone [url]]</P>
+          <h2>Enable Wifi / Ethernet</h2>
+          <p>systemctl enable NetworkManager</p>
 
-      <h2>Navigate to Folder and Print Files</h2>
-      <p>cd [folder]/[folder]/[folder] && ls</p>
+          <h2>Add non-root User</h2>
+          <p>useradd -g users -G wheel,storage,power -m username</p>
+          <p>passwd username</p>
 
-      <h2>Build from Source</h2>
-      <p>less PKGBUILD</p>
-      <p>makepkg -si</p>
-    </div>
-    <div id="compile">
-      <h1>Compile and Execute</h1>
-      <h2>Install C/C++ Language Packages</h2>
-      <p>sudo pacman -Syu gcc</p>
-      
-      <h2>Navigate to Folder and Print Files</h2>
-      <p>cd [folder]/[folder]/[folder] && ls</p>
+          <h2>Enable Non-Root User To Use SUDO</h2>
+          <p>nano ~/.bashrc</p>
+          <ul>
+              <li>export EDITOR="nano"</li>
+          </ul>
+          <p>sudo -E visudo</p>
+          <ul>
+              <li>#Uncomment to allow members of group wheel to execute any command</li>
+              <li>%wheel ALL=(ALL) ALL</li>
+          </ul>
 
-      <h2>Compile C++ Files</h2>
-      <p>g++ -o [executable file] [fileToBeCompiled.cpp]</p>
-      <h2>Compile C Files</h2>
-      <p>gcc -o [executable file] [fileToBeCompiled.c]</p>
-      
-      <h2>Execute the Executable File</h2>
-      <p>./[numeFisierExecutabil]</p>
-      <!--
-        --
-        heck for mono
-        sudo pacman -Syu mono
-        mono --version
-        mono -V
-        mcs -out:[numeFisierExecutabil (nu trebuie extensie)] [numeleFisieruluiDeCompilat.cs]
-        ./[numeFisierExecutabil]
-        mono [numeleFisierExecutabil]
-        --
-      -->
-    </div>
+          <h2>Install KDE Plasma</h2>
+          <p>sudo pacman -Syu</p>
+          <p>sudo pacman -S xorg</p>
+          <p>sudo pacman -S plasma-meta</p>
+          <p>sudo pacman -S firefox dolphin konsole</p>
+          <p>systemctl enable sddm</p>
+      </div>
+      <div id="startup">
+          <h1>Start-up</h1>
+          <h2>Update packages</h2>
+          <p>sudo pacman -Syu</p>
+
+          <h2>Remove packages</h2>
+          <P>sudo pacman -R [package name]</P>
+
+          <h2>Remove package caches</h2>
+          <p>sudo pacman -Scc</p>
+
+          <h2>Restart system</h2>
+          <p>sudo restart</p>
+
+          <h2>Install other apps</h2>
+          <p>sudo pacman -S virt-manager</p>
+          <p>sudo pacman -S libreoffice-still</p>
+          <p>sudo pacman -S virtualbox</p>
+          <p>sudo pacman -S vlc</p>
+          <p>sudo pacman -S firefox</p>
+          <p>sudo pacman -S konsole</p>
+          <p>sudo pacman -S dolphin</p>
+      </div>
+      <div id="git">
+          <h1>GIT/Github</h1>
+          <h2>Install GIT</h2>
+          <p>sudo pacman -S git</p>
+
+          <h2>GIT version</h2>
+          <P>git --version</P>
+          <P>git version</P>
+
+          <h2>Setup config</h2>
+          <p>git config --global user.email "[user email]"</p>
+          <p>git config --global user.name "[name for commits ,not github username]"</p>
+
+          <h2>Clone repo</h2>
+          <p>git clone [github/AUR https link]</p>
+
+          <h2>Check new changes</h2>
+          <p>git status</p>
+
+          <h2>Save changed file</h2>
+          <p>git add [filename]</p>
+
+          <h2>Commit changes locally</h2>
+          <p>git commit -m "[commit comment]" [filename]</p>
+
+          <h2>Push changes on remote</h2>
+          <p>git push -u origin [branch name]</p>
+      </div>
+      <div id="build">
+          <h1>Build from Source</h1>
+          <h2>Install</h2>
+          <p>sudo pacman -S --needed base-devel git</p>
+
+          <h2>Clone App</h2>
+          <P>git clone [url]]</P>
+
+          <h2>Navigate to Folder and Print Files</h2>
+          <p>cd [folder]/[folder]/[folder] && ls</p>
+
+          <h2>Build from Source</h2>
+          <p>less PKGBUILD</p>
+          <p>makepkg -si</p>
+      </div>
+      <div id="compile">
+          <h1>Compile and Execute</h1>
+          <h2>Install C/C++ Language Packages</h2>
+          <p>sudo pacman -Syu gcc</p>
+
+          <h2>Navigate to Folder and Print Files</h2>
+          <p>cd [folder]/[folder]/[folder] && ls</p>
+
+          <h2>Compile C++ Files</h2>
+          <p>g++ -o [executable file] [fileToBeCompiled.cpp]</p>
+          <h2>Compile C Files</h2>
+          <p>gcc -o [executable file] [fileToBeCompiled.c]</p>
+
+          <h2>Execute the Executable File</h2>
+          <p>./[numeFisierExecutabil]</p>
+          <!--
+          --
+          heck for mono
+          sudo pacman -Syu mono
+          mono --version
+          mono -V
+          mcs -out:[numeFisierExecutabil (nu trebuie extensie)] [numeleFisieruluiDeCompilat.cs]
+          ./[numeFisierExecutabil]
+          mono [numeleFisierExecutabil]
+          --
+        -->
+      </div>
   </main>
   <footer>
 
