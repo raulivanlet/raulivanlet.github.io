@@ -51,21 +51,22 @@
   </header>
   <main>
       <div id="arch">
-          <h1>Start-up</h1>
-          <h2>Show disks and partitions</h2>
+          <h1>Install Arch</h1>
+          <h2>Show Disks and Partitions</h2>
           <p>lsblk</p>
 
-          <h2>Enter Partition tool in disk sda</h2>
+          <h2>Enter Partition Tool in Disk sda</h2>
           <P>cgdisk /dev/sda</P>
           <ul>
               <li> 500M     ef00     boot</li>
               <li> 4G       8200     swap</li>
               <li> ALL      8300     arch</li>
           </ul>
+          <P>sda = disk1 ,sda1=disk1 part1 ,sda2 = disk1 part2</P>
 
           <h2>Format Partitions</h2>
           <p>mkfs.fat -F32 /dev/sda1</p>
-          <p>mkswap /dev/sda2 /mnt/boot</p>
+          <p>mkswap /dev/sda2</p>
           <p>mkfs.ext4 /dev/sda3</p>
 
           <h2>Mount Partitions</h2>
@@ -75,7 +76,7 @@
           <p>mount /dev/sda1 /mnt/boot</p>
 
           <h2>Preinstall Packages</h2>
-          <p>pacstarap /mnt base linux linux-firmware base-devel nano networkmanager</p>
+          <p>pacstrap /mnt base linux linux-firmware base-devel nano networkmanager</p>
 
           <h2>Create drives linkin points</h2>
           <p>genfstab -U /mnt >> /mnt/etc/fstab</p>
@@ -109,6 +110,7 @@
               <li>(hostname is irelevant , you login as root using root name)</li>
           </ul>
           <p>passwd</p>
+          <p>("root" user password)</p>
 
           <h2>IDK Why</h2>
           <p>mkinitcpio -P</p>
@@ -129,8 +131,9 @@
           <p>systemctl enable NetworkManager</p>
 
           <h2>Add non-root User</h2>
-          <p>useradd -g users -G wheel,storage,power -m username</p>
-          <p>passwd username</p>
+          <p>useradd -g users -G wheel,storage,power -m [username]</p>
+          <p>passwd [username]</p>
+          <p>insted of [username] write the username you want</p>
 
           <h2>Enable Non-Root User To Use SUDO</h2>
           <p>nano ~/.bashrc</p>
@@ -147,6 +150,7 @@
           <p>sudo pacman -Syu</p>
           <p>sudo pacman -S xorg</p>
           <p>sudo pacman -S plasma-meta</p>
+          <p>sudo pacman -S kde-applications</p>
           <p>sudo pacman -S firefox dolphin konsole</p>
           <p>systemctl enable sddm</p>
       </div>
@@ -248,33 +252,33 @@
 
   </footer>
   <script>
-    function InstallArch(){
-      hideStartup();
+    function InstallArch() {
       showInstallArch();
-      hideGit();
-      hideBuild();
-      hideCompile();}
-    function Startup(){
-      showStartup();
-      hideInstallArch();
-      hideGit();
-      hideBuild();
-      hideCompile();}
-    function Git(){
       hideStartup();
+      hideGit();
+      hideBuild();
+      hideCompile();}
+    function Startup() {
       hideInstallArch();
+      showStartup();  
+      hideGit();
+      hideBuild();
+      hideCompile();}
+    function Git() {
+      hideInstallArch();
+      hideStartup();
       showGit();
       hideBuild();
       hideCompile();}
-    function Build(){
+    function Build() {
+      hideInstallArch();
       hideStartup();
-      hideInstallArch()
       hideGit();
       showBuild();
       hideCompile();}
-    function Compile(){
-      hideStartup();
+    function Compile() {
       hideInstallArch();
+      hideStartup();
       hideGit();
       hideBuild();
       showCompile();}
