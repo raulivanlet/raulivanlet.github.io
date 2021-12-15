@@ -9,12 +9,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {padding: 10px;
-            background-color: rgb(65, 65, 65);
-            color: honeydew;
+            color: #c2ffc2;
+            background-color:#181a1b;
+            border: 1px solid oldlace;
             font-family: 'Open Sans', sans-serif;}
 
         main {padding: 10px;}
-
+          
+        header {color: #f2d798;}
+        
         h1 {margin: 3px;
             font-size: 40px;
             display: inline-flexbox;
@@ -24,9 +27,9 @@
 
         button {padding: 5px;
             font-size: 25px;
-            background-color: rgb(116, 116, 116);
-            border: 1px solid oldlace;
-            color: oldlace;}
+            background-color: #575f62;
+            border: 1px solid #664508;
+            color: #f2d798;}
 
         .header {padding: 0px 30px 0px 30px;
             display: inline-block;}
@@ -56,6 +59,7 @@
     </div>
   </header>
   <main>
+      <!-- ____________________________ARCH Linux Installation Guide____________________________-->
       <div id="arch">
           <h1>Install Arch</h1>
           <h2>Show Disks and Partitions</h2>
@@ -160,6 +164,7 @@
           <p>sudo pacman -S firefox dolphin konsole</p>
           <p>systemctl enable sddm</p>
       </div>
+      <!-- ____________________________How to Install Packages / Packages Sugestion____________________________-->
       <div id="startup">
           <h1>Start-up</h1>
           <h2>Update packages</h2>
@@ -183,6 +188,7 @@
           <p>sudo pacman -S konsole</p>
           <p>sudo pacman -S dolphin</p>
       </div>
+      <!-- ____________________________GIT / GITHUB Guide for Linux____________________________-->
       <div id="git">
           <h1>GIT/Github</h1>
           <h2>Install GIT</h2>
@@ -208,9 +214,13 @@
           <h2>Commit changes locally</h2>
           <p>git commit -m "[commit comment]" [filename]</p>
 
+          <h2>Save and commit locally all changes with [git comall] which means git commit all</h2>
+          <p>git config --global alias.comall "git status add -A && git commit -m</p>
+
           <h2>Push changes on remote</h2>
           <p>git push -u origin [branch name]</p>
       </div>
+      <!-- ____________________________Build Software From Source____________________________-->
       <div id="build">
           <h1>Build from Source</h1>
           <h2>Install</h2>
@@ -226,6 +236,7 @@
           <p>less PKGBUILD</p>
           <p>makepkg -si</p>
       </div>
+      <!-- ____________________________Compile C / C++ Code witn MinGW____________________________-->
       <div id="compile">
           <h1>Compile and Execute</h1>
           <h2>Install C/C++ Language Packages</h2>
