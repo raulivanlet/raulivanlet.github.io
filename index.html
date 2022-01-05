@@ -65,14 +65,13 @@
           <h2>Show Disks and Partitions</h2>
           <p>lsblk</p>
 
-          <h2>Enter Partition Tool in Disk sda</h2>
+          <h2>Enter Partition Tool in Disk sda or nvme0n1</h2>
           <P>cgdisk /dev/sda or nvme0n1</P>
           <ul>
               <li> 500M     ef00     boot</li>
               <li> 4G       8200     swap</li>
               <li> ALL      8300     arch</li>
           </ul>
-          <P>sda = disk1 ,sda1=disk1 part1 ,sda2 = disk1 part2</P>
 
           <h2>Format Partitions</h2>
           <p>mkfs.fat -F32 /dev/sda1</p>
@@ -84,9 +83,9 @@
           <p>swapon /dev/sda2</p>
           <p>mkdir -p /mnt/boot</p>
           <p>mount /dev/sda1 /mnt/boot</p>
-
+          <!--Install software-->
           <h2>Preinstall Packages</h2>
-          <p>pacstrap /mnt base linux linux-firmware base-devel nano networkmanager</p>
+          <p>pacstrap /mnt base base-devel linux linux-firmware nano vim networkmanager</p>
 
           <h2>Create drives linkin points</h2>
           <p>genfstab -U /mnt >> /mnt/etc/fstab</p>
@@ -94,10 +93,8 @@
           <h2>Boot into arch instalation</h2>
           <p>arch-chroot /mnt</p>
 
-          <h1>Inside ARCH install</h1>
           <h2>Set local time</h2>
           <p>ln -sf /usr/share/zoneinfo/Europe/Bucharest /etc/localtime</p>
-          <p>hwclock --systohc</p>
 
           <h2>Set local date format , currency ,etc</h2>
           <p>nano /etc/locale.gen</p>
@@ -117,10 +114,8 @@
           <p>nano /etc/hostname</p>
           <ul>
               <li>hostname</li>
-              <li>(hostname is irelevant , you login as root using root name)</li>
           </ul>
           <p>passwd</p>
-          <p>("root" user password)</p>
 
           <h2>IDK Why</h2>
           <p>mkinitcpio -P</p>
@@ -129,13 +124,6 @@
           <p>pacman -Sy grub efibootmgr</p>
           <p>grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB</p>
           <p>grub-mkconfig -o /boot/grub/grub.cfg</p>
-
-
-          <h2>Finished Basic ARCH Install</h2>
-          <p>exit</p>
-          <p>unmount -R /mnt</p>
-          <p>reboot</p>
-
 
           <h2>Enable Wifi / Ethernet</h2>
           <p>systemctl enable NetworkManager</p>
@@ -146,14 +134,9 @@
           <p>insted of [username] write the username you want</p>
 
           <h2>Enable Non-Root User To Use SUDO</h2>
-          <p>nano ~/.bashrc</p>
+          <p>visudo</p>
           <ul>
-              <li>export EDITOR="nano"</li>
-          </ul>
-          <p>sudo -E visudo</p>
-          <p>sudo nano /etc/sudoers</p>
-          <ul>
-              <li>#Uncomment to allow members of group wheel to execute any command</li>
+              <li>##Uncomment to allow members of group wheel to execute any command</li>
               <li>%wheel ALL=(ALL) ALL</li>
           </ul>
 
@@ -161,8 +144,13 @@
           <p>sudo pacman -Syu</p>
           <p>sudo pacman -S xorg</p>
           <p>sudo pacman -S plasma-meta</p>
-          <p>sudo pacman -S firefox dolphin konsole vlc gwenview partitionmanager</p>
+          <p>sudo pacman -S firefox dolphin konsole gwenview partitionmanager</p>
           <p>systemctl enable sddm</p>
+
+          <h2>Finished Basic ARCH Install</h2>
+          <p>exit</p>
+          <p>unmount -R /mnt</p>
+          <p>reboot</p>
       </div>
       <!-- ____________________________How to Install Packages / Packages Sugestion____________________________-->
       <div id="startup">
@@ -173,11 +161,14 @@
           <h2>Remove packages</h2>
           <P>sudo pacman -R [package name]</P>
 
+          <h2>Search for package</h2>
+          <p>sudo pacman -Qi [package name]</p>
+
           <h2>Remove package caches</h2>
           <p>sudo pacman -Scc</p>
 
-          <h2>Restart system</h2>
-          <p>sudo restart</p>
+          <h2>Remove tru orphan packages</h2>
+          <p>sudo pacman -Qtdq | sudo pacman -Rns -</p>
 
           <h2>Install other apps</h2>
           <p>sudo pacman -S virt-manager</p>
@@ -186,10 +177,7 @@
           <p>sudo pacman -S vlc</p>
           <p>sudo pacman -S firefox</p>
           <p>sudo pacman -S konsole</p>
-          <p>sudo pacman -S dolphin</p>
-
-          <h2>Remove tru orphan packages</h2>
-          <p>sudo pacman -Qtdq | sudo pacman -Rns -</p>
+          <p>sudo pacman -S dolphin</p>          
       </div>
       <!-- ____________________________GIT / GITHUB Guide for Linux____________________________-->
       <div id="git">
@@ -231,7 +219,7 @@
           <p>sudo pacman -S --needed base-devel git</p>
 
           <h2>Clone App</h2>
-          <P>git clone [url]]</P>
+          <P>git clone [url]</P>
 
           <h2>Navigate to Folder and Print Files</h2>
           <p>cd [folder]/[folder]/[folder] && ls</p>
