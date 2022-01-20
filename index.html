@@ -3,7 +3,6 @@
 <head>
     <meta charset="utf-8">
     <title>Linux Crashcourse</title>
-    <link rel="icon" href="archIcon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
@@ -102,7 +101,6 @@
           <ul>
               <li>ro_RO.UTF-8 UTF-8</li>
           </ul>
-          <p>locale-gen</p>
 
           <h2>Set language</h2>
           <p>nano /etc/locale.conf</p>
@@ -132,7 +130,6 @@
           <h2>Add non-root User</h2>
           <p>useradd -g users -G wheel,storage,power -m [username]</p>
           <p>passwd [username]</p>
-          <p>insted of [username] write the username you want</p>
 
           <h2>Enable Non-Root User To Use SUDO</h2>
           <p>visudo</p>
@@ -143,9 +140,8 @@
 
           <h2>Install KDE Plasma</h2>
           <p>sudo pacman -Syu</p>
-          <p>sudo pacman -S xorg</p>
-          <p>sudo pacman -S plasma-meta</p>
-          <p>sudo pacman -S firefox dolphin konsole gwenview partitionmanager</p>
+          <p>sudo pacman -S xorg      i3     urxvt   thunar  firefox</p>
+          <p>sudo pacman -S xorg plasma-meta konsole dolphin firefox partitionmanager</p>
           <p>systemctl enable sddm</p>
 
           <h2>Finished Basic ARCH Install</h2>
@@ -172,13 +168,28 @@
           <p>sudo pacman -Qtdq | sudo pacman -Rns -</p>
 
           <h2>Install other apps</h2>
-          <p>sudo pacman -S virt-manager</p>
-          <p>sudo pacman -S libreoffice-still</p>
-          <p>sudo pacman -S virtualbox</p>
-          <p>sudo pacman -S vlc</p>
-          <p>sudo pacman -S firefox</p>
-          <p>sudo pacman -S konsole</p>
-          <p>sudo pacman -S dolphin</p>          
+          <p>sudo pacman -S libreoffice-still gwenview vlc</p>
+
+          <h2>Install VM</h2>
+          <p>LC_ALL=C lscpu | grep Virtualization</p>
+          <p>sudo pacman -S iptable ebtables dnsmask dmidecode bridge-utils</p>
+          <p>sudo pacman -S qemu qemu-arch-extra ovmf openbsd-netcat virt-manager</p>
+          <p>sudo systemctl status libvirtd</p>
+          <p>sudo /etc/libvirt/libvirtd.conf</p>
+          <ul>
+            <li>#uncomment:</li>
+            <li>#unix_sock_group="libvirt"</li>
+            <li>#unix_sock_rw_perms="0770"</li>
+          </ul>
+          <p>sudo usermod -a -G libvirt $(whoami)</p>
+          <p>groups $(whoami)</p>
+          <p>sudo systemctl restart libvirtd</p>
+          <p>sudo virsh net-define /etc/libvirt/qemu/networks/default.xml</p>
+          <p>sudo virsh net-autorestart default</p>
+          <p>sudo virsh net-list --all</p>
+          <p>reboot</p>
+          <p>sudo systemctl status libvirtd</p>
+
       </div>
       <!-- ____________________________GIT / GITHUB Guide for Linux____________________________-->
       <div id="git">
@@ -200,18 +211,7 @@
           <p>git status (into the file folder)</p>
 
           <h2>Save changed file</h2>
-          <p>git add [filename] // git add -a // --all</p>
-
-          <h2>Commit changes locally</h2>
-          <p>git commit -m "[commit comment]" <!--[filename]--></p>
-
-          <h2>Push changes on remote</h2>
-          <p>git push -u origin [branch name]</p>
-
-          <!--
-          <h2>Save and commit locally all changes with [git comall] which means git commit all</h2>
-          <p>git config --global alias.gitsave "git add --all && git commit -m "Update""</p>
-          -->
+          <p>git add --all</p>
       </div>
       <!-- ____________________________Build Software From Source____________________________-->
       <div id="build">
