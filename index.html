@@ -85,7 +85,7 @@
           <p>mount /dev/sda1 /mnt/boot</p>
           <!--Install software-->
           <h2>Preinstall Packages</h2>
-          <p>pacstrap /mnt base base-devel linux linux-firmware nano vim networkmanager</p>
+          <p>pacstrap /mnt base linux linux-firmware networkmanager nano</p>
 
           <h2>Create drives linkin points</h2>
           <p>genfstab -U /mnt >> /mnt/etc/fstab</p>
