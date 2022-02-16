@@ -138,10 +138,10 @@
               <li>%wheel ALL=(ALL) ALL</li>
           </ul>
 
-          <h2>Install KDE Plasma</h2>
+          <h2>Install Desktop Environment</h2>
           <p>sudo pacman -Syu</p>
-          <p>sudo pacman -S xorg      i3     urxvt   thunar  firefox</p>
-          <p>sudo pacman -S xorg plasma-meta konsole dolphin firefox partitionmanager</p>
+          <p>sudo pacman -S xorg      i3     konsole dolphin chromium</p>
+          <p>sudo pacman -S xorg plasma-meta konsole dolphin chromium</p>
           <p>systemctl enable sddm</p>
 
           <h2>Finished Basic ARCH Install</h2>
@@ -149,26 +149,40 @@
           <p>unmount -R /mnt</p>
           <p>reboot</p>
       </div>
-      <!-- ____________________________How to Install Packages / Packages Sugestion____________________________-->
+      <!-- ____________________________How to Install Packages / Packages Sugestion____________________________
+	~/.config/ -App configuration
+	~/.cache/ -Cache location
+	~/.local/share/ -Old files might be here
+      -->
       <div id="startup">
-          <h1>Start-up</h1>
-          <h2>Update packages</h2>
-          <p>sudo pacman -Syu</p>
-
-          <h2>Remove packages</h2>
-          <P>sudo pacman -R [package name]</P>
-
-          <h2>Search for package</h2>
-          <p>sudo pacman -Qi [package name]</p>
-
-          <h2>Remove package caches</h2>
+          <h1>Setup Arch</h1>
+	  <h2>Install  apps</h2>
+	  <p>sudo pacman -S base-devel git gcc nano</p>
+	  <p>sudo pacman -S kmix</p>
+	
+          <h2>Clear all package cache</h2>
           <p>sudo pacman -Scc</p>
 
-          <h2>Remove tru orphan packages</h2>
+          <h2>Remove true orphan packages</h2>
           <p>sudo pacman -Qtdq | sudo pacman -Rns -</p>
 
-          <h2>Install other apps</h2>
-          <p>sudo pacman -S libreoffice-still gwenview vlc</p>
+          <h2>Add ~/bin to $PATH</h2>
+	  <p>mkdir ~/bin</p>
+	  <p>vim ~/.bash_profile</p>
+          <p>export PATH=$PATH:/home/[username]/bin</p>
+
+          <h2>Configure D-Menu</h2>
+          <p>vim ~/.config/i3/config</p>
+
+          <h2>D-Menu Applications</h2>
+          <p>ls -a /usr/share/applications</p>
+
+          <h2>Xorg settings</h2>
+          <p>cat /etc/X11/xorg.conf</p>
+	  <p>ls -a /etc/X11</p>
+	  <p>xrandr --output HDMI-A-1 --mode 1920x1080 --rate 119.98</p>
+	  <p>sudo Xorg -configure</p>
+	  <p>X -configure</p>
 
           <h2>Install VM</h2>
           <p>LC_ALL=C lscpu | grep Virtualization</p>
@@ -194,9 +208,6 @@
       <!-- ____________________________GIT / GITHUB Guide for Linux____________________________-->
       <div id="git">
           <h1>GIT/Github</h1>
-          <h2>Install GIT</h2>
-          <p>sudo pacman -S git</p>
-
           <h2>GIT version</h2>
           <P>git version</P>
 
@@ -216,9 +227,6 @@
       <!-- ____________________________Build Software From Source____________________________-->
       <div id="build">
           <h1>Build from Source</h1>
-          <h2>Install</h2>
-          <p>sudo pacman -S --needed base-devel git</p>
-
           <h2>Clone App</h2>
           <P>git clone [url]</P>
 
@@ -232,9 +240,6 @@
       <!-- ____________________________Compile C / C++ Code witn MinGW____________________________-->
       <div id="compile">
           <h1>Compile and Execute</h1>
-          <h2>Install C/C++ Language Packages</h2>
-          <p>sudo pacman -Syu gcc</p>
-
           <h2>Navigate to Folder and Print Files</h2>
           <p>cd [folder]/[folder]/[folder] && ls</p>
 
