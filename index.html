@@ -1,55 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-		<meta charset="utf-8">
-		<title>Linux Crashcourse</title>
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<style>
-				body {padding: 20px;
-						line-height: 1.5;
-						color: #c2ffc2;
-						background-color:#181a1b;
-						border: 1px solid oldlace;
-						font-family: 'Open Sans', sans-serif;
-						font-size: 18px;}
+	<meta charset="utf-8">
+	<title>Linux Crashcourse</title>
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+	<!--
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+		body {padding: 20px;
+			line-height: 1.5;
+			color: #c2ffc2;
+			background-color:#181a1b;
+			border: 1px solid oldlace;
+			font-family: 'Open Sans', sans-serif;
+			font-size: 18px;}
 
-				main {padding: 5px;}
+		main {padding: 5px;}
 					
-				header {color: #f2d798;}
+		header {color: #f2d798;}
 				
-				h1 {margin: 3px;
-						font-size: 40px;
-						display: inline-flexbox;
-						text-align: center;}
+		h1 {margin: 3px;
+			font-size: 40px;
+			display: inline-flexbox;
+			text-align: center;}
 				
-				h2 {margin: 25px 0px 0px 0px;
-						font-size:28px;}
+		h2 {margin: 25px 0px 0px 0px;
+			font-size:28px;}
 
-				p{margin:0px 0px 0px 0px;}
+		p{margin:0px 0px 0px 0px;}
 
-				button {padding: 5px;
-						font-size: 25px;
-						background-color: #575f62;
-						border: 1px solid #664508;
-						color: #f2d798;}
+		button {padding: 5px;
+			font-size: 25px;
+			background-color: #575f62;
+			border: 1px solid #664508;
+			color: #f2d798;}
 
-				.header {padding: 0px 30px 0px 30px;
-						display: inline-block;}
+		.header {padding: 0px 30px 0px 30px;
+			display: inline-block;}
 
-				.textFile {padding:10px;
-						background-color: #333638;
-						border:1px solid black;
-						border-left: 5px solid rgba(28,110,164,0.94);}
+		.textFile {padding:10px;
+			background-color: #333638;
+			border:1px solid black;
+			border-left: 5px solid rgba(28,110,164,0.94);}
 				
-				#i3conf{display:none;}
-				#startup {display: none;}
-				#git {display: none;}
-				#build {display: none;}
-				#compile {display: none;}
-		</style>
+		#i3conf{display:none;}
+		#startup {display: none;}
+		#git {display: none;}
+		#build {display: none;}
+		#compile {display: none;}
+	</style>
 </head>
 <body>
 	<header>
@@ -70,7 +72,7 @@
 		</div>
 	</header>
 	<main>
-			<!-- ____________________________ARCH Linux Installation Guide____________________________-->
+		<!-- ____________________________ARCH Linux Installation Guide____________________________-->
 		<div id="arch">
 			<h1>Install Arch</h1>
 				<h2>Show Disks and Partitions</h2>
@@ -168,7 +170,7 @@
 						reboot</p>
 		</div>
 
-			<!-- ____________________________New Install Settings____________________________-->
+		<!-- ____________________________New Install Settings____________________________-->
 		<div id="startup">
 			<h1>New Install Settings</h1>
 				<h2>Install  apps</h2>
@@ -187,7 +189,11 @@
 					<div class="textFile">
 						<p>export PATH=$PATH:/home/[username]/bin <br>
 							startx <br>
-							xrandr --output HDMI-A-1 --mode 1920x1080 --rate 119.98</p>
+							</p>
+					</div>
+					<p>vim ~/.bashrc</p>
+					<div class="textFile">
+						<p>xrandr --output HDMI-A-1 --mode 1920x1080 --rate 119.98</p>
 					</div>
 
 				<h2>Add 32 bit programs to pacman</h2>
@@ -196,7 +202,7 @@
 						<p>[multilib] <br>
 							Include = /etc/pacman.d/mirrorlist</p>
 					</div>
-				
+					
 				<br>
 				<br>
 				<br>
@@ -406,12 +412,12 @@ bindsym $mod+o exec libreoffice <br>
 
 				<h2>Install VM</h2>
 					<p>LC_ALL=C lscpu | grep Virtualization <br>
-						sudo pacman -S virt-manager qemu qemu-arch-extra <br>
+						sudo pacman -S virt-manager libvirt qemu qemu-arch-extra <br>
 						sudo pacman -S [iptable] [ebtables] [dnsmask] dmidecode bridge-utils ovmf openbsd-netcat <br>
 						sudo systemctl status libvirtd <br>
-						sudo /etc/libvirt/libvirtd.conf</p>
+						sudo vim /etc/libvirt/libvirtd.conf</p>
 					<div class="textFile">
-						<p>#uncomment: <br>
+						<p>uncomment: <br>
 							#unix_sock_group="libvirt" <br>
 							#unix_sock_rw_perms="0770"</p>
 					</div>
@@ -444,17 +450,26 @@ bindsym $mod+o exec libreoffice <br>
 				<h2>Check new changes</h2>
 					<p>git status (into the file folder)</p>
 
-				<h2>Save changed file</h2>
-					<p>git add --all</p>
+				<h2>Save changes</h2>
+					<p>git add -A</p>
+
+				<h2>Add changes to local repo</h2>
+					<p>git commit -m</p>
+
+				<h2>Add changes to cloud repo</h2>
+					<p>git push</p>
 		</div>
 		<!-- ____________________________Build Software From Source____________________________-->
 		<div id="build">
 			<h1>Build from Source</h1>
+				<h2>Download Libs</h2>
+					<p>sudo pacman -Syu dase-devel</p>
+
 				<h2>Clone App</h2>
 					<p>git clone [url]</p>
 
-				<h2>Navigate to Folder and Print Files</h2>
-					<p>cd [folder]/[folder]/[folder] && ls</p>
+				<h2>Navigate to Folder</h2>
+					<p>cd [folder]/[folder]/[folder]</p>
 
 				<h2>Build from Source</h2>
 					<p>less PKGBUILD <br>
@@ -463,8 +478,11 @@ bindsym $mod+o exec libreoffice <br>
 		<!-- ____________________________Compile C / C++ Code witn MinGW____________________________-->
 		<div id="compile">
 			<h1>Compile and Execute</h1>
-				<h2>Navigate to Folder and Print Files</h2>
-					<p>cd [folder]/[folder]/[folder] && ls</p>
+				<h2>Install C/C++ compilers</h2>
+					<p>sudo pacman -S gcc</p>
+
+				<h2>Navigate to Folder</h2>
+					<p>cd [folder]/[folder]/[folder]</p>
 
 				<h2>Compile C++ Files</h2>
 					<p>g++ -o [executable file] [fileToBeCompiled.cpp]</p>
