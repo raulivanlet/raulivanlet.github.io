@@ -1,326 +1,562 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>Linux Crashcourse</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {padding: 10px;
-            color: #c2ffc2;
-            background-color:#181a1b;
-            border: 1px solid oldlace;
-            font-family: 'Open Sans', sans-serif;}
+		<meta charset="utf-8">
+		<title>Linux Crashcourse</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<style>
+				body {padding: 20px;
+						line-height: 1.5;
+						color: #c2ffc2;
+						background-color:#181a1b;
+						border: 1px solid oldlace;
+						font-family: 'Open Sans', sans-serif;
+						font-size: 18px;}
 
-        main {padding: 10px;}
-          
-        header {color: #f2d798;}
-        
-        h1 {margin: 3px;
-            font-size: 40px;
-            display: inline-flexbox;
-            text-align: center;}
+				main {padding: 5px;}
+					
+				header {color: #f2d798;}
+				
+				h1 {margin: 3px;
+						font-size: 40px;
+						display: inline-flexbox;
+						text-align: center;}
+				
+				h2 {margin: 25px 0px 0px 0px;
+						font-size:28px;}
 
-        h2 {margin: 25px 0px 0px 0px;}
+				p{margin:0px 0px 0px 0px;}
 
-        button {padding: 5px;
-            font-size: 25px;
-            background-color: #575f62;
-            border: 1px solid #664508;
-            color: #f2d798;}
+				button {padding: 5px;
+						font-size: 25px;
+						background-color: #575f62;
+						border: 1px solid #664508;
+						color: #f2d798;}
 
-        .header {padding: 0px 30px 0px 30px;
-            display: inline-block;}
+				.header {padding: 0px 30px 0px 30px;
+						display: inline-block;}
 
-        #startup {display: none;}
-        #git {display: none;}
-        #build {display: none;}
-        #compile {display: none;}
-    </style>
+				.textFile {padding:10px;
+						background-color: #333638;
+						border:1px solid black;
+						border-left: 5px solid rgba(28,110,164,0.94);}
+				
+				#i3conf{display:none;}
+				#startup {display: none;}
+				#git {display: none;}
+				#build {display: none;}
+				#compile {display: none;}
+		</style>
 </head>
 <body>
-  <header>
-    <div class="header">
-      <button onclick="InstallArch()"> Install Arch </button>
-    </div>
-    <div class="header">
-      <button onclick="Startup()"> Start-up </button>
-    </div>
-    <div class="header">
-      <button onclick="Git()"> GIT/Github </button>
-    </div>
-    <div class="header">
-      <button onclick="Build()"> Build from Source </button>
-    </div>
-    <div class="header">
-      <button onclick="Compile()"> Compile and Execute </button>
-    </div>
-  </header>
-  <main>
-      <!-- ____________________________ARCH Linux Installation Guide____________________________-->
-      <div id="arch">
-          <h1>Install Arch</h1>
-          <h2>Show Disks and Partitions</h2>
-          <p>lsblk</p>
+	<header>
+		<div class="header">
+			<button onclick="InstallArch()"> Install Arch </button>
+		</div>
+		<div class="header">
+			<button onclick="Startup()"> New Install Settings </button>
+		</div>
+		<div class="header">
+			<button onclick="Git()"> GIT/Github </button>
+		</div>
+		<div class="header">
+			<button onclick="Build()"> Build from Source </button>
+		</div>
+		<div class="header">
+			<button onclick="Compile()"> Compile and Execute </button>
+		</div>
+	</header>
+	<main>
+			<!-- ____________________________ARCH Linux Installation Guide____________________________-->
+		<div id="arch">
+			<h1>Install Arch</h1>
+				<h2>Show Disks and Partitions</h2>
+					<p>lsblk</p>
+				
+				<h2>Enter Partition Tool in Disk sda or nvme0n1</h2>
+					<p>cgdisk /dev/sda or nvme0n1</p>
+					<ul>
+						<li> 500M     ef00     boot</li>
+						<li> 4G       8200     swap</li>
+						<li> ALL      8300     arch</li>
+					</ul>
 
-          <h2>Enter Partition Tool in Disk sda or nvme0n1</h2>
-          <P>cgdisk /dev/sda or nvme0n1</P>
-          <ul>
-              <li> 500M     ef00     boot</li>
-              <li> 4G       8200     swap</li>
-              <li> ALL      8300     arch</li>
-          </ul>
+				<h2>Format Partitions</h2>
+					<p>mkfs.fat -F32 /dev/sda1 <br>
+						mkswap /dev/sda2<br>
+						mkfs.ext4 /dev/sda3</p>
 
-          <h2>Format Partitions</h2>
-          <p>mkfs.fat -F32 /dev/sda1</p>
-          <p>mkswap /dev/sda2</p>
-          <p>mkfs.ext4 /dev/sda3</p>
+				<h2>Mount Partitions</h2>
+					<p>mount /dev/sda3 /mnt <br>
+						swapon /dev/sda2 <br>
+						mkdir -p /mnt/boot <br>
+						mount /dev/sda1 /mnt/boot</p>
 
-          <h2>Mount Partitions</h2>
-          <p>mount /dev/sda3 /mnt</p>
-          <p>swapon /dev/sda2</p>
-          <p>mkdir -p /mnt/boot</p>
-          <p>mount /dev/sda1 /mnt/boot</p>
-          <!--Install software-->
-          <h2>Preinstall Packages</h2>
-          <p>pacstrap /mnt base linux linux-firmware vim sudo networkmanager</p>
+				<h2>Preinstall Packages</h2>
+					<p>pacstrap /mnt base linux linux-firmware vim sudo networkmanager</p>
 
-          <h2>Create drives linkin points</h2>
-          <p>genfstab -U /mnt >> /mnt/etc/fstab</p>
+				<h2>Create drives linkin points</h2>
+					<p>genfstab -U /mnt >> /mnt/etc/fstab</p>
 
-          <h2>Boot into arch instalation</h2>
-          <p>arch-chroot /mnt</p>
+				<h2>Boot into arch instalation</h2>
+					<p>arch-chroot /mnt</p>
 
-          <h2>Set local time</h2>
-          <p>ln -sf /usr/share/zoneinfo/Europe/Bucharest /etc/localtime</p>
+				<h2>Set local time</h2>
+					<p>ln -sf /usr/share/zoneinfo/Europe/Bucharest /etc/localtime</p>
 
-          <h2>Set local date format , currency ,etc</h2>
-          <p>vim /etc/locale.gen</p>
-          <ul>
-              <li>en_US.UTF-8 UTF-8</li>
-          </ul>
+				<h2>Set local date format , currency ,etc</h2>
+					<p>vim /etc/locale.gen</p>
+					<div class="textFile">
+						<p>en_US.UTF-8 UTF-8</p>
+					</div>
+						
+				<h2>Set language</h2>
+					<p>vim /etc/locale.conf</p>
+					<div class="textFile">
+						<p>LANG=en_US.UTF-8</p>
+					</div>
+					<p>locale-gen</p>
 
-          <h2>Set language</h2>
-          <p>vim /etc/locale.conf</p>
-          <ul>
-              <li>LANG=en_US.UTF-8</li>
-          </ul>
-          <p>locale-gen</p>
+				<h2>Create root user</h2>
+					<p>vim /etc/hostname</p>
+					<div class="textFile">
+						<p>hostname</p>
+					</div>
+					<p>passwd</p>
 
-          <h2>Create root user</h2>
-          <p>vim /etc/hostname</p>
-          <ul>
-              <li>hostname</li>
-          </ul>
-          <p>passwd</p>
+				<h2>IDK Why</h2>
+					<p>mkinitcpio -P</p>
 
-          <h2>IDK Why</h2>
-          <p>mkinitcpio -P</p>
+				<h2>Install GRUB</h2>
+					<p>pacman -Sy grub efibootmgr <br>
+						grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB <br>
+						grub-mkconfig -o /boot/grub/grub.cfg</p>
 
-          <h2>Install GRUB</h2>
-          <p>pacman -Sy grub efibootmgr</p>
-          <p>grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB</p>
-          <p>grub-mkconfig -o /boot/grub/grub.cfg</p>
+				<h2>Enable Wifi / Ethernet</h2>
+					<p>systemctl enable NetworkManager</p>
 
-          <h2>Enable Wifi / Ethernet</h2>
-          <p>systemctl enable NetworkManager</p>
+				<h2>Add non-root User</h2>
+					<p>useradd -g users -G wheel,storage,power -m [username] <br>
+						passwd [username]</p>
 
-          <h2>Add non-root User</h2>
-          <p>useradd -g users -G wheel,storage,power -m [username]</p>
-          <p>passwd [username]</p>
+				<h2>Enable Non-Root User To Use SUDO</h2>
+				 	<p>visudo</p>
+				 	<div class="textFile">
+						<p>##Uncomment to allow members of group wheel to execute any command <br>
+							%wheel ALL=(ALL:ALL) ALL</p>
+					</div>
+		
+				<h2>Arch CLI install finished , can skip DE</h2>
+					<div style="margin:50px 0px 50px 200px;border:10px;">
+						<h2>Install Desktop Environment</h2>
+							<p>sudo pacman -Syu</p>
 
-          <h2>Enable Non-Root User To Use SUDO</h2>
-          <p>visudo</p>
-          <ul>
-              <li>##Uncomment to allow members of group wheel to execute any command</li>
-              <li>%wheel ALL=(ALL) ALL</li>
-          </ul>
+						<h2>Install I3</h2>
+							<p>sudo pacman -S xorg-server xorg-xrandr i3-wm i3bar i3status konsole dolphin chromium</p>
 
-          <h2>Install Desktop Environment</h2>
-          <p>sudo pacman -Syu</p>
-          <p>sudo pacman -S xorg      i3     konsole dolphin chromium</p>
-          <p>sudo pacman -S xorg plasma-meta konsole dolphin chromium</p>
-          <p>systemctl enable sddm</p>
+						<h2>Install KDE Plasma</h2>
+							<p>sudo pacman -S xorg-server plasma-desktop konsole dolphin chromium <br>
+								systemctl enable sddm</p>
+					</div>
 
-          <h2>Finished Basic ARCH Install</h2>
-          <p>exit</p>
-          <p>umount -R /mnt</p>
-          <p>reboot</p>
-      </div>
-      <!-- ____________________________How to Install Packages / Packages Sugestion____________________________
-	~/.config/ -App configuration
-	~/.cache/ -Cache location
-	~/.local/share/ -Old files might be here
-      -->
-      <div id="startup">
-          <h1>Setup Arch</h1>
-	  <h2>Install  apps</h2>
-	  <p>sudo pacman -S base-devel git gcc nano</p>
-	  <p>sudo pacman -S kmix</p>
+				<h2>Finished Basic ARCH Install</h2>
+					<p>exit <br>
+						umount -R /mnt <br>
+						reboot</p>
+		</div>
+
+			<!-- ____________________________New Install Settings____________________________-->
+		<div id="startup">
+			<h1>New Install Settings</h1>
+				<h2>Install  apps</h2>
+					<p>sudo pacman -S mesa lib32-mesa xf86-video-amdgpu vulkan-radeon<br>
+						sudo pacman -S </p>
 	
-          <h2>Clear all package cache</h2>
-          <p>sudo pacman -Scc</p>
+				<h2>Clear all package cache</h2>
+					<p>sudo pacman -Scc</p>
 
-          <h2>Remove true orphan packages</h2>
-          <p>sudo pacman -Qtdq | sudo pacman -Rns -</p>
+				<h2>Remove true orphan packages</h2>
+					<p>sudo pacman -Qtdq | sudo pacman -Rns -</p>
 
-          <h2>Add ~/bin to $PATH</h2>
-	  <p>mkdir ~/bin</p>
-	  <p>vim ~/.bash_profile</p>
-          <p>export PATH=$PATH:/home/[username]/bin</p>
+				<h2>Add ~/bin to $PATH</h2>
+					<p>mkdir ~/bin <br>
+						vim ~/.bash_profile</p>
+					<div class="textFile">
+						<p>export PATH=$PATH:/home/[username]/bin <br>
+							startx <br>
+							xrandr --output HDMI-A-1 --mode 1920x1080 --rate 119.98</p>
+					</div>
 
-          <h2>Configure D-Menu</h2>
-          <p>vim ~/.config/i3/config</p>
+				<h2>Add 32 bit programs to pacman</h2>
+					<p>vim /etc/pacman.conf</p>
+					<div class="textFile">
+						<p>[multilib] <br>
+							Include = /etc/pacman.d/mirrorlist</p>
+					</div>
+				
+				<br>
+				<br>
+				<br>
+			<h1>I3 DE Configure</h1>
+				<h2>Configure D-Menu</h2>
+				<p>vim ~/.config/i3/config</p>
+				<button onclick="showi3conf()">
+					<div class="textFile">
+						<p> Show I3 Config File</p>
+					</div>
+				</button>
 
-          <h2>D-Menu Applications</h2>
-          <p>ls -a /usr/share/applications</p>
+				<div class="textFile" id="i3conf">
+					<p>
+set $mod Mod4 <br>
+font pango:Ubuntu Regular 10 <br>
+exec --no-startup-id dex --autostart --environment i3 <br>
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork <br>
+exec --no-startup-id nm-applet <br>
+set $refresh_i3status killall -SIGUSR1 i3status <br>
+<br>
+#--------------------------------Media Controlls-------------------------------- <br>
+#Audio Setup <br>
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status <br>
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status <br>
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status <br>
+#bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status <br>
+<br>
+# Sreen brightness controls <br>
+#bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness <br>
+#bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness <br>
+<br>
+# Media player controls <br>
+bindsym XF86AudioPlay exec playerctl play-pause <br>
+bindsym XF86AudioPause exec playerctl play-pause <br>
+bindsym XF86AudioNext exec playerctl next <br>
+bindsym XF86AudioPrev exec playerctl previous <br>
+<br>
+# Change focus <br>
+bindsym $mod+Left focus left <br>
+bindsym $mod+Down focus down <br>
+bindsym $mod+Up focus up <br>
+bindsym $mod+Right focus right <br>
+<br>
+# Focus the parent container <br>
+#bindsym $mod+a focus parent <br>
+<br>
+# focus the child container <br>
+#bindsym $mod+d focus child <br>
+<br>
+# Move window <br>
+bindsym $mod+Shift+Left move left <br>
+bindsym $mod+Shift+Down move down <br>
+bindsym $mod+Shift+Up move up <br>
+bindsym $mod+Shift+Right move right <br>
+<br>
+# Use Mouse+$mod to drag floating windows to their wanted position <br>
+#floating_modifier $mod <br>
+<br>
+# toggle tiling / floating <br>
+#bindsym $mod+Shift+space floating toggle <br>
+<br>
+# change focus between tiling / floating windows <br>
+#bindsym $mod+space focus mode_toggle <br>
+<br>
+# enter fullscreen mode for the focused container <br>
+#bindsym $mod+f fullscreen toggle <br>
+<br>
+#-----------Split Horizontal-Vertical-------------- <br>
+# split in horizontal orientation <br>
+#bindsym $mod+h split h <br>
+bindsym $mod+bracketleft split h <br>
+<br>
+# split in vertical orientation <br>
+#bindsym $mod+v split v <br>
+bindsym $mod+bracketright split v <br>
+<br>
+# change container layout (stacked, tabbed, toggle split) <br>
+#bindsym $mod+s layout stacking <br>
+#bindsym $mod+w layout tabbed <br>
+#bindsym $mod+e layout toggle split <br>
+<br>
+############################################ <br>
+# Workspaces <br>
+############################################ <br>
+# switch to workspace <br>
+bindsym $mod+1 workspace number $ws1 <br>
+bindsym $mod+2 workspace number $ws2 <br>
+bindsym $mod+3 workspace number $ws3 <br>
+bindsym $mod+4 workspace number $ws4 <br>
+bindsym $mod+5 workspace number $ws5 <br>
+bindsym $mod+6 workspace number $ws6 <br>
+bindsym $mod+7 workspace number $ws7 <br>
+bindsym $mod+8 workspace number $ws8 <br>
+bindsym $mod+9 workspace number $ws9 <br>
+bindsym $mod+0 workspace number $ws10 <br>
+<br>
+# move focused container to workspace <br>
+bindsym $mod+Shift+1 move container to workspace number $ws1 <br>
+bindsym $mod+Shift+2 move container to workspace number $ws2 <br>
+bindsym $mod+Shift+3 move container to workspace number $ws3 <br>
+bindsym $mod+Shift+4 move container to workspace number $ws4 <br>
+bindsym $mod+Shift+5 move container to workspace number $ws5 <br>
+bindsym $mod+Shift+6 move container to workspace number $ws6 <br>
+bindsym $mod+Shift+7 move container to workspace number $ws7 <br>
+bindsym $mod+Shift+8 move container to workspace number $ws8 <br>
+bindsym $mod+Shift+9 move container to workspace number $ws9 <br>
+bindsym $mod+Shift+0 move container to workspace number $ws10 <br>
+<br>
+# Define names for default workspaces for which we configure key bindings later on. <br>
+# We use variables to avoid repeating the names in multiple places. <br>
+set $ws1 "1" <br>
+set $ws2 "2" <br>
+set $ws3 "3" <br>
+set $ws4 "4" <br>
+set $ws5 "5" <br>
+set $ws6 "6" <br>
+set $ws7 "7" <br>
+set $ws8 "8" <br>
+set $ws9 "9" <br>
+set $ws10 "10" <br>
+<br>
+# reload the configuration file <br>
+bindsym $mod+Shift+c reload <br>
+<br>
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3) <br>
+bindsym $mod+Shift+r restart <br>
+<br>
+# exit i3 (logs you out of your X session) <br>
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'" <br>
+<br>
+# resize window (you can also use the mouse for that) <br>
+mode "resize" { <br>
+				bindsym Left resize shrink width 10 px or 10 ppt <br>
+				bindsym Down resize grow height 10 px or 10 ppt <br>
+				bindsym Up resize shrink height 10 px or 10 ppt <br>
+				bindsym Right resize grow width 10 px or 10 ppt <br>
+				<br>
+				# back to normal: Enter or Escape or $mod+r <br>
+				bindsym Return mode "default" <br>
+				bindsym Escape mode "default" <br>
+				bindsym $mod+r mode "default" <br>
+} <br>
+<br>
+bindsym $mod+r mode "resize" <br>
+<br>
+bar { <br>
+	status_command i3status -c /home/raul/.config/i3status/i3status.conf <br>
+} <br>
+<br>
+############################################ <br>
+# Keybinds <br>
+############################################ <br>
+<br>
+# kill focused window <br>
+bindsym Mod1+Escape kill <br>
+<br>
+# start dmenu (a program launcher) <br>
+bindsym $mod+d exec --no-startup-id dmenu_run <br>
+<br>
+# start a terminal <br>
+bindsym $mod+Return exec i3-sensible-terminal <br>
+<br>
+#Open dolphin file manager <br>
+bindsym $mod+l exec dolphin <br>
+<br>
+#Open browser chromium <br>
+bindsym $mod+i exec chromium <br>
+<br>
+#Open VS Code <br>
+bindsym $mod+k exec code <br>
+<br>
+#Open Libre Office <br>
+bindsym $mod+o exec libreoffice <br>
+					</p>
+				</div>
 
-          <h2>Xorg settings</h2>
-          <p>cat /etc/X11/xorg.conf</p>
-	  <p>ls -a /etc/X11</p>
-	  <p>xrandr --output HDMI-A-1 --mode 1920x1080 --rate 119.98</p>
-	  <p>sudo Xorg -configure</p>
-	  <p>X -configure</p>
+				<h2>D-Menu Applications</h2>
+					<p>ls -a /usr/share/applications</p>
+				
+				<h2>KDE apps theme</h2>
+					<p>sudo vim /etc/environment </p>
+					<div class="textFile">
+						<p>export QT_QPA_PLATFORMTHEME=qt5ct</p>
+					</div>
+					<p>sudo pacman -Syu lxappearance breeze breeze-gtk ttf-roboto</p>
 
-          <h2>Install VM</h2>
-          <p>LC_ALL=C lscpu | grep Virtualization</p>
-          <p>sudo pacman -S iptable ebtables dnsmask dmidecode bridge-utils</p>
-          <p>sudo pacman -S qemu qemu-arch-extra ovmf openbsd-netcat virt-manager</p>
-          <p>sudo systemctl status libvirtd</p>
-          <p>sudo /etc/libvirt/libvirtd.conf</p>
-          <ul>
-            <li>#uncomment:</li>
-            <li>#unix_sock_group="libvirt"</li>
-            <li>#unix_sock_rw_perms="0770"</li>
-          </ul>
-          <p>sudo usermod -a -G libvirt $(whoami)</p>
-          <p>groups $(whoami)</p>
-          <p>sudo systemctl restart libvirtd</p>
-          <p>sudo virsh net-define /etc/libvirt/qemu/networks/default.xml</p>
-          <p>sudo virsh net-autorestart default</p>
-          <p>sudo virsh net-list --all</p>
-          <p>reboot</p>
-          <p>sudo systemctl status libvirtd</p>
+				<h2>Music settings</h2>
+					<p>sudo pacman -S kmix <br>
+						For Testing: <br>
+						arecord --list-devices <br>
+						arecord -f dat -r 60000 -D hw:1,0 -d 5 test.wav <br>
+						grep "default-sample-rate" /etc/pulse/daemon.conf </p>
 
-      </div>
-      <!-- ____________________________GIT / GITHUB Guide for Linux____________________________-->
-      <div id="git">
-          <h1>GIT/Github</h1>
-          <h2>GIT version</h2>
-          <P>git version</P>
+				<h2>System Time</h2>
+					<p>sudo pacman -S ntp <br>
+						systemctl enable ntpd.service <br>
+						systemctl start ntpd.service</p>				
 
-          <h2>Setup config</h2>
-          <p>git config --global user.email "[user email]"</p>
-          <p>git config --global user.name "[name for commits ,not github username]"</p>
+				<h2>Xorg settings</h2>
+					<p>xrandr <br>
+						xrandr --output HDMI-A-1 --mode 1920x1080 --rate 119.98 <br>
+						cat /etc/X11/xorg.conf <br>
+						ls -a /etc/X11 <br>
+						sudo Xorg -configure <br>
+						X -configure</p>
 
-          <h2>Clone repo</h2>
-          <p>git clone [github/AUR https link]</p>
+				<h2>Install VM</h2>
+					<p>LC_ALL=C lscpu | grep Virtualization <br>
+						sudo pacman -S virt-manager qemu qemu-arch-extra <br>
+						sudo pacman -S [iptable] [ebtables] [dnsmask] dmidecode bridge-utils ovmf openbsd-netcat <br>
+						sudo systemctl status libvirtd <br>
+						sudo /etc/libvirt/libvirtd.conf</p>
+					<div class="textFile">
+						<p>#uncomment: <br>
+							#unix_sock_group="libvirt" <br>
+							#unix_sock_rw_perms="0770"</p>
+					</div>
+					<p>sudo usermod -a -G libvirt $(whoami) <br>
+						groups $(whoami) <br>
+						sudo systemctl restart libvirtd <br>
+						sudo virsh net-define /etc/libvirt/qemu/networks/default.xml <br>
+						sudo virsh net-autorestart default <br>
+						sudo virsh net-list --all <br>
+						reboot <br>
+						sudo systemctl status libvirtd</p>
 
-          <h2>Check new changes</h2>
-          <p>git status (into the file folder)</p>
+		</div>
+		<!-- ____________________________GIT / GITHUB Guide for Linux____________________________-->
+		<div id="git">
+			<h1>GIT/Github</h1>
+				<h2>Install GIT</h2>
+					<p>sudo pacman -S git</p>
 
-          <h2>Save changed file</h2>
-          <p>git add --all</p>
-      </div>
-      <!-- ____________________________Build Software From Source____________________________-->
-      <div id="build">
-          <h1>Build from Source</h1>
-          <h2>Clone App</h2>
-          <P>git clone [url]</P>
+				<h2>GIT version</h2>
+					<p>git version</p>
 
-          <h2>Navigate to Folder and Print Files</h2>
-          <p>cd [folder]/[folder]/[folder] && ls</p>
+				<h2>Setup config</h2>
+					<p>git config --global user.email "[user email]" <br>
+						git config --global user.name "[name for commits ,not github username]"</p>
 
-          <h2>Build from Source</h2>
-          <p>less PKGBUILD</p>
-          <p>makepkg -si</p>
-      </div>
-      <!-- ____________________________Compile C / C++ Code witn MinGW____________________________-->
-      <div id="compile">
-          <h1>Compile and Execute</h1>
-          <h2>Navigate to Folder and Print Files</h2>
-          <p>cd [folder]/[folder]/[folder] && ls</p>
+				<h2>Clone repo</h2>
+					<p>git clone [github/AUR https link]</p>
 
-          <h2>Compile C++ Files</h2>
-          <p>g++ -o [executable file] [fileToBeCompiled.cpp]</p>
-          <h2>Compile C Files</h2>
-          <p>gcc -o [executable file] [fileToBeCompiled.c]</p>
+				<h2>Check new changes</h2>
+					<p>git status (into the file folder)</p>
 
-          <h2>Execute the Executable File</h2>
-          <p>./[numeFisierExecutabil]</p>
-      </div>
-  </main>
-  <footer>
+				<h2>Save changed file</h2>
+					<p>git add --all</p>
+		</div>
+		<!-- ____________________________Build Software From Source____________________________-->
+		<div id="build">
+			<h1>Build from Source</h1>
+				<h2>Clone App</h2>
+					<p>git clone [url]</p>
 
-  </footer>
-  <script>
-    function InstallArch() {
-      showInstallArch();
-      hideStartup();
-      hideGit();
-      hideBuild();
-      hideCompile();}
-    function Startup() {
-      hideInstallArch();
-      showStartup();  
-      hideGit();
-      hideBuild();
-      hideCompile();}
-    function Git() {
-      hideInstallArch();
-      hideStartup();
-      showGit();
-      hideBuild();
-      hideCompile();}
-    function Build() {
-      hideInstallArch();
-      hideStartup();
-      hideGit();
-      showBuild();
-      hideCompile();}
-    function Compile() {
-      hideInstallArch();
-      hideStartup();
-      hideGit();
-      hideBuild();
-      showCompile();}
-    
-    function hideInstallArch(){
-      var x = document.getElementById("arch");
-      x.style.display = "none";}
-    function showInstallArch(){
-      var x = document.getElementById("arch");
-      x.style.display = "block";}
+				<h2>Navigate to Folder and Print Files</h2>
+					<p>cd [folder]/[folder]/[folder] && ls</p>
 
-    function hideStartup(){
-      var x = document.getElementById("startup");
-      x.style.display = "none";}
-    function showStartup(){
-      var x = document.getElementById("startup");
-      x.style.display = "block";}
+				<h2>Build from Source</h2>
+					<p>less PKGBUILD <br>
+						makepkg -si</p>
+		</div>
+		<!-- ____________________________Compile C / C++ Code witn MinGW____________________________-->
+		<div id="compile">
+			<h1>Compile and Execute</h1>
+				<h2>Navigate to Folder and Print Files</h2>
+					<p>cd [folder]/[folder]/[folder] && ls</p>
 
-    function hideGit(){
-      var x = document.getElementById("git");
-      x.style.display = "none";}
-    function showGit(){
-      var x = document.getElementById("git");
-      x.style.display = "block";}
+				<h2>Compile C++ Files</h2>
+					<p>g++ -o [executable file] [fileToBeCompiled.cpp]</p>
 
-    function hideBuild(){
-      var x = document.getElementById("build");
-      x.style.display = "none";}
-    function showBuild(){
-      var x = document.getElementById("build");
-      x.style.display = "block";}
+				<h2>Compile C Files</h2>
+					<p>gcc -o [executable file] [fileToBeCompiled.c]</p>
 
-    function hideCompile(){
-      var x = document.getElementById("compile");
-      x.style.display = "none";}
-    function showCompile(){
-      var x = document.getElementById("compile");
-      x.style.display = "block";}
-  </script> 
+				<h2>Execute the Executable File</h2>
+					<p>./[numeFisierExecutabil]</p>
+		</div>
+	</main>
+	<footer>
+
+	</footer>
+	<script>
+		var showconfi3 = false;
+		function showi3conf(){
+			if(showconfi3 == false){
+				var x = document.getElementById("i3conf");
+				x.style.display = "block";
+				showconfi3 = true;}
+			else{
+				var x = document.getElementById("i3conf");
+				x.style.display = "none";
+				showconfi3 = false;}
+		}
+
+		function InstallArch() {
+			showInstallArch();
+			hideStartup();
+			hideGit();
+			hideBuild();
+			hideCompile();}
+		function Startup() {
+			hideInstallArch();
+			showStartup();  
+			hideGit();
+			hideBuild();
+			hideCompile();}
+		function Git() {
+			hideInstallArch();
+			hideStartup();
+			showGit();
+			hideBuild();
+			hideCompile();}
+		function Build() {
+			hideInstallArch();
+			hideStartup();
+			hideGit();
+			showBuild();
+			hideCompile();}
+		function Compile() {
+			hideInstallArch();
+			hideStartup();
+			hideGit();
+			hideBuild();
+			showCompile();}
+		
+		function hideInstallArch(){
+			var x = document.getElementById("arch");
+			x.style.display = "none";}
+		function showInstallArch(){
+			var x = document.getElementById("arch");
+			x.style.display = "block";}
+
+		function hideStartup(){
+			var x = document.getElementById("startup");
+			x.style.display = "none";}
+		function showStartup(){
+			var x = document.getElementById("startup");
+			x.style.display = "block";}
+
+		function hideGit(){
+			var x = document.getElementById("git");
+			x.style.display = "none";}
+		function showGit(){
+			var x = document.getElementById("git");
+			x.style.display = "block";}
+
+		function hideBuild(){
+			var x = document.getElementById("build");
+			x.style.display = "none";}
+		function showBuild(){
+			var x = document.getElementById("build");
+			x.style.display = "block";}
+
+		function hideCompile(){
+			var x = document.getElementById("compile");
+			x.style.display = "none";}
+		function showCompile(){
+			var x = document.getElementById("compile");
+			x.style.display = "block";}
+	</script> 
 </body>
 </html>
