@@ -186,43 +186,44 @@
 		<div id="startup">
 			<h1>New Install Settings</h1>
 				<h2>Clear all package cache</h2>
-					<p>sudo pacman -Scc</p>
+					<p>sudo pacman -Scc </p>
 
 				<h2>Remove true orphan packages</h2>
-					<p>sudo pacman -Qtdq | sudo pacman -Rns -</p>
+					<p>sudo pacman -Qtdq | sudo pacman -Rns - </p>
 
 				<h2>Add ~/bin to $PATH</h2>
-					<p>mkdir ~/bin <br>
-						vim ~/.bash_profile</p>
+					<p>mkdir ~/bin ; vim ~/.bash_profile </p>
 					<div class="textFile">
 						<p>export PATH=$PATH:/home/[username]/bin <br>
-							startx <br>
-							</p>
+							startx </p>
 					</div>
-					<p>vim ~/.bashrc</p>
+					<p>vim ~/.bashrc </p>
 					<div class="textFile">
-						<p>xrandr --output HDMI-A-1 --mode 1920x1080 --rate 119.98</p>
+						<p>xrandr --output HDMI-A-1 --mode 1920x1080 --rate 119.98 </p>
 					</div>
 
 				<h2>Add 32 bit programs to pacman</h2>
-					<p>vim /etc/pacman.conf</p>
+					<p>vim /etc/pacman.conf </p>
 					<div class="textFile">
 						<p>[multilib] <br>
-							Include = /etc/pacman.d/mirrorlist</p>
+							Include = /etc/pacman.d/mirrorlist </p>
 					</div>
 					
 				<br>
 				<br>
 				<br>
 			<h1>I3 DE Configure</h1>
+				<h2>D-Menu Applications</h2>
+					<p>ls -a /usr/share/applications</p>
+					
 				<h2>Configure D-Menu</h2>
-				<p>vim ~/.config/i3/config</p>
-				<button onclick="showi3conf()">
-					<p> Show I3 Config File</p>
-				</button>
+					<p>vim ~/.config/i3/config</p>
+					<button onclick="showi3conf()">
+						<p> Show I3 Config File</p>
+					</button>
 
-				<div class="textFile" id="i3conf">
-					<pre>
+					<div class="textFile" id="i3conf">
+						<pre>
 set $mod Mod4
 font pango:Ubuntu Regular 10
 exec --no-startup-id dex --autostart --environment i3
@@ -383,12 +384,9 @@ bindsym $mod+k exec code
 
 #Open Libre Office
 bindsym $mod+o exec libreoffice
-					</pre>
-				</div>
+						</pre>
+					</div>
 
-				<h2>D-Menu Applications</h2>
-					<p>ls -a /usr/share/applications</p>
-				
 				<h2>KDE apps theme</h2>
 					<p>sudo vim /etc/environment </p>
 					<div class="textFile">
@@ -416,9 +414,8 @@ bindsym $mod+o exec libreoffice
 						sudo Xorg -configure <br>
 						X -configure</p>
 				
-				<h2>Install  apps</h2>
-					<p>Emoji: <br>
-						sudo pacman -S noto-fonts-emoji</p>
+				<h2>Install Emoji support</h2>
+					<p>sudo pacman -S noto-fonts-emoji</p>
 					
 				<h2>Notifications</h2>
 					<p>sudo pacman -Syu notification-daemon dunst<br>
