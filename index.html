@@ -4,14 +4,10 @@
 	<meta charset="utf-8">
 	<title>Linux Crashcourse</title>
 	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
-	<!--
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	-->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<style>
 		body {padding: 20px;
-			line-height: 1.5;
+			line-height: 1.4;
 			color: #c2ffc2;
 			background-color:#181a1b;
 			border: 1px solid oldlace;
@@ -33,7 +29,7 @@
 		p{margin:0px 0px 0px 0px;}
 
 		button {padding: 5px;
-			font-size: 25px;
+			font-size: 20px;
 			background-color: #575f62;
 			border: 1px solid #664508;
 			color: #f2d798;}
@@ -98,7 +94,7 @@
 						mount /dev/sda1 /mnt/boot</p>
 
 				<h2>Preinstall Packages</h2>
-					<p>pacstrap /mnt base linux linux-firmware vim sudo networkmanager</p>
+					<p>pacstrap /mnt base base-devel linux linux-firmware vim networkmanager</p>
 
 				<h2>Create drives linkin points</h2>
 					<p>genfstab -U /mnt >> /mnt/etc/fstab</p>
@@ -129,7 +125,7 @@
 					</div>
 					<p>passwd</p>
 
-				<h2>IDK Why</h2>
+				<h2>Initial RAMdisk</h2>
 					<p>mkinitcpio -P</p>
 
 				<h2>Install GRUB</h2>
@@ -154,13 +150,29 @@
 				<h2>Arch CLI install finished , can skip DE</h2>
 					<div style="margin:50px 0px 50px 200px;border:10px;">
 						<h2>Install Desktop Environment</h2>
-							<p>sudo pacman -Syu</p>
+							<p>pacman -Syu </p>
+						<h2>Install  OpenGL: </h2>
+							<p>[AMD] pacman -S mesa [lib32-mesa] <br>
+								[NVIDIA] pacman -S mesa nvidia-utils [lib32-nvidia-utils] <br>
+								[INTEL] pacman -S mesa </p>
+						<h2>Install Vulkan: </h2>
+								<p>[AMD] pacman -S amdvlk lib32-amdvlk <br>
+								[NVIDIA] pacman -S nvidia-utils lib32-nvidia-utils <br>
+								[INTEL] pacman -S vulkan-intel lib32-vulkan-intel </p>
+						<h2>AMD Drivers: </h2>
+							<p>pacman -S xf86-video-amdgpu </p>
+						<h2>Intel Drivers: </h2>
+							<p>pacman -S xf86-video-intel </p>
+						<h2>Nvidia Drivers: </h2>
+							<p>	pacman -S nvidia </p>
 
+						<br>
+						<br>
 						<h2>Install I3</h2>
-							<p>sudo pacman -S xorg-server xorg-xrandr i3-wm i3bar i3status konsole dolphin chromium</p>
+							<p>pacman -S xorg-server xorg-xrandr i3-wm i3bar i3status konsole dolphin chromium</p>
 
 						<h2>Install KDE Plasma</h2>
-							<p>sudo pacman -S xorg-server plasma-desktop konsole dolphin chromium <br>
+							<p>pacman -S xorg-server plasma-desktop konsole dolphin chromium <br>
 								systemctl enable sddm</p>
 					</div>
 
@@ -173,10 +185,6 @@
 		<!-- ____________________________New Install Settings____________________________-->
 		<div id="startup">
 			<h1>New Install Settings</h1>
-				<h2>Install  apps</h2>
-					<p>sudo pacman -S mesa lib32-mesa xf86-video-amdgpu vulkan-radeon<br>
-						sudo pacman -S </p>
-	
 				<h2>Clear all package cache</h2>
 					<p>sudo pacman -Scc</p>
 
@@ -210,174 +218,172 @@
 				<h2>Configure D-Menu</h2>
 				<p>vim ~/.config/i3/config</p>
 				<button onclick="showi3conf()">
-					<div class="textFile">
-						<p> Show I3 Config File</p>
-					</div>
+					<p> Show I3 Config File</p>
 				</button>
 
 				<div class="textFile" id="i3conf">
-					<p>
-set $mod Mod4 <br>
-font pango:Ubuntu Regular 10 <br>
-exec --no-startup-id dex --autostart --environment i3 <br>
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork <br>
-exec --no-startup-id nm-applet <br>
-set $refresh_i3status killall -SIGUSR1 i3status <br>
-<br>
-#--------------------------------Media Controlls-------------------------------- <br>
-#Audio Setup <br>
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status <br>
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status <br>
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status <br>
-#bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status <br>
-<br>
-# Sreen brightness controls <br>
-#bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness <br>
-#bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness <br>
-<br>
-# Media player controls <br>
-bindsym XF86AudioPlay exec playerctl play-pause <br>
-bindsym XF86AudioPause exec playerctl play-pause <br>
-bindsym XF86AudioNext exec playerctl next <br>
-bindsym XF86AudioPrev exec playerctl previous <br>
-<br>
-# Change focus <br>
-bindsym $mod+Left focus left <br>
-bindsym $mod+Down focus down <br>
-bindsym $mod+Up focus up <br>
-bindsym $mod+Right focus right <br>
-<br>
-# Focus the parent container <br>
-#bindsym $mod+a focus parent <br>
-<br>
-# focus the child container <br>
-#bindsym $mod+d focus child <br>
-<br>
-# Move window <br>
-bindsym $mod+Shift+Left move left <br>
-bindsym $mod+Shift+Down move down <br>
-bindsym $mod+Shift+Up move up <br>
-bindsym $mod+Shift+Right move right <br>
-<br>
-# Use Mouse+$mod to drag floating windows to their wanted position <br>
-#floating_modifier $mod <br>
-<br>
-# toggle tiling / floating <br>
-#bindsym $mod+Shift+space floating toggle <br>
-<br>
-# change focus between tiling / floating windows <br>
-#bindsym $mod+space focus mode_toggle <br>
-<br>
-# enter fullscreen mode for the focused container <br>
-#bindsym $mod+f fullscreen toggle <br>
-<br>
-#-----------Split Horizontal-Vertical-------------- <br>
-# split in horizontal orientation <br>
-#bindsym $mod+h split h <br>
-bindsym $mod+bracketleft split h <br>
-<br>
-# split in vertical orientation <br>
-#bindsym $mod+v split v <br>
-bindsym $mod+bracketright split v <br>
-<br>
-# change container layout (stacked, tabbed, toggle split) <br>
-#bindsym $mod+s layout stacking <br>
-#bindsym $mod+w layout tabbed <br>
-#bindsym $mod+e layout toggle split <br>
-<br>
-############################################ <br>
-# Workspaces <br>
-############################################ <br>
-# switch to workspace <br>
-bindsym $mod+1 workspace number $ws1 <br>
-bindsym $mod+2 workspace number $ws2 <br>
-bindsym $mod+3 workspace number $ws3 <br>
-bindsym $mod+4 workspace number $ws4 <br>
-bindsym $mod+5 workspace number $ws5 <br>
-bindsym $mod+6 workspace number $ws6 <br>
-bindsym $mod+7 workspace number $ws7 <br>
-bindsym $mod+8 workspace number $ws8 <br>
-bindsym $mod+9 workspace number $ws9 <br>
-bindsym $mod+0 workspace number $ws10 <br>
-<br>
-# move focused container to workspace <br>
-bindsym $mod+Shift+1 move container to workspace number $ws1 <br>
-bindsym $mod+Shift+2 move container to workspace number $ws2 <br>
-bindsym $mod+Shift+3 move container to workspace number $ws3 <br>
-bindsym $mod+Shift+4 move container to workspace number $ws4 <br>
-bindsym $mod+Shift+5 move container to workspace number $ws5 <br>
-bindsym $mod+Shift+6 move container to workspace number $ws6 <br>
-bindsym $mod+Shift+7 move container to workspace number $ws7 <br>
-bindsym $mod+Shift+8 move container to workspace number $ws8 <br>
-bindsym $mod+Shift+9 move container to workspace number $ws9 <br>
-bindsym $mod+Shift+0 move container to workspace number $ws10 <br>
-<br>
-# Define names for default workspaces for which we configure key bindings later on. <br>
-# We use variables to avoid repeating the names in multiple places. <br>
-set $ws1 "1" <br>
-set $ws2 "2" <br>
-set $ws3 "3" <br>
-set $ws4 "4" <br>
-set $ws5 "5" <br>
-set $ws6 "6" <br>
-set $ws7 "7" <br>
-set $ws8 "8" <br>
-set $ws9 "9" <br>
-set $ws10 "10" <br>
-<br>
-# reload the configuration file <br>
-bindsym $mod+Shift+c reload <br>
-<br>
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3) <br>
-bindsym $mod+Shift+r restart <br>
-<br>
-# exit i3 (logs you out of your X session) <br>
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'" <br>
-<br>
-# resize window (you can also use the mouse for that) <br>
-mode "resize" { <br>
-				bindsym Left resize shrink width 10 px or 10 ppt <br>
-				bindsym Down resize grow height 10 px or 10 ppt <br>
-				bindsym Up resize shrink height 10 px or 10 ppt <br>
-				bindsym Right resize grow width 10 px or 10 ppt <br>
-				<br>
-				# back to normal: Enter or Escape or $mod+r <br>
-				bindsym Return mode "default" <br>
-				bindsym Escape mode "default" <br>
-				bindsym $mod+r mode "default" <br>
-} <br>
-<br>
-bindsym $mod+r mode "resize" <br>
-<br>
-bar { <br>
-	status_command i3status -c /home/raul/.config/i3status/i3status.conf <br>
-} <br>
-<br>
-############################################ <br>
-# Keybinds <br>
-############################################ <br>
-<br>
-# kill focused window <br>
-bindsym Mod1+Escape kill <br>
-<br>
-# start dmenu (a program launcher) <br>
-bindsym $mod+d exec --no-startup-id dmenu_run <br>
-<br>
-# start a terminal <br>
-bindsym $mod+Return exec i3-sensible-terminal <br>
-<br>
-#Open dolphin file manager <br>
-bindsym $mod+l exec dolphin <br>
-<br>
-#Open browser chromium <br>
-bindsym $mod+i exec chromium <br>
-<br>
-#Open VS Code <br>
-bindsym $mod+k exec code <br>
-<br>
-#Open Libre Office <br>
-bindsym $mod+o exec libreoffice <br>
-					</p>
+					<pre>
+set $mod Mod4
+font pango:Ubuntu Regular 10
+exec --no-startup-id dex --autostart --environment i3
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec --no-startup-id nm-applet
+set $refresh_i3status killall -SIGUSR1 i3status
+
+#--------------------------------Media Controlls--------------------------------
+#Audio Setup
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+#bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+# Sreen brightness controls
+#bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
+#bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+
+# Media player controls
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPause exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+# Change focus
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Focus the parent container
+#bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+# Move window
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+#floating_modifier $mod
+
+# toggle tiling / floating
+#bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+#bindsym $mod+space focus mode_toggle
+
+# enter fullscreen mode for the focused container
+#bindsym $mod+f fullscreen toggle
+
+#-----------Split Horizontal-Vertical--------------
+# split in horizontal orientation
+#bindsym $mod+h split h
+bindsym $mod+bracketleft split h
+
+# split in vertical orientation
+#bindsym $mod+v split v
+bindsym $mod+bracketright split v
+
+# change container layout (stacked, tabbed, toggle split)
+#bindsym $mod+s layout stacking
+#bindsym $mod+w layout tabbed
+#bindsym $mod+e layout toggle split
+
+############################################
+# Workspaces
+############################################
+# switch to workspace
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+# Define names for default workspaces for which we configure key bindings later on.
+# We use variables to avoid repeating the names in multiple places.
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+		bindsym Left resize shrink width 10 px or 10 ppt
+		bindsym Down resize grow height 10 px or 10 ppt
+		bindsym Up resize shrink height 10 px or 10 ppt
+		bindsym Right resize grow width 10 px or 10 ppt
+
+		# back to normal: Enter or Escape or $mod+r
+		bindsym Return mode "default"
+		bindsym Escape mode "default"
+		bindsym $mod+r mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+bar {
+	status_command i3status -c /home/raul/.config/i3status/i3status.conf
+}
+
+############################################
+# Keybinds
+############################################
+
+# kill focused window
+bindsym Mod1+Escape kill
+
+# start dmenu (a program launcher)
+bindsym $mod+d exec --no-startup-id dmenu_run
+
+# start a terminal
+bindsym $mod+Return exec i3-sensible-terminal
+
+#Open dolphin file manager
+bindsym $mod+l exec dolphin
+
+#Open browser chromium
+bindsym $mod+i exec chromium
+
+#Open VS Code
+bindsym $mod+k exec code
+
+#Open Libre Office
+bindsym $mod+o exec libreoffice
+					</pre>
 				</div>
 
 				<h2>D-Menu Applications</h2>
@@ -390,8 +396,8 @@ bindsym $mod+o exec libreoffice <br>
 					</div>
 					<p>sudo pacman -Syu lxappearance breeze breeze-gtk ttf-roboto</p>
 
-				<h2>Music settings</h2>
-					<p>sudo pacman -S kmix <br>
+				<h2>Music Settings</h2>
+					<p>sudo pacman -S pulseaudio pulseaudio-alsa kmix [pavucontrol] <br>
 						For Testing: <br>
 						arecord --list-devices <br>
 						arecord -f dat -r 60000 -D hw:1,0 -d 5 test.wav <br>
@@ -400,15 +406,23 @@ bindsym $mod+o exec libreoffice <br>
 				<h2>System Time</h2>
 					<p>sudo pacman -S ntp <br>
 						systemctl enable ntpd.service <br>
-						systemctl start ntpd.service</p>				
+						systemctl start ntpd.service</p>
 
-				<h2>Xorg settings</h2>
+				<h2>Xorg Settings</h2>
 					<p>xrandr <br>
 						xrandr --output HDMI-A-1 --mode 1920x1080 --rate 119.98 <br>
 						cat /etc/X11/xorg.conf <br>
 						ls -a /etc/X11 <br>
 						sudo Xorg -configure <br>
 						X -configure</p>
+				
+				<h2>Install  apps</h2>
+					<p>Emoji: <br>
+						sudo pacman -S noto-fonts-emoji</p>
+					
+				<h2>Notifications</h2>
+					<p>sudo pacman -Syu notification-daemon dunst<br>
+						notify-send --urgency=LOW "hello"</p>
 
 				<h2>Install VM</h2>
 					<p>LC_ALL=C lscpu | grep Virtualization <br>
@@ -492,11 +506,16 @@ bindsym $mod+o exec libreoffice <br>
 
 				<h2>Execute the Executable File</h2>
 					<p>./[numeFisierExecutabil]</p>
+
+				<h2>Download Arduino IDE and add user to group</h2>
+					<p>ls -l /dev/ttyUSB0* <br>
+						sudo gpasswd -a raul [uucp]</p>					
 		</div>
 	</main>
-	<footer>
 
+	<footer>
 	</footer>
+
 	<script>
 		var showconfi3 = false;
 		function showi3conf(){
