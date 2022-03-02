@@ -254,12 +254,6 @@ bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
-# Focus the parent container
-#bindsym $mod+a focus parent
-
-# focus the child container
-#bindsym $mod+d focus child
-
 # Move window
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
@@ -276,15 +270,13 @@ bindsym $mod+Shift+Right move right
 #bindsym $mod+space focus mode_toggle
 
 # enter fullscreen mode for the focused container
-#bindsym $mod+f fullscreen toggle
+bindsym $mod+f fullscreen toggle
 
 #-----------Split Horizontal-Vertical--------------
 # split in horizontal orientation
-#bindsym $mod+h split h
 bindsym $mod+bracketleft split h
 
 # split in vertical orientation
-#bindsym $mod+v split v
 bindsym $mod+bracketright split v
 
 # change container layout (stacked, tabbed, toggle split)
@@ -368,10 +360,10 @@ bar {
 bindsym Mod1+Escape kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id dmenu_run
+bindsym $mod+Return exec --no-startup-id dmenu_run
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+k exec exec i3-sensible-terminal
 
 #Open dolphin file manager
 bindsym $mod+l exec dolphin
@@ -380,10 +372,16 @@ bindsym $mod+l exec dolphin
 bindsym $mod+i exec chrome
 
 #Open VS Code
-bindsym $mod+k exec code
+bindsym $mod+c exec vscode
 
 #Open Libre Office
 bindsym $mod+o exec libreoffice
+
+#Open Discord
+bindsym $mod+d exec discord
+
+#Open Steam
+bindsym $mod+s exec steam
 						</pre>
 					</div>
 
