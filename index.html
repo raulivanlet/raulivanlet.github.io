@@ -45,6 +45,7 @@
 			border-left: 5px solid rgba(28,110,164,0.94);}
 				
 		#i3conf{display:none;}
+		#i3status{display:none;}
 		#startup {display: none;}
 		#git {display: none;}
 		#build {display: none;}
@@ -371,10 +372,10 @@
 				
 				<h2>Configure D-Menu</h2>
 					<p>vim ~/.config/i3status/i3status.conf </p>
-					<button onclick="showi3conf()">
+					<button onclick="showi3status()">
 						<p> Show I3Status Config File </p>
 					</button>
-					<div class="textFile" id="i3conf">
+					<div class="textFile" id="i3status">
 						<pre>
 							general {
 								colors = true
@@ -540,7 +541,7 @@
 	</main>
 
 	<script>
-		var showconfi3 = false;
+		var showconfi3 = false ,showstatusi3 = false;
 		function showi3conf(){
 			if(showconfi3 == false){
 				var x = document.getElementById("i3conf");
@@ -550,6 +551,16 @@
 				var x = document.getElementById("i3conf");
 				x.style.display = "none";
 				showconfi3 = false;}
+		}
+		function showi3status(){
+			if(showstatusi3 == false){
+				var x = document.getElementById("i3status");
+				x.style.display = "block";
+				showstatusi3 = true;}
+			else{
+				var x = document.getElementById("i3status");
+				x.style.display = "none";
+				showstatusi3 = false;}
 		}
 
 		function InstallArch() {
