@@ -374,21 +374,16 @@
 					<button onclick="showi3conf()">
 						<p> Show I3Status Config File </p>
 					</button>
-
 					<div class="textFile" id="i3conf">
 						<pre>
-							# It is important that this file is edited as UTF-8.
-							# The following line should contain a sharp s:
-							# ß
-							
 							general {
-											colors = true
-											interval = 1
+								colors = true
+								interval = 1
 							}
 							
 							#order += "ipv6"
 							#order += "wireless _first_"
-							#order += "ethernet _first_"
+							order += "ethernet _first_"
 							#order += "battery all"
 							order += "disk /"
 							order += "load"
@@ -396,39 +391,38 @@
 							order += "tztime local"
 							
 							wireless _first_ {
-											format_up = "  W: (%quality at %essid) %ip  "
-											format_down = "  W: OFF  "
+								format_up = "  W: (%quality at %essid) %ip  "
+								format_down = "  W: OFF  "
 							}
 							
 							ethernet _first_ {
-											format_up = "  E: %ip (%speed)  "
-											format_down = "  E: down  "
+								format_up = "  E: %ip (%speed)  "
+								format_down = "  E: down  "
 							}
 							
 							battery all {
-											format_up = "  %status %percentage %remaining  "
+								format = "  %status %percentage %remaining  "
 							}
 							
 							disk "/" {
-											format = "  DISK: %avail  "
+								format = "  DISK: %avail  "
 							}
 							
 							load {
-											format = "  CPU: %1min  "
+								format = "  CPU: %1min  "
 							}
 							
 							memory {
-											format = "  MEM: %used | %available  "
-											threshold_degraded = "1G"
-											format_degraded = "MEMORY < %available"
+								format = "  MEM: %used | %available  "
+								#threshold_degraded = "1G"
+								#format_degraded = "MEMORY < %available"
 							}
 							
 							tztime local {
-											format = "  %Y-%m-%d %H:%M:%S  "
+								format = "  %S:%M:%H  %d-%m-%Y "
 							}
 						</pre>
 					</div>
-				
 				
 				<h2>KDE apps theme</h2>
 					<p>sudo vim /etc/environment </p>
