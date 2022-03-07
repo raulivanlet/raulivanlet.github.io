@@ -201,13 +201,12 @@
 
 				<h2>Add ~/bin to $PATH</h2>
 					<p>mkdir ~/bin <br>
-						vim ~/.bash_profile </p>
+						vim ~/.profile </p>
 					<div class="textFile">
-						<p>export PATH=$PATH:/home/[username]/bin </p>
-					</div>
-					<p>vim ~/.bashrc </p>
-					<div class="textFile">
-						<p>xrandr --output HDMI-A-1 --mode 1920x1080 --rate 119.98 </p>
+						<p>export PATH=$PATH:/home/[username]/bin <br>
+							#for GTK app themes <br>
+							export QT_QPA_PLATFORMTHEME=qt5ct <br>
+							xrandr --output HDMI-A-1 --mode 1920x1080 --rate 119.98 </p>
 					</div>
 
 				<h2>Add 32 bit programs to pacman</h2>
@@ -421,7 +420,7 @@
 							
 							
 							tztime local {
-  							format = "  %d-%m-%Y %H:%M:%S"
+  							format = "  %d-%m    %H:%M "
 							}
 						</pre>
 					</div>
@@ -430,21 +429,15 @@
 					<p>sudo pacman -S neofetch htop </p>
 
 				<h2>Display manager</h2>
-					<p>sudo pacman -S lightdm <br>
+					<p>sudo pacman -S lightdm lightdm-gtk-greeter<br>
 						systemctl enable lightdm.service <br>
-						vim /etc/lightdm/lightdm.conf </p>
+						sudo vim /etc/lightdm/lightdm.conf </p>
 					<div class="textFile">
 						<p>[Seat:*] <br>
-							... <br>
-							greeter-session=lightdm-yourgreeter-greeter <br>
-							...</p>
+							greeter-session=lightdm-gtk-greeter <br>
 					</div>
 
 				<h2>KDE apps theme</h2>
-					<p>sudo vim /etc/environment </p>
-					<div class="textFile">
-						<p>export QT_QPA_PLATFORMTHEME=qt5ct </p>
-					</div>
 					<p>sudo pacman -Syu lxappearance breeze breeze-gtk ttf-roboto </p>
 
 				<h2>Music Settings</h2>
@@ -452,7 +445,7 @@
 
 				<h2>System Time</h2>
 					<p>sudo pacman -S ntp <br>
-						vim /etc/ntp.conf <br>
+						sudo vim /etc/ntp.conf <br>
 						systemctl enable ntpd.service <br>
 						systemctl start ntpd.service <br>
 						timedatectl set-local-rtc 1 </p>
