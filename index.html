@@ -484,7 +484,9 @@
 				
 				<h2>Setup config</h2>
 					<p>git config --global user.email "[user email]" <br>
-						git config --global user.name "[name for commits ,not github username]" </p>
+						git config --global user.name "[name for commits ,not github username]" <br>
+						git config --global credential.helper cache 
+						git config --global credential.helper 'cache --timeout=7200' </p>
 
 				<h2>Clone repo</h2>
 					<p>git clone [github/AUR https link] </p>
