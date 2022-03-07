@@ -46,6 +46,7 @@
 				
 		#i3conf{display:none;}
 		#i3status{display:none;}
+		#grubconfig{display:none;}
 		#startup {display: none;}
 		#git {display: none;}
 		#build {display: none;}
@@ -423,7 +424,59 @@
 							}
 						</pre>
 					</div>
-					
+
+				<h2>Configure Grub</h2>
+					<p>sudo pacman -S os-prober <br>
+						sudo vim /etc/default/grub </p>
+					<button onclick="showGRUB()">
+						<p> Show Grub Config File </p>
+					</button>
+					<div class="textFile" id="grubconfig">
+						<pre>#Grub Config File
+							GRUB_DEFAULT=saved
+							GRUB_TIMEOUT=5
+							GRUB_DISTRIBUTOR="Arch"
+							GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet"
+							GRUB_CMDLINE_LINUX=""
+							GRUB_PRELOAD_MODULES="part_gpt part_msdos"
+							
+							# Uncomment to enable booting from LUKS encrypted devices
+							#GRUB_ENABLE_CRYPTODISK=y
+							
+							# Set to 'countdown' or 'hidden' to change timeout behavior, press ESC key to display menu.
+							GRUB_TIMEOUT_STYLE=menu
+							
+							GRUB_TERMINAL_INPUT=console
+							
+							# Uncomment to disable graphical terminal
+							#GRUB_TERMINAL_OUTPUT=console
+							
+							GRUB_GFXMODE=1280x1024
+							
+							GRUB_GFXPAYLOAD_LINUX=keep
+							
+							GRUB_DISABLE_RECOVERY=true
+							
+							# Desired menu colors.Entries specified as foreground/background.
+							GRUB_COLOR_NORMAL="light-blue/black"
+							GRUB_COLOR_HIGHLIGHT="light-cyan/blue"
+							
+							# Uncomment one of them for the gfx desired, a image background or a gfxtheme
+							#GRUB_BACKGROUND="/path/to/wallpaper"
+							#GRUB_THEME="/path/to/gfxtheme"
+							
+							# Uncomment to get a beep at GRUB start
+							#GRUB_INIT_TUNE="480 440 1"
+							
+							GRUB_SAVEDEFAULT=true
+							
+							#GRUB_DISABLE_SUBMENU=y
+							
+							GRUB_DISABLE_OS_PROBER=false
+						</pre>
+					</div>
+					<p> sudo grub-mkconfig -o /boot/grub/grub.cfg </p>
+
 				<h2>Cool Apps</h2>
 					<p>sudo pacman -S neofetch htop vlc gwenview spectacle </p>
 
@@ -558,7 +611,7 @@
 	</main>
 
 	<script>
-		var showconfi3 = false ,showstatusi3 = false;
+		var showconfi3 = false ,showstatusi3 = false ,showgrubconfig = false;
 		function showi3conf(){
 			if(showconfi3 == false){
 				var x = document.getElementById("i3conf");
@@ -578,6 +631,16 @@
 				var x = document.getElementById("i3status");
 				x.style.display = "none";
 				showstatusi3 = false;}
+		}
+		function showGRUB(){
+			if(showgrubconfig == false){
+				var x = document.getElementById("grubconfig");
+				x.style.display = "block";
+				showgrubconfig= true;}
+			else{
+				var x = document.getElementById("grubconfig");
+				x.style.display = "none";
+				showgrubconfig= false;}
 		}
 
 		function InstallArch() {
