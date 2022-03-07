@@ -204,7 +204,6 @@
 						vim ~/.profile </p>
 					<div class="textFile">
 						<p>export PATH=$PATH:/home/[username]/bin <br>
-							#for GTK app themes <br>
 							export QT_QPA_PLATFORMTHEME=qt5ct <br>
 							xrandr --output HDMI-A-1 --mode 1920x1080 --rate 119.98 </p>
 					</div>
@@ -449,17 +448,12 @@
 						systemctl enable ntpd.service <br>
 						systemctl start ntpd.service <br>
 						timedatectl set-local-rtc 1 </p>
-
-				<h2>Xorg Settings</h2>
-					<p>xrandr <br>
-						xrandr --output HDMI-A-1 --mode 1920x1080 --rate 119.98 </p>
 				
 				<h2>Install Emoji support</h2>
 					<p>sudo pacman -S noto-fonts-emoji </p>
 					
 				<h2>Notifications</h2>
 					<p>sudo pacman -Syu notification-daemon dunst </p>
-						<!--notify-send --urgency=LOW "hello"-->
 				
 				<!--
 				<h2>Install VM</h2>
