@@ -425,7 +425,20 @@
 							}
 						</pre>
 					</div>
-				
+					
+				<h2>Cool Apps</h2>
+					<p>sudo pacman -S neofetch htop </p>
+
+				<h2>Display manager</h2>
+					<p>sudo pacman -S lightdm <br>
+						vim /etc/lightdm/lightdm.conf </p>
+					<div class="textFile">
+						<p>[Seat:*] <br>
+							... <br>
+							greeter-session=lightdm-yourgreeter-greeter <br>
+							...</p>
+					</div>
+
 				<h2>KDE apps theme</h2>
 					<p>sudo vim /etc/environment </p>
 					<div class="textFile">
