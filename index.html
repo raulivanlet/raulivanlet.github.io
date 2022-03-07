@@ -419,7 +419,7 @@
 							}
 							
 							tztime local {
-								format = "  %S:%M:%H  %d-%m-%Y "
+								format = "  %d-%m-%Y %S:%M:%H  "
 							}
 						</pre>
 					</div>
@@ -436,8 +436,10 @@
 
 				<h2>System Time</h2>
 					<p>sudo pacman -S ntp <br>
+						vim /etc/ntp.conf <br>
 						systemctl enable ntpd.service <br>
-						systemctl start ntpd.service </p>
+						systemctl start ntpd.service <br>
+						timedatectl set-local-rtc 1 </p>
 
 				<h2>Xorg Settings</h2>
 					<p>xrandr <br>
