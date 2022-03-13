@@ -531,20 +531,20 @@
 						sudo systemctl start libvirtd.service <br>
 						sudo vim ~/br10.xml </p>
 					<pre>
-						<network>
-							<name>br10</name>
-							<forward mode='nat'>
-								<nat>
-									<port start='1024' end='65535'/>
-								</nat>
-							</forward>
-							<bridge name='br10' stp='on' delay='0'/>
-							<ip address='192.168.30.1' netmask='255.255.255.0'>
-								<dhcp>
-									<range start='192.168.30.50' end='192.168.30.200'/>
-								</dhcp>
-							</ip>
-						</network>
+						&lt;network&gt;
+							&lt;name&gt;br10&lt;/name&gt;
+							&lt;forward mode='nat'&gt;
+								&lt;nat&gt;
+									&lt;port start='1024' end='65535'/&gt;
+								&lt;/nat&gt;
+							&lt;/forward&gt;
+							&lt;bridge name='br10' stp='on' delay='0'/&gt;
+							&lt;ip address='192.168.30.1' netmask='255.255.255.0'&gt;
+								&lt;dhcp&gt;
+									&lt;range start='192.168.30.50' end='192.168.30.200'/&gt;
+								&lt;/dhcp&gt;
+							&lt;/ip&gt;
+						&lt;/network&gt;
 					</pre>
 					<p>Add this to a vm autostart script <br>
 						sudo virsh net-start br10 <br>
