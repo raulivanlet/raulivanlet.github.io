@@ -1,0 +1,65 @@
+body {
+    padding: 20px;
+    line-height: 1.4;
+    color: #c2ffc2;
+    background-color:#181a1b;
+    border: 1px solid oldlace;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+}
+
+main {
+    padding: 5px;
+}
+            
+header {
+    color: #f2d798;
+}
+        
+h1 {
+    margin: 3px;
+    font-size: 40px;
+    display: inline-flexbox;
+    text-align: center;
+}
+        
+h2 {
+    margin: 25px 0px 0px 0px;
+    font-size:28px;
+}
+
+p{
+    margin:0px 0px 0px 0px;
+}
+
+pre{
+    white-space: pre-line;
+}
+
+button {
+    padding: 5px;
+    font-size: 20px;
+    background-color: #575f62;
+    border: 1px solid #664508;
+    color: #f2d798;
+}
+
+.header {
+    padding: 0px 30px 0px 30px;
+    display: inline-block;
+}
+
+.textFile {
+    padding:10px;
+    background-color: #333638;
+    border:1px solid black;
+    border-left: 5px solid rgba(28,110,164,0.94);
+}
+        
+#i3conf{display:none;}
+#i3status{display:none;}
+#grubconfig{display:none;}
+#startup {display: none;}
+#git {display: none;}
+#build {display: none;}
+#compile {display: none;}

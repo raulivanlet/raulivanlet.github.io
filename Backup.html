@@ -3,9 +3,55 @@
 <head>
 	<meta charset="utf-8">
 	<title>Linux Crashcourse</title>
-	<link rel="stylesheet" href="index.css">
 	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+		body {padding: 20px;
+			line-height: 1.4;
+			color: #c2ffc2;
+			background-color:#181a1b;
+			border: 1px solid oldlace;
+			font-family: 'Open Sans', sans-serif;
+			font-size: 18px;}
+
+		main {padding: 5px;}
+					
+		header {color: #f2d798;}
+				
+		h1 {margin: 3px;
+			font-size: 40px;
+			display: inline-flexbox;
+			text-align: center;}
+				
+		h2 {margin: 25px 0px 0px 0px;
+			font-size:28px;}
+
+		p{margin:0px 0px 0px 0px;}
+
+		pre{white-space: pre-line;}
+
+		button {padding: 5px;
+			font-size: 20px;
+			background-color: #575f62;
+			border: 1px solid #664508;
+			color: #f2d798;}
+
+		.header {padding: 0px 30px 0px 30px;
+			display: inline-block;}
+
+		.textFile {padding:10px;
+			background-color: #333638;
+			border:1px solid black;
+			border-left: 5px solid rgba(28,110,164,0.94);}
+				
+		#i3conf{display:none;}
+		#i3status{display:none;}
+		#grubconfig{display:none;}
+		#startup {display: none;}
+		#git {display: none;}
+		#build {display: none;}
+		#compile {display: none;}
+	</style>
 </head>
 <body>
 	<header>
@@ -106,13 +152,38 @@
 					</div>
 		
 				<h2>Arch CLI install finished , can skip DE</h2>
+					<div style="margin:50px 0px 50px 200px;border:10px;">
+						<h2>Install Desktop Environment</h2>
+							<p>pacman -Syu </p>
 
-				<h2>Install I3</h2>
-					<p>pacman -S xorg-server xorg-xrandr i3-wm i3bar i3status konsole dolphin chromium </p>
+						<h2>Install  OpenGL: </h2>
+							<p>[AMD] pacman -S mesa [lib32-mesa] <br>
+								[NVIDIA] pacman -S mesa nvidia-utils [lib32-nvidia-utils] <br>
+								[INTEL] pacman -S mesa </p>
 
-				<h2>Install KDE Plasma</h2>
-					<p>pacman -S xorg-server plasma-desktop konsole dolphin chromium <br>
-						systemctl enable sddm </p>
+						<h2>Install Vulkan: </h2>
+								<p>[AMD] pacman -S amdvlk lib32-amdvlk <br>
+								[NVIDIA] pacman -S nvidia-utils lib32-nvidia-utils <br>
+								[INTEL] pacman -S vulkan-intel lib32-vulkan-intel </p>
+
+						<h2>AMD Drivers: </h2>
+							<p>pacman -S xf86-video-amdgpu </p>
+
+						<h2>Nvidia Drivers: </h2>
+							<p>	pacman -S nvidia </p>
+
+						<h2>Intel Drivers: </h2>
+							<p>pacman -S xf86-video-intel </p>
+
+						<br>
+						<br>
+						<h2>Install I3</h2>
+							<p>pacman -S xorg-server xorg-xrandr i3-wm i3bar i3status konsole dolphin chromium </p>
+
+						<h2>Install KDE Plasma</h2>
+							<p>pacman -S xorg-server plasma-desktop konsole dolphin chromium <br>
+								systemctl enable sddm </p>
+					</div>
 
 				<h2>Finished Basic ARCH Install</h2>
 					<p>exit <br>
@@ -123,6 +194,12 @@
 		<!-- ____________________________New Install Settings____________________________-->
 		<div id="startup">
 			<h1>New Install Settings</h1>
+				<h2>Clear all package cache</h2>
+					<p>sudo pacman -Scc </p>
+
+				<h2>Remove true orphan packages</h2>
+					<p>sudo pacman -Qtdq | sudo pacman -Rns - </p>
+
 				<h2>Add ~/bin to $PATH</h2>
 					<p>mkdir ~/bin <br>
 						vim ~/.profile </p>
@@ -138,8 +215,14 @@
 						<p>[multilib] <br>
 							Include = /etc/pacman.d/mirrorlist </p>
 					</div>
-			
-			<h1>I3 DE Configure</h1>	
+					
+				<br>
+				<br>
+				<br>
+			<h1>I3 DE Configure</h1>
+				<h2>D-Menu Applications</h2>
+					<p>ls -a /usr/share/applications </p>
+					
 				<h2>Configure D-Menu</h2>
 					<p>vim ~/.config/i3/config </p>
 					<button onclick="showi3conf()">
@@ -236,18 +319,6 @@
 							set $ws9 "9"
 							set $ws10 "10"
 							
-							mode "resize" {
-									bindsym Left resize shrink width 10 px or 10 ppt
-									bindsym Down resize grow height 10 px or 10 ppt
-									bindsym Up resize shrink height 10 px or 10 ppt
-									bindsym Right resize grow width 10 px or 10 ppt
-									bindsym Escape mode "default"
-							}
-							
-							bar {
-								status_command i3status -c /home/raul/.config/i3status/i3status.conf
-							}
-
 							# reload the configuration file
 							bindsym $mod+Shift+c reload
 							
@@ -256,18 +327,44 @@
 							
 							# exit i3 (logs you out of your X session)
 							bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
-
+							
+							mode "resize" {
+									bindsym Left resize shrink width 10 px or 10 ppt
+									bindsym Down resize grow height 10 px or 10 ppt
+									bindsym Up resize shrink height 10 px or 10 ppt
+									bindsym Right resize grow width 10 px or 10 ppt
+							
+									# back to normal: Enter or Escape or $mod+r
+									bindsym Return mode "default"
+									bindsym Escape mode "default"
+									bindsym $mod+r mode "default"
+							}
+							
 							bindsym $mod+r mode "resize"
-
+							
+							bar {
+								status_command i3status -c /home/raul/.config/i3status/i3status.conf
+							}
+							
+							############################################
 							bindsym Mod1+Escape kill
+							
 							bindsym $mod+Return exec --no-startup-id dmenu_run
+							
 							bindsym $mod+k exec exec i3-sensible-terminal
+							
 							bindsym $mod+l exec dolphin
+							
 							bindsym $mod+i exec chromium
+							
 							bindsym $mod+c exec vscode
+							
 							bindsym $mod+m exec virt-manager
+							
 							bindsym $mod+o exec libreoffice
+							
 							bindsym $mod+d exec discord
+							
 							bindsym $mod+s exec steam
 						</pre>
 					</div>
@@ -320,6 +417,7 @@
 								#threshold_degraded = "1G"
 								#format_degraded = "MEMORY < %available"
 							}
+							
 							
 							tztime local {
   							format = "  %d-%m    %H:%M:%S "
@@ -420,6 +518,7 @@
 				<h2>Notifications</h2>
 					<p>sudo pacman -S notification-daemon dunst </p>
 				
+				
 				<h2>Install VM</h2>
 					<p>sudo pacman -S virt-manager libvirt qemu qemu-arch-extra dnsmasq dmidecode bridge-utils ovmf vde2 openbsd-netcat <br>
 						sudo systemctl enable libvirtd.service <br>
@@ -512,6 +611,104 @@
 		</div>
 	</main>
 
-	<script src="index.js"></script> 
+	<script>
+		var showconfi3 = false ,showstatusi3 = false ,showgrubconfig = false;
+		function showi3conf(){
+			if(showconfi3 == false){
+				var x = document.getElementById("i3conf");
+				x.style.display = "block";
+				showconfi3 = true;}
+			else{
+				var x = document.getElementById("i3conf");
+				x.style.display = "none";
+				showconfi3 = false;}
+		}
+		function showi3status(){
+			if(showstatusi3 == false){
+				var x = document.getElementById("i3status");
+				x.style.display = "block";
+				showstatusi3 = true;}
+			else{
+				var x = document.getElementById("i3status");
+				x.style.display = "none";
+				showstatusi3 = false;}
+		}
+		function showGRUB(){
+			if(showgrubconfig == false){
+				var x = document.getElementById("grubconfig");
+				x.style.display = "block";
+				showgrubconfig= true;}
+			else{
+				var x = document.getElementById("grubconfig");
+				x.style.display = "none";
+				showgrubconfig= false;}
+		}
+
+		function InstallArch() {
+			showInstallArch();
+			hideStartup();
+			hideGit();
+			hideBuild();
+			hideCompile();}
+		function Startup() {
+			hideInstallArch();
+			showStartup();  
+			hideGit();
+			hideBuild();
+			hideCompile();}
+		function Git() {
+			hideInstallArch();
+			hideStartup();
+			showGit();
+			hideBuild();
+			hideCompile();}
+		function Build() {
+			hideInstallArch();
+			hideStartup();
+			hideGit();
+			showBuild();
+			hideCompile();}
+		function Compile() {
+			hideInstallArch();
+			hideStartup();
+			hideGit();
+			hideBuild();
+			showCompile();}
+		
+		function hideInstallArch(){
+			var x = document.getElementById("arch");
+			x.style.display = "none";}
+		function showInstallArch(){
+			var x = document.getElementById("arch");
+			x.style.display = "block";}
+
+		function hideStartup(){
+			var x = document.getElementById("startup");
+			x.style.display = "none";}
+		function showStartup(){
+			var x = document.getElementById("startup");
+			x.style.display = "block";}
+
+		function hideGit(){
+			var x = document.getElementById("git");
+			x.style.display = "none";}
+		function showGit(){
+			var x = document.getElementById("git");
+			x.style.display = "block";}
+
+		function hideBuild(){
+			var x = document.getElementById("build");
+			x.style.display = "none";}
+		function showBuild(){
+			var x = document.getElementById("build");
+			x.style.display = "block";}
+
+		function hideCompile(){
+			var x = document.getElementById("compile");
+			x.style.display = "none";}
+		function showCompile(){
+			var x = document.getElementById("compile");
+			x.style.display = "block";}
+	</script> 
 </body>
 </html>
