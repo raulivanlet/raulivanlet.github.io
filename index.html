@@ -117,10 +117,15 @@
 
 				<h2>Configure Grub</h2>
 					<button onclick="DownloadGrubConfig()">
-						<p> Show Grub Config File </p>
+						<a href="/images/myw3schoolsimage.jpg" download>
+							<p> Download  Grub Config </p>
+						</a>
+						
 					</button>
 					<p>sudo pacman -S os-prober ntfs-3g <br>
-						sudo vim /etc/default/grub <br>
+							<a href="Configs/grub.txt" download="grub">
+								sudo vim /etc/default/grub <br>
+							</a>
 						sudo grub-mkconfig -o /boot/grub/grub.cfg </p>
 
 				<h2>System Time</h2>
@@ -145,13 +150,13 @@
 
 				<h2>Configure D-Menu</h2>
 					<button onclick="DownloadI3Config()">
-						<p> Show I3 Config File </p>
+						<p> Download I3 Config </p>
 					</button>
 					<p>vim ~/.config/i3/config </p>
 				
 				<h2>Configure D-Menu</h2>
 					<button onclick="DownloadI3StatusConfig()">
-						<p> Show I3Status Config File </p>
+						<p> Download I3 Status Config </p>
 					</button>
 					<p>vim ~/.config/i3status/i3status.conf </p>
 					
