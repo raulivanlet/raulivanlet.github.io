@@ -32,8 +32,20 @@ p{
   margin:0px 0px 0px 0px;
 }
 
-pre{
-  white-space: pre-line;
+a:link {
+  color: rgb(191, 255, 0);
+}
+
+a:visited {
+  color: rgb(255, 174, 0);
+}
+
+a:hover {
+  color:rgb(255, 234, 0);
+}
+
+a:active {
+  color: rgb(26, 255, 0);
 }
 
 button {
