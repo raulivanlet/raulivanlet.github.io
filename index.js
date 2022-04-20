@@ -1,16 +1,4 @@
 
-function DownloadI3Config(){
-	
-}
-
-function DownloadI3StatusConfig(){
-	
-}
-
-function DownloadGrubConfig(){
-	
-}
-
 function MenuButton1() {
 	ShowMenuButton1();
 	HideMenuButton2();

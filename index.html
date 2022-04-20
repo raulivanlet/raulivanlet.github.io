@@ -10,7 +10,7 @@
 <body>
 	<header>
 		<div class="header">
-			<button onclick="MenuButton1()"> Install Arch CLI</button>
+			<button onclick="MenuButton1()"> Install Arch CLI </button>
 		</div>
 		<div class="header">
 			<button onclick="MenuButton2()"> Setup Arch </button>
@@ -26,7 +26,8 @@
 		</div>
 	</header>
 	<main>
-		<!-- ____________________________ARCH Linux Installation Guide____________________________-->
+
+		<!-- ________________________________________________  Install Arch CLI ________________________________________________ -->
 		<div id="menu1">
 			<h1>Install Arch</h1>
 				<h2>Show Disks and Partitions</h2>
@@ -111,7 +112,7 @@
 						reboot </p>
 		</div>
 
-		<!-- ____________________________New Install Settings____________________________-->
+		<!-- ________________________________________________ Setup Arch ________________________________________________ -->
 		<div id="menu2">
 			<h1>Setup ARCH</h1>
 
@@ -147,12 +148,10 @@
 						<p>vim ~/.config/i3/config </p>
 					</a>
 					
-				
 				<h2>Configure D-Menu</h2>
 					<a href="Configs/i3 status conf" download="i3status.conf">
 						<p>vim ~/.config/i3status/i3status.conf </p>
 					</a>
-					
 					
 				<h2>Cool Apps</h2>
 					<p>sudo pacman -S neofetch htop vlc gwenview spectacle ark </p>
@@ -170,34 +169,38 @@
 					<p>sudo pacman -S network-manager-applet nftables <br>
 						run with D-menu or console: nm-applet</p>
 
-				<h2>System Temperature</h2>	
-					<p>sudo pacman -S lm_sensors <br>
-						In console: sensors </p>
-
-				<h2>Keyring</h2>
-					<p>sudo pacman -S gnome-keyring libsecret seahorse </p>
+				<h2>Music Settings</h2>
+					<p>sudo pacman -S pulseaudio pulseaudio-alsa kmix </p>
 
 				<h2>KDE apps theme</h2>
 					<p>sudo pacman -S lxappearance breeze breeze-gtk ttf-roboto </p>
 
-				<h2>Music Settings</h2>
-					<p>sudo pacman -S pulseaudio pulseaudio-alsa kmix </p>
-				
 				<h2>Install Emoji support</h2>
 					<p>sudo pacman -S noto-fonts-emoji </p>
-					
+
 				<h2>Notifications</h2>
 					<p>sudo pacman -S notification-daemon dunst </p>
+
+				<h2>Keyring</h2>
+					<p>sudo pacman -S gnome-keyring libsecret seahorse </p>
+
+				<!-- ==========Milascenous=========-->
+				<h2>System Temperature</h2>	
+					<p>sudo pacman -S lm_sensors <br>
+						[In console terminal] sensors </p>
 				
 				<h2>Install VM</h2>
 					<p>sudo pacman -S virt-manager libvirt qemu qemu-arch-extra dnsmasq dmidecode bridge-utils ovmf vde2 openbsd-netcat <br>
 						sudo systemctl enable libvirtd.service <br>
 						sudo systemctl start libvirtd.service <br>
-						sudo vim ~/br10.xml </p>
-					<p>Add this to a vm autostart script <br>
+						<a href="Configs/br10.xml" download="br10.xml">
+							sudo vim ~/br10.xml <br>
+						</a>
+						Add this to a vm autostart script <br>
 						sudo virsh net-start br10 </p>
 		</div>
-		<!-- ____________________________GIT / GITHUB Guide for Linux____________________________-->
+
+		<!-- ________________________________________________ GIT / GITHUB Guide for Linux ________________________________________________ -->
 		<div id="menu3">
 			<h1>GIT/Github</h1>
 				<h2>Install GIT</h2>
@@ -216,7 +219,7 @@
 				<h2>Check new changes</h2>
 					<p>git status </p>
 
-				<h2>Save changes</h2>
+				<h2>Save all changes</h2>
 					<p>git add -A </p>
 
 				<h2>Add changes to local repo</h2>
@@ -225,11 +228,12 @@
 				<h2>Add changes to cloud repo</h2>
 					<p>git push </p>
 		</div>
-		<!-- ____________________________Build Software From Source____________________________-->
+
+		<!-- ________________________________________________ Build Software From Source ________________________________________________ -->
 		<div id="menu4">
 			<h1>Build from Source</h1>
 				<h2>Download Libs</h2>
-					<p>sudo pacman -Syu dase-devel </p>
+					<p>sudo pacman -S dase-devel </p>
 
 				<h2>Clone App</h2>
 					<p>git clone [url]</p>
@@ -241,28 +245,24 @@
 					<p>less PKGBUILD <br>
 						makepkg -si </p>
 		</div>
-		<!-- ____________________________Compile C / C++ / C# Code witn MinGW____________________________-->
+
+		<!-- ________________________________________________ Compile C / C++ / C# Code witn MinGW ________________________________________________ -->
 		<div id="menu5">
 			<h1>Compile and Execute</h1>
 				<h2>Install C/C++ compilers</h2>
 					<p>sudo pacman -S gcc </p>
 
-				<h2>Navigate to Folder</h2>
-					<p>cd [folder]/[folder]/[folder] </p>
-
-				<h2>Compile C++ Files</h2>
-					<p>g++ -o [executable file] [fileToBeCompiled.cpp] </p>
-
-				<h2>Compile C Files</h2>
-					<p>gcc -o [executable file] [fileToBeCompiled.c] </p>
+				<h2>Compile C/C++ Files</h2>
+					<p>[gcc / g++] -o [executable file] [MainFile.c/.cpp] </p>
 
 				<h2>Execute the Executable File</h2>
-					<p>./[numeFisierExecutabil] </p>
+					<p>./[executable filename] </p>
 
 				<h2>Download Arduino IDE and add user to group</h2>
 					<p>ls -l /dev/ttyUSB0* <br>
 						sudo gpasswd -a raul [uucp] </p>
 		</div>
+
 	</main>
 
 	<script src="index.js"></script> 
