@@ -116,12 +116,6 @@
 			<h1>Setup ARCH</h1>
 
 				<h2>Configure Grub</h2>
-					<button onclick="DownloadGrubConfig()">
-						<a href="/images/myw3schoolsimage.jpg" download>
-							<p> Download  Grub Config </p>
-						</a>
-						
-					</button>
 					<p>sudo pacman -S os-prober ntfs-3g <br>
 							<a href="Configs/grub.txt" download="grub">
 								sudo vim /etc/default/grub <br>
@@ -155,10 +149,10 @@
 					<p>vim ~/.config/i3/config </p>
 				
 				<h2>Configure D-Menu</h2>
-					<button onclick="DownloadI3StatusConfig()">
-						<p> Download I3 Status Config </p>
-					</button>
-					<p>vim ~/.config/i3status/i3status.conf </p>
+					<a href="Configs/i3 status conf" download="i3status.conf">
+						<p>vim ~/.config/i3status/i3status.conf </p>
+					</a>
+					
 					
 				<h2>Cool Apps</h2>
 					<p>sudo pacman -S neofetch htop vlc gwenview spectacle ark </p>
