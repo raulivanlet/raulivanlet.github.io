@@ -36,7 +36,7 @@
 					<p>cgdisk /dev/sda or nvme0n1 </p>
 					<ul>
 						<li> 500M     ef00     boot</li>
-						<li> 4G       8200     swap</li>
+						<li> 20G       8200     swap</li>
 						<li> ALL      8300     arch</li>
 					</ul>
 
@@ -108,12 +108,8 @@
 				<h2>Arch CLI install finished , can skip DE</h2>
 
 				<h2>Install I3</h2>
-					<p>pacman -S xorg-server xorg-xrandr i3-wm i3bar i3status konsole dolphin chromium </p>
-
-				<h2>Install KDE Plasma</h2>
-					<p>pacman -S xorg-server plasma-desktop konsole dolphin chromium <br>
-						systemctl enable sddm </p>
-
+					<p>pacman -S xorg-server i3 (1 3 5) dmenu  konsole dolphin chromium </p>
+				
 				<h2>Finished Basic ARCH Install</h2>
 					<p>exit <br>
 						umount -R /mnt <br>
@@ -123,6 +119,41 @@
 		<!-- ____________________________New Install Settings____________________________-->
 		<div id="startup">
 			<h1>New Install Settings</h1>
+
+				<h2>Configure Grub</h2>
+					<p>sudo pacman -S os-prober ntfs-3g<br>
+						sudo vim /etc/default/grub </p>
+					<button onclick="showGRUB()">
+						<p> Show Grub Config File </p>
+					</button>
+					<div class="textFile" id="grubconfig">
+						<pre>#Grub Config File
+						GRUB_DEFAULT=saved
+						GRUB_TIMEOUT=5
+						GRUB_DISTRIBUTOR="Arch"
+						GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet"
+						GRUB_CMDLINE_LINUX=""
+						GRUB_PRELOAD_MODULES="part_gpt part_msdos"
+						# Uncomment to enable booting from LUKS encrypted devices
+						#GRUB_ENABLE_CRYPTODISK=y
+						# Set to 'countdown' or 'hidden' to change timeout behavior, press ESC key to display menu.
+						GRUB_TIMEOUT_STYLE=menu
+						GRUB_TERMINAL_INPUT=console
+						GRUB_GFXMODE=1280x1024
+						GRUB_GFXPAYLOAD_LINUX=keep
+						GRUB_DISABLE_RECOVERY=true
+						# Desired menu colors.Entries specified as foreground/background.
+						GRUB_COLOR_NORMAL="light-blue/black"
+						GRUB_COLOR_HIGHLIGHT="light-cyan/blue"
+						# Uncomment one of them for the gfx desired, a image background or a gfxtheme
+						#GRUB_BACKGROUND="/path/to/wallpaper"
+						#GRUB_THEME="/path/to/gfxtheme"
+						GRUB_SAVEDEFAULT=true
+						#GRUB_DISABLE_SUBMENU=y
+						GRUB_DISABLE_OS_PROBER=false</pre>
+					</div>
+					<p> sudo grub-mkconfig -o /boot/grub/grub.cfg </p>
+
 				<h2>Add ~/bin to $PATH</h2>
 					<p>mkdir ~/bin <br>
 						vim ~/.profile </p>
@@ -326,58 +357,7 @@
 							}
 						</pre>
 					</div>
-
-				<h2>Configure Grub</h2>
-					<p>sudo pacman -S os-prober <br>
-						sudo vim /etc/default/grub </p>
-					<button onclick="showGRUB()">
-						<p> Show Grub Config File </p>
-					</button>
-					<div class="textFile" id="grubconfig">
-						<pre>#Grub Config File
-							GRUB_DEFAULT=saved
-							GRUB_TIMEOUT=5
-							GRUB_DISTRIBUTOR="Arch"
-							GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet"
-							GRUB_CMDLINE_LINUX=""
-							GRUB_PRELOAD_MODULES="part_gpt part_msdos"
-							
-							# Uncomment to enable booting from LUKS encrypted devices
-							#GRUB_ENABLE_CRYPTODISK=y
-							
-							# Set to 'countdown' or 'hidden' to change timeout behavior, press ESC key to display menu.
-							GRUB_TIMEOUT_STYLE=menu
-							
-							GRUB_TERMINAL_INPUT=console
-							
-							# Uncomment to disable graphical terminal
-							#GRUB_TERMINAL_OUTPUT=console
-							
-							GRUB_GFXMODE=1280x1024
-							
-							GRUB_GFXPAYLOAD_LINUX=keep
-							
-							GRUB_DISABLE_RECOVERY=true
-							
-							# Desired menu colors.Entries specified as foreground/background.
-							GRUB_COLOR_NORMAL="light-blue/black"
-							GRUB_COLOR_HIGHLIGHT="light-cyan/blue"
-							
-							# Uncomment one of them for the gfx desired, a image background or a gfxtheme
-							#GRUB_BACKGROUND="/path/to/wallpaper"
-							#GRUB_THEME="/path/to/gfxtheme"
-							
-							# Uncomment to get a beep at GRUB start
-							#GRUB_INIT_TUNE="480 440 1"
-							
-							GRUB_SAVEDEFAULT=true
-							
-							#GRUB_DISABLE_SUBMENU=y
-							
-							GRUB_DISABLE_OS_PROBER=false</pre>
-					</div>
-					<p> sudo grub-mkconfig -o /boot/grub/grub.cfg </p>
-
+					
 				<h2>Cool Apps</h2>
 					<p>sudo pacman -S neofetch htop vlc gwenview spectacle ark </p>
 
