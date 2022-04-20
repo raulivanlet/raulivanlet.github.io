@@ -1,109 +1,87 @@
-var showconfi3 = false ,showstatusi3 = false ,showgrubconfig = false;
 
-function showi3conf(){
-	if(showconfi3 == false){
-		var x = document.getElementById("i3conf");
-		x.style.display = "block";
-		showconfi3 = true;}
-	else{
-		var x = document.getElementById("i3conf");
-		x.style.display = "none";
-        showconfi3 = false;}
+function DownloadI3Config(){
+	
 }
 
-function showi3status(){
-	if(showstatusi3 == false){
-		var x = document.getElementById("i3status");
-		x.style.display = "block";
-		showstatusi3 = true;}
-	else{
-		var x = document.getElementById("i3status");
-		x.style.display = "none";
-		showstatusi3 = false;}
+function DownloadI3StatusConfig(){
+	
 }
 
-function showGRUB(){
-	if(showgrubconfig == false){
-		var x = document.getElementById("grubconfig");
-		x.style.display = "block";
-		showgrubconfig= true;}
-	else{
-		var x = document.getElementById("grubconfig");
-		x.style.display = "none";
-		showgrubconfig= false;}
+function DownloadGrubConfig(){
+	
 }
 
-function InstallArch() {
-	showInstallArch();
-	hideStartup();
-	hideGit();
-	hideBuild();
-	hideCompile();}
+function MenuButton1() {
+	ShowMenuButton1();
+	HideMenuButton2();
+	HideMenuButton3();
+	HideMenuButton4();
+	HideMenuButton5();}
 		
-function Startup() {
-	hideInstallArch();
-	showStartup();  
-	hideGit();
-	hideBuild();
-	hideCompile();}
+function MenuButton2() {
+	HideMenuButton1();
+	ShowMenuButton2();  
+	HideMenuButton3();
+	HideMenuButton4();
+	HideMenuButton5();}
 		
-function Git() {
-	hideInstallArch();
-	hideStartup();
-	showGit();
-	hideBuild();
-	hideCompile();}
+function MenuButton3() {
+	HideMenuButton1();
+	HideMenuButton2();
+	ShowMenuButton3();
+	HideMenuButton4();
+	HideMenuButton5();}
 		
-function Build() {
-	hideInstallArch();
-	hideStartup();
-	hideGit();
-	showBuild();
-	hideCompile();}
+function MenuButton4() {
+	HideMenuButton1();
+	HideMenuButton2();
+	HideMenuButton3();
+	ShowMenuButoon4();
+	HideMenuButton5();}
 
-function Compile() {
-	hideInstallArch();
-	hideStartup();
-	hideGit();
-	hideBuild();
-	showCompile();}
+function MenuButton5() {
+	HideMenuButton1();
+	HideMenuButton2();
+	HideMenuButton3();
+	HideMenuButton4();
+	ShowMenuButton5();}
 		
-function hideInstallArch(){
-	var x = document.getElementById("arch");
+function HideMenuButton1(){
+	var x = document.getElementById("menu1");
 	x.style.display = "none";}
 		
-function showInstallArch(){
-	var x = document.getElementById("arch");
+function ShowMenuButton1(){
+	var x = document.getElementById("menu1");
 	x.style.display = "block";}
 
-function hideStartup(){
-	var x = document.getElementById("startup");
+function HideMenuButton2(){
+	var x = document.getElementById("menu2");
 	x.style.display = "none";}
 	
-function showStartup(){
-	var x = document.getElementById("startup");
+function ShowMenuButton2(){
+	var x = document.getElementById("menu2");
 	x.style.display = "block";}
 
-function hideGit(){
-	var x = document.getElementById("git");
+function HideMenuButto3(){
+	var x = document.getElementById("menu3");
 	x.style.display = "none";}
 		
-function showGit(){
-	var x = document.getElementById("git");
+function ShowMenuButton3(){
+	var x = document.getElementById("menu3");
 	x.style.display = "block";}
 
-function hideBuild(){
-	var x = document.getElementById("build");
+function HideMenuButton4(){
+	var x = document.getElementById("menu4");
 	x.style.display = "none";}
 		
-function showBuild(){
-	var x = document.getElementById("build");
+function ShowMenuButoon4(){
+	var x = document.getElementById("menu4");
 	x.style.display = "block";}
 
-function hideCompile(){
-    var x = document.getElementById("compile");
+function HideMenuButton5(){
+    var x = document.getElementById("menu5");
 	x.style.display = "none";}
 		
-function showCompile(){
-	var x = document.getElementById("compile");
+function ShowMenuButton5(){
+	var x = document.getElementById("menu5");
 	x.style.display = "block";}

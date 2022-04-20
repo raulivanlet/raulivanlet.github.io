@@ -10,24 +10,24 @@
 <body>
 	<header>
 		<div class="header">
-			<button onclick="InstallArch()"> Install Arch </button>
+			<button onclick="MenuButton1()"> Install Arch CLI</button>
 		</div>
 		<div class="header">
-			<button onclick="Startup()"> New Install Settings </button>
+			<button onclick="MenuButton2()"> Setup Arch </button>
 		</div>
 		<div class="header">
-			<button onclick="Git()"> GIT/Github </button>
+			<button onclick="MenuButton3()"> GIT/Github </button>
 		</div>
 		<div class="header">
-			<button onclick="Build()"> Build from Source </button>
+			<button onclick="MenuButton4()"> Build from Source </button>
 		</div>
 		<div class="header">
-			<button onclick="Compile()"> Compile and Execute </button>
+			<button onclick="MenuButton5()"> Compile and Execute </button>
 		</div>
 	</header>
 	<main>
 		<!-- ____________________________ARCH Linux Installation Guide____________________________-->
-		<div id="arch">
+		<div id="menu1">
 			<h1>Install Arch</h1>
 				<h2>Show Disks and Partitions</h2>
 					<p>lsblk </p>
@@ -104,12 +104,7 @@
 						<p>##Uncomment to allow members of group wheel to execute any command <br>
 							%wheel ALL=(ALL:ALL) ALL </p>
 					</div>
-		
-				<h2>Arch CLI install finished , can skip DE</h2>
 
-				<h2>Install I3</h2>
-					<p>pacman -S xorg-server i3 (1 3 5) dmenu  konsole dolphin chromium </p>
-				
 				<h2>Finished Basic ARCH Install</h2>
 					<p>exit <br>
 						umount -R /mnt <br>
@@ -117,246 +112,48 @@
 		</div>
 
 		<!-- ____________________________New Install Settings____________________________-->
-		<div id="startup">
-			<h1>New Install Settings</h1>
+		<div id="menu2">
+			<h1>Setup ARCH</h1>
 
 				<h2>Configure Grub</h2>
-					<p>sudo pacman -S os-prober ntfs-3g<br>
-						sudo vim /etc/default/grub </p>
-					<button onclick="showGRUB()">
+					<button onclick="DownloadGrubConfig()">
 						<p> Show Grub Config File </p>
 					</button>
-					<div class="textFile" id="grubconfig">
-						<pre>#Grub Config File
-						GRUB_DEFAULT=saved
-						GRUB_TIMEOUT=5
-						GRUB_DISTRIBUTOR="Arch"
-						GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet"
-						GRUB_CMDLINE_LINUX=""
-						GRUB_PRELOAD_MODULES="part_gpt part_msdos"
-						# Uncomment to enable booting from LUKS encrypted devices
-						#GRUB_ENABLE_CRYPTODISK=y
-						# Set to 'countdown' or 'hidden' to change timeout behavior, press ESC key to display menu.
-						GRUB_TIMEOUT_STYLE=menu
-						GRUB_TERMINAL_INPUT=console
-						GRUB_GFXMODE=1280x1024
-						GRUB_GFXPAYLOAD_LINUX=keep
-						GRUB_DISABLE_RECOVERY=true
-						# Desired menu colors.Entries specified as foreground/background.
-						GRUB_COLOR_NORMAL="light-blue/black"
-						GRUB_COLOR_HIGHLIGHT="light-cyan/blue"
-						# Uncomment one of them for the gfx desired, a image background or a gfxtheme
-						#GRUB_BACKGROUND="/path/to/wallpaper"
-						#GRUB_THEME="/path/to/gfxtheme"
-						GRUB_SAVEDEFAULT=true
-						#GRUB_DISABLE_SUBMENU=y
-						GRUB_DISABLE_OS_PROBER=false</pre>
-					</div>
-					<p> sudo grub-mkconfig -o /boot/grub/grub.cfg </p>
+					<p>sudo pacman -S os-prober ntfs-3g <br>
+						sudo vim /etc/default/grub <br>
+						sudo grub-mkconfig -o /boot/grub/grub.cfg </p>
 
-				<h2>Add ~/bin to $PATH</h2>
-					<p>mkdir ~/bin <br>
-						vim ~/.profile </p>
+				<h2>System Time</h2>
+					<p>timedatectl set-local-rtc 1 </p>
+				
+				<h2>Add bin to PATH</h2>
+					<p>mkdir ~/bin && vim ~/.profile</p>
 					<div class="textFile">
 						<p>export PATH=$PATH:/home/[username]/bin <br>
-							export QT_QPA_PLATFORMTHEME=qt5ct <br>
-							xrandr --output HDMI-A-1 --mode 1920x1080 --rate 119.98 </p>
+							export QT_QPA_PLATFORMTHEME=qt5ct </p>
 					</div>
 
 				<h2>Add 32 bit programs to pacman</h2>
-					<p>vim /etc/pacman.conf </p>
+					<p>sudo vim /etc/pacman.conf </p>
 					<div class="textFile">
 						<p>[multilib] <br>
 							Include = /etc/pacman.d/mirrorlist </p>
 					</div>
-			
-			<h1>I3 DE Configure</h1>	
+
+				<h2>Install I3</h2>
+					<p>pacman -S xorg-server i3 (1 3 5) dmenu  konsole dolphin chromium </p>
+
 				<h2>Configure D-Menu</h2>
-					<p>vim ~/.config/i3/config </p>
-					<button onclick="showi3conf()">
+					<button onclick="DownloadI3Config()">
 						<p> Show I3 Config File </p>
 					</button>
-					<div class="textFile" id="i3conf">
-						<pre>
-							set $mod Mod4
-							font pango:Ubuntu Regular 10
-							exec --no-startup-id dex --autostart --environment i3
-							exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
-							exec --no-startup-id nm-applet
-							set $refresh_i3status killall -SIGUSR1 i3status
-							
-							#--------------------------------Media Controlls--------------------------------
-							bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
-							bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
-							bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-							#bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
-							
-							# Sreen brightness controls
-							#bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
-							#bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
-							
-							# Media player controls
-							bindsym XF86AudioPlay exec playerctl play-pause
-							bindsym XF86AudioPause exec playerctl play-pause
-							bindsym XF86AudioNext exec playerctl next
-							bindsym XF86AudioPrev exec playerctl previous
-							
-							# Change focus
-							bindsym $mod+Left focus left
-							bindsym $mod+Down focus down
-							bindsym $mod+Up focus up
-							bindsym $mod+Right focus right
-							
-							# Move window
-							bindsym $mod+Shift+Left move left
-							bindsym $mod+Shift+Down move down
-							bindsym $mod+Shift+Up move up
-							bindsym $mod+Shift+Right move right
-							
-							bindsym $mod+f fullscreen toggle
-							
-							# Use Mouse+$mod to drag floating windows to their wanted position
-							#floating_modifier $mod
-							
-							# toggle tiling / floating
-							#bindsym $mod+Shift+space floating toggle
-							
-							# change focus between tiling / floating windows
-							#bindsym $mod+space focus mode_toggle
-							
-							#-----------Split Horizontal-Vertical--------------
-							bindsym $mod+bracketleft split h
-							
-							bindsym $mod+bracketright split v
-							
-							#bindsym $mod+s layout stacking
-							#bindsym $mod+w layout tabbed
-							#bindsym $mod+e layout toggle split
-							
-							############################################
-							bindsym $mod+1 workspace number $ws1
-							bindsym $mod+2 workspace number $ws2
-							bindsym $mod+3 workspace number $ws3
-							bindsym $mod+4 workspace number $ws4
-							bindsym $mod+5 workspace number $ws5
-							bindsym $mod+6 workspace number $ws6
-							bindsym $mod+7 workspace number $ws7
-							bindsym $mod+8 workspace number $ws8
-							bindsym $mod+9 workspace number $ws9
-							bindsym $mod+0 workspace number $ws10
-							
-							bindsym $mod+Shift+1 move container to workspace number $ws1
-							bindsym $mod+Shift+2 move container to workspace number $ws2
-							bindsym $mod+Shift+3 move container to workspace number $ws3
-							bindsym $mod+Shift+4 move container to workspace number $ws4
-							bindsym $mod+Shift+5 move container to workspace number $ws5
-							bindsym $mod+Shift+6 move container to workspace number $ws6
-							bindsym $mod+Shift+7 move container to workspace number $ws7
-							bindsym $mod+Shift+8 move container to workspace number $ws8
-							bindsym $mod+Shift+9 move container to workspace number $ws9
-							bindsym $mod+Shift+0 move container to workspace number $ws10
-							
-							set $ws1 "1"
-							set $ws2 "2"
-							set $ws3 "3"
-							set $ws4 "4"
-							set $ws5 "5"
-							set $ws6 "6"
-							set $ws7 "7"
-							set $ws8 "8"
-							set $ws9 "9"
-							set $ws10 "10"
-							
-							mode "resize" {
-									bindsym Left resize shrink width 10 px or 10 ppt
-									bindsym Down resize grow height 10 px or 10 ppt
-									bindsym Up resize shrink height 10 px or 10 ppt
-									bindsym Right resize grow width 10 px or 10 ppt
-									bindsym Escape mode "default"
-							}
-							
-							bar {
-								status_command i3status -c /home/raul/.config/i3status/i3status.conf
-							}
-
-							# reload the configuration file
-							bindsym $mod+Shift+c reload
-							
-							# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-							bindsym $mod+Shift+r restart
-							
-							# exit i3 (logs you out of your X session)
-							bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
-
-							bindsym $mod+r mode "resize"
-
-							bindsym Mod1+Escape kill
-							bindsym $mod+Return exec --no-startup-id dmenu_run
-							bindsym $mod+k exec exec i3-sensible-terminal
-							bindsym $mod+l exec dolphin
-							bindsym $mod+i exec chromium
-							bindsym $mod+c exec vscode
-							bindsym $mod+m exec virt-manager
-							bindsym $mod+o exec libreoffice
-							bindsym $mod+d exec discord
-							bindsym $mod+s exec steam
-						</pre>
-					</div>
+					<p>vim ~/.config/i3/config </p>
 				
 				<h2>Configure D-Menu</h2>
-					<p>vim ~/.config/i3status/i3status.conf </p>
-					<button onclick="showi3status()">
+					<button onclick="DownloadI3StatusConfig()">
 						<p> Show I3Status Config File </p>
 					</button>
-					<div class="textFile" id="i3status">
-						<pre>
-							general {
-								colors = true
-								interval = 1
-							}
-							
-							#order += "ipv6"
-							#order += "wireless _first_"
-							order += "ethernet _first_"
-							#order += "battery all"
-							order += "disk /"
-							order += "load"
-							order += "memory"
-							order += "tztime local"
-							
-							wireless _first_ {
-								format_up = "  W: (%quality at %essid) %ip  "
-								format_down = "  W: OFF  "
-							}
-							
-							ethernet _first_ {
-								format_up = "  E: %ip (%speed)  "
-								format_down = "  E: down  "
-							}
-							
-							battery all {
-								format = "  %status %percentage %remaining  "
-							}
-							
-							disk "/" {
-								format = "  DISK: %avail  "
-							}
-							
-							load {
-								format = "  CPU: %1min  "
-							}
-							
-							memory {
-								format = "  MEM: %used | %available  "
-								#threshold_degraded = "1G"
-								#format_degraded = "MEMORY < %available"
-							}
-							
-							tztime local {
-  							format = "  %d-%m    %H:%M:%S "
-							}
-						</pre>
-					</div>
+					<p>vim ~/.config/i3status/i3status.conf </p>
 					
 				<h2>Cool Apps</h2>
 					<p>sudo pacman -S neofetch htop vlc gwenview spectacle ark </p>
@@ -370,13 +167,13 @@
 							greeter-session=lightdm-gtk-greeter <br>
 					</div>
 
-				<h2>System Temperature</h2>	
-					<p>sudo pacman -S lm_sensors <br>
-						In console: sensors </p>
-
 				<h2>Network</h2>
 					<p>sudo pacman -S network-manager-applet nftables <br>
 						run with D-menu or console: nm-applet</p>
+
+				<h2>System Temperature</h2>	
+					<p>sudo pacman -S lm_sensors <br>
+						In console: sensors </p>
 
 				<h2>Keyring</h2>
 					<p>sudo pacman -S gnome-keyring libsecret seahorse </p>
@@ -386,13 +183,6 @@
 
 				<h2>Music Settings</h2>
 					<p>sudo pacman -S pulseaudio pulseaudio-alsa kmix </p>
-
-				<h2>System Time</h2>
-					<p>sudo pacman -S ntp <br>
-						sudo vim /etc/ntp.conf <br>
-						systemctl enable ntpd.service <br>
-						systemctl start ntpd.service <br>
-						timedatectl set-local-rtc 1 </p>
 				
 				<h2>Install Emoji support</h2>
 					<p>sudo pacman -S noto-fonts-emoji </p>
@@ -425,7 +215,7 @@
 						sudo virsh net-start br10 </p>
 		</div>
 		<!-- ____________________________GIT / GITHUB Guide for Linux____________________________-->
-		<div id="git">
+		<div id="menu3">
 			<h1>GIT/Github</h1>
 				<h2>Install GIT</h2>
 					<p>sudo pacman -S git <br>
@@ -453,7 +243,7 @@
 					<p>git push </p>
 		</div>
 		<!-- ____________________________Build Software From Source____________________________-->
-		<div id="build">
+		<div id="menu4">
 			<h1>Build from Source</h1>
 				<h2>Download Libs</h2>
 					<p>sudo pacman -Syu dase-devel </p>
@@ -469,7 +259,7 @@
 						makepkg -si </p>
 		</div>
 		<!-- ____________________________Compile C / C++ / C# Code witn MinGW____________________________-->
-		<div id="compile">
+		<div id="menu5">
 			<h1>Compile and Execute</h1>
 				<h2>Install C/C++ compilers</h2>
 					<p>sudo pacman -S gcc </p>

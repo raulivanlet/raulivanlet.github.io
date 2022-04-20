@@ -55,11 +55,8 @@ button {
     border:1px solid black;
     border-left: 5px solid rgba(28,110,164,0.94);
 }
-        
-#i3conf{display:none;}
-#i3status{display:none;}
-#grubconfig{display:none;}
-#startup {display: none;}
-#git {display: none;}
-#build {display: none;}
-#compile {display: none;}
+
+#menu2 {display: none;}
+#menu3 {display: none;}
+#menu4 {display: none;}
+#menu5 {display: none;}
