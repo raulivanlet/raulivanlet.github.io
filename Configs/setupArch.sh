@@ -6,9 +6,9 @@ sudo timedatectl set-local-rtc 1
 
 
 #--------------------Installing all
-echo "Updating..."
+echo "\nUpdating..."
 sudo pacman -Syu
-echo "Downloading..."
+echo "\nDownloading..."
 sudo pacman -S os-prober ntfs-3g xorg-server mesa xf86-video-amdgpu nvidia nvidia-utils nvidia-prime i3-gaps i3blocks i3status dmenu lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings konsole dolphin chromium network-manager-applet nftables pulseaudio pulseaudio-alsa kmix lxappearance breeze breeze-gtk ttf-roboto noto-fonts-emoji notification-daemon dunst lm_sensors
 #--------------------Installing grub--------------------os-prober ntfs-3g
 #--------------------Installing Xorg--------------------xorg-server mesa
@@ -23,7 +23,7 @@ sudo pacman -S os-prober ntfs-3g xorg-server mesa xf86-video-amdgpu nvidia nvidi
 #--------------------Notification Support--------------------notification-daemon dunst
 #--------------------System Temperature--------------------lm_sensors
 
-
+echo "\nSetting Up Grub..."
 #--------------------Setting Grub
 if [[ -f /etc/default/grub ]]
 then
@@ -37,7 +37,7 @@ fi
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 
 
-
+echo "\nSetting Up Bin & .profile..."
 #--------------------Setting bin folder and paths
 if [[ ! -d ~/bin ]] ;then
     mkdir ~/bin
@@ -49,7 +49,7 @@ if [[ ! -f ~/.profile ]] ;then
 fi
 
 
-
+echo "\nSetting Up I3..."
 #--------------------Configure I3
 if [[ -f ~/.config/i3/config ]]
 then
@@ -62,7 +62,7 @@ else
 fi
 
 
-
+echo "\nSetting Up I3 Bar..."
 #--------------------Configure I3 Status
 if [[ -f ~/.config/i3status/i3status.conf ]]
 then
@@ -84,7 +84,7 @@ fi
 
 
 
-echo "setting mouse completed"
+#echo "setting mouse completed"
 #--------------------Disable Mouse Acceleration
 #if [[ -f /etc/X11/xorg.conf.d/50-mouse-acceleration.conf ]] ;then
 #	sudo rm /etc/X11/xorg.conf.d/50-mouse-acceleration.conf
@@ -93,7 +93,7 @@ echo "setting mouse completed"
 
 
 
-echo "setting dm completed"
+#echo "setting dm completed"
 #--------------------Install Display Manager
 #systemctl enable lightdm.service
 #printf "[Seat:*]
