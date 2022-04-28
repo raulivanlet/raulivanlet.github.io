@@ -37,17 +37,13 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 
 
 #--------------------Setting bin folder and paths
-if [[ -f ~/bin ]] ;then
-    :
-else
-	mkdir ~/bin
+if [[ ! -d ~/bin ]] ;then
+    mkdir ~/bin
 fi
-if [[ -f ~/.profile ]] ;then
-	:
-else
+if [[ ! -f ~/.profile ]] ;then
 	sudo rm ~/.profile
 	cp profile.txt .profile
-	sudo mv .profile ~/
+	sudo mv .profile ~/	
 fi
 
 
