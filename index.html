@@ -142,8 +142,11 @@
 							Include = /etc/pacman.d/mirrorlist </p>
 					</div>
 
+				<h2>Install Drivers</h2>
+					<p>pacman -S xorg-server mesa xf86-video-amdgpu nvidia nvidia-utils nvidia-prime </p>
+
 				<h2>Install I3</h2>
-					<p>pacman -S xorg-server i3-gaps i3blocks i3status dmenu konsole dolphin chromium </p>
+					<p>pacman -S i3-gaps i3blocks i3status dmenu konsole dolphin chromium </p>
 
 				<h2>No Desktop Manager</h2>
 					<p>vim ~/.xinitrc </p>
@@ -158,19 +161,31 @@
 						sudo vim /etc/lightdm/lightdm.conf </p>
 					<div class="textFile">
 						<p>[Seat:*] <br>
-							greeter-session=lightdm-gtk-greeter <br>
+							greeter-session=lightdm-gtk-greeter </p>
 					</div>
 
-				<h2>Configure D-Menu</h2>
+				<h2>Configure I3</h2>
 					<a href="Configs/i3_config.txt" download="config">
 						<p>vim ~/.config/i3/config </p>
 					</a>
 					
-				<h2>Configure D-Menu</h2>
+				<h2>Configure Data Bar</h2>
 					<a href="Configs/i3_status_conf.txt" download="i3status.conf">
 						<p>vim ~/.config/i3status/i3status.conf </p>
 					</a>
 					
+				<h2></h2>
+					<p>/etc/X11/xorg.conf.d/50-mouse-acceleration.conf </p>
+					<div class="textFile">
+						<p>Section "InputClass"
+							Identifier "My Mouse"
+							MatchIsPointer "yes"
+							Option "AccelerationProfile" "-1"
+							Option "AccelerationScheme" "none"
+							Option "AccelSpeed" "-1"
+						EndSection </p>
+					</div>
+
 				<h2>Cool Apps</h2>
 					<p>sudo pacman -S neofetch htop vlc gwenview spectacle ark </p>
 
