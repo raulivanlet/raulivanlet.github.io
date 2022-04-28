@@ -1,8 +1,10 @@
 #!/bin/bash
 
 
+
 #--------------------Setting time for dualboot
 sudo timedatectl set-local-rtc 1
+
 
 
 #--------------------Installing all
@@ -10,10 +12,14 @@ echo ""
 echo ""
 echo "Updating..."
 sudo pacman -Syu
+
+
+
 echo ""
 echo ""
 echo "Downloading..."
-sudo pacman -S os-prober ntfs-3g xorg-server mesa xf86-video-amdgpu nvidia nvidia-utils nvidia-prime i3-gaps i3blocks i3status dmenu lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings konsole dolphin chromium network-manager-applet nftables pulseaudio pulseaudio-alsa kmix lxappearance breeze breeze-gtk ttf-roboto noto-fonts-emoji notification-daemon dunst lm_sensors
+sudo pacman -S os-prober ntfs-3g xorg-server mesa xf86-video-amdgpu nvidia nvidia-utils nvidia-prime i3-gaps i3blocks i3status dmenu lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings
+sudo pacman -S konsole dolphin chromium network-manager-applet nftables pulseaudio pulseaudio-alsa kmix lxappearance breeze breeze-gtk ttf-roboto noto-fonts-emoji notification-daemon dunst lm_sensors
 #--------------------Installing grub--------------------os-prober ntfs-3g
 #--------------------Installing Xorg--------------------xorg-server mesa
 #--------------------Installing Drivers--------------------xf86-video-amdgpu nvidia nvidia-utils nvidia-prime
@@ -26,6 +32,7 @@ sudo pacman -S os-prober ntfs-3g xorg-server mesa xf86-video-amdgpu nvidia nvidi
 #--------------------Emoji Support--------------------noto-fonts-emoji
 #--------------------Notification Support--------------------notification-daemon dunst
 #--------------------System Temperature--------------------lm_sensors
+
 
 
 echo ""
@@ -44,6 +51,7 @@ fi
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 
 
+
 echo ""
 echo ""
 echo "Setting Up Bin & .profile..."
@@ -56,6 +64,7 @@ if [[ ! -f ~/.profile ]] ;then
 	cp profile.txt .profile
 	sudo mv .profile ~/	
 fi
+
 
 
 echo ""
@@ -71,6 +80,7 @@ else
 	cp i3_config.txt config
 	mv config ~/.config/i3/
 fi
+
 
 
 echo ""
@@ -89,26 +99,42 @@ fi
 
 
 
+echo ""
+echo ""
+echo "Setting Up Pacman..."
 #--------------------Pacman can install 32 bit programs
-#if [[ -f /etc/pacman.conf ]] ;then
-#	sudo rm /etc/pacman.conf
-#fi
-#sudo touch /etc/pacman.conf
+if [[ -f /etc/pacman.conf ]]
+then
+	sudo rm /etc/pacman.conf
+	cp pacman_conf.txt pacman.conf
+	sudo mv pacman.conf /etc/
+else
+	cp pacman_conf.txt pacman.conf
+	sudo mv pacman.conf /etc/
+fi
 
 
 
-#echo "setting mouse completed"
+echo ""
+echo ""
+echo "Setting Mouse Acceleration..."
 #--------------------Disable Mouse Acceleration
-#if [[ -f /etc/X11/xorg.conf.d/50-mouse-acceleration.conf ]] ;then
-#	sudo rm /etc/X11/xorg.conf.d/50-mouse-acceleration.conf
-#fi
-#sudo touch /etc/X11/xorg.conf.d/50-mouse-acceleration.conf
+if [[ -f /etc/X11/xorg.conf.d/50-mouse-acceleration.conf ]]
+then
+	sudo rm /etc/X11/xorg.conf.d/50-mouse-acceleration.conf
+	cp mouse_acel_conf.txt 50-mouse-acceleration.conf
+	sudo mv 50-mouse-acceleration.conf /etc/X11/xorg.conf.d/
+else
+	cp mouse_acel_conf.txt 50-mouse-acceleration.conf
+	sudo mv 50-mouse-acceleration.conf /etc/X11/xorg.conf.d/
+fi
 
 
 
-#echo "setting dm completed"
+echo ""
+echo ""
+echo "Setting Display Manager..."
 #--------------------Install Display Manager
-#systemctl enable lightdm.service
-#printf "[Seat:*]
-#greeter-session=lightdm-gtk-greeter"
+systemctl enable lightdm.service
+printf "[Seat:*] greeter-session=lightdm-gtk-greeter"
 #sudo vim /etc/lightdm/lightdm.conf

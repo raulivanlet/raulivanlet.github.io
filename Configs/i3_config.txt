@@ -13,8 +13,8 @@ set $ws9 "9"
 set $ws10 "10"
 
 
-gaps inner 5
-gaps outer 3
+#gaps inner 5
+#gaps outer 3
 font pango:Ubuntu Regular 10
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
