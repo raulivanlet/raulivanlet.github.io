@@ -6,9 +6,13 @@ sudo timedatectl set-local-rtc 1
 
 
 #--------------------Installing all
-echo "\nUpdating..."
+echo ""
+echo ""
+echo "Updating..."
 sudo pacman -Syu
-echo "\nDownloading..."
+echo ""
+echo ""
+echo "Downloading..."
 sudo pacman -S os-prober ntfs-3g xorg-server mesa xf86-video-amdgpu nvidia nvidia-utils nvidia-prime i3-gaps i3blocks i3status dmenu lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings konsole dolphin chromium network-manager-applet nftables pulseaudio pulseaudio-alsa kmix lxappearance breeze breeze-gtk ttf-roboto noto-fonts-emoji notification-daemon dunst lm_sensors
 #--------------------Installing grub--------------------os-prober ntfs-3g
 #--------------------Installing Xorg--------------------xorg-server mesa
@@ -23,7 +27,10 @@ sudo pacman -S os-prober ntfs-3g xorg-server mesa xf86-video-amdgpu nvidia nvidi
 #--------------------Notification Support--------------------notification-daemon dunst
 #--------------------System Temperature--------------------lm_sensors
 
-echo "\nSetting Up Grub..."
+
+echo ""
+echo ""
+echo "Setting Up Grub..."
 #--------------------Setting Grub
 if [[ -f /etc/default/grub ]]
 then
@@ -37,7 +44,9 @@ fi
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 
 
-echo "\nSetting Up Bin & .profile..."
+echo ""
+echo ""
+echo "Setting Up Bin & .profile..."
 #--------------------Setting bin folder and paths
 if [[ ! -d ~/bin ]] ;then
     mkdir ~/bin
@@ -49,7 +58,9 @@ if [[ ! -f ~/.profile ]] ;then
 fi
 
 
-echo "\nSetting Up I3..."
+echo ""
+echo ""
+echo "Setting Up I3..."
 #--------------------Configure I3
 if [[ -f ~/.config/i3/config ]]
 then
@@ -62,7 +73,9 @@ else
 fi
 
 
-echo "\nSetting Up I3 Bar..."
+echo ""
+echo ""
+echo "Setting Up I3 Bar..."
 #--------------------Configure I3 Status
 if [[ -f ~/.config/i3status/i3status.conf ]]
 then
