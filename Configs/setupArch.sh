@@ -6,7 +6,9 @@ sudo timedatectl set-local-rtc 1
 
 
 #--------------------Installing all
+echo "Updating..."
 sudo pacman -Syu
+echo "Downloading..."
 sudo pacman -S os-prober ntfs-3g xorg-server mesa xf86-video-amdgpu nvidia nvidia-utils nvidia-prime i3-gaps i3blocks i3status dmenu lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings konsole dolphin chromium network-manager-applet nftables pulseaudio pulseaudio-alsa kmix lxappearance breeze breeze-gtk ttf-roboto noto-fonts-emoji notification-daemon dunst lm_sensors
 #--------------------Installing grub--------------------os-prober ntfs-3g
 #--------------------Installing Xorg--------------------xorg-server mesa
