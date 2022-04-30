@@ -133,6 +133,22 @@ fi
 
 echo ""
 echo ""
+echo "Setting HDPI Monitor..."
+#--------------------Setting HDPI Monitor
+if [[ -f ~/.Xresources ]]
+then
+	sudo rm ~/.Xresources
+	cp x_resources.txt ~/.Xresources
+	mv ~/.Xresources ~/
+else
+	cp x_resources.txt ~/.Xresources
+	mv ~/.Xresources ~/
+fi
+
+
+
+echo ""
+echo ""
 echo "Setting Display Manager..."
 #--------------------Install Display Manager
 systemctl enable lightdm.service
