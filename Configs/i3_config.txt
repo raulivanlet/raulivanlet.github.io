@@ -25,7 +25,6 @@ bar {
 }
 
 
-
 mode "resize" {
 	bindsym Left resize shrink width 5 px or 5 ppt
 	bindsym Down resize grow height 5 px or 5 ppt
@@ -42,8 +41,8 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ to
 #bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 # Sreen brightness controls
-#bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
-#bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+#bindsym XF86MonBrightnessUp exec xbacklight -inc 10
+#bindsym XF86MonBrightnessDown exec xbacklight -dec 10
 
 # Media player controls
 bindsym XF86AudioPlay exec playerctl play-pause
@@ -89,23 +88,19 @@ bindsym $win+Shift+0 move container to workspace number $ws10
 
 
 ############################################
-# exit i3 (logs you out of your X session)
 bindsym $win+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 bindsym $win+Shift+r restart
 
 bindsym $alt+Escape kill
 bindsym $win+r mode "resize"
+#bindsym $win+q mode horizontal
+#bindsym $win+w mode vertical
 bindsym $win+Shift+space floating toggle
 bindsym $win+f fullscreen toggle
 
 
 bindsym $win+Return exec --no-startup-id dmenu_run
-#bindsym $win+k exec exec i3-sensible-terminal
-bindsym $win+k exec alacritty
+bindsym $win+k exec exec i3-sensible-terminal
 bindsym $win+l exec thunar
-bindsym $win+i exec chrome
+#bindsym $win+i exec chrome
 bindsym $win+c exec code
-#bindsym $win+m exec virt-manager
-#bindsym $win+o exec libreoffice
-#bindsym $win+d exec discord
-#bindsym $win+s exec steam
