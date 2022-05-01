@@ -1,5 +1,3 @@
-#/etc/X11/xorg.conf
-
 Section "Monitor"
     Identifier  "eDP-1"
     Option "PreferredMode" "1920x1080_60.00"
