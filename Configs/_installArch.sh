@@ -23,15 +23,15 @@ arch-chroot /mnt
 ln -sf /usr/share/zoneinfo/Europe/Bucharest /etc/localtime
 
 
-LOCALE_GEN = "en_US.UTF-8 UTF-8"
+#LOCALE_GEN = "en_US.UTF-8 UTF-8"
 printf "$LOCALE_GEN" >> /etc/locale.gen
 
-LOCALE_CONF = "LANG=en_US.UTF-8"
+#LOCALE_CONF = "LANG=en_US.UTF-8"
 printf "$LOCALE_CONF" >> vim /etc/locale.conf
 
 locale-gen
 
-HOSTNAME = "root"
+#HOSTNAME = "root"
 printf "$HOSTNAME" >> /etc/hostname
 
 passwd
