@@ -18,10 +18,11 @@ sudo pacman -Syu
 echo ""
 echo ""
 echo "Downloading..."
-sudo pacman -S os-prober ntfs-3g xorg-server mesa xf86-video-amdgpu nvidia nvidia-utils nvidia-prime i3-gaps i3blocks i3status dmenu lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings
-sudo pacman -S konsole dolphin chromium network-manager-applet nftables pulseaudio pulseaudio-alsa kmix lxappearance breeze breeze-gtk ttf-roboto noto-fonts-emoji notification-daemon dunst lm_sensors
+sudo pacman -S os-prober ntfs-3g xorg-server xorg-xrandr mesa  xf86-video-amdgpu nvidia nvidia-utils nvidia-prime i3-gaps i3blocks i3status dmenu lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings
+sudo pacman -S konsole dolphin chromium network-manager-applet nftables pulseaudio pulseaudio-alsa kmix lxappearance breeze breeze-gtk ttf-roboto noto-fonts-emoji notification-daemon dunst 
+sudo pacman -S gnome-keyring libsecret seahorse lm_sensors
 #--------------------Installing grub--------------------os-prober ntfs-3g
-#--------------------Installing Xorg--------------------xorg-server mesa
+#--------------------Installing Xorg--------------------xorg-server xorg-xrandr mesa
 #--------------------Installing Drivers--------------------xf86-video-amdgpu nvidia nvidia-utils nvidia-prime
 #--------------------Install I3--------------------i3-gaps i3blocks i3status dmenu
 #--------------------Install Display Manager--------------------lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings
@@ -31,6 +32,7 @@ sudo pacman -S konsole dolphin chromium network-manager-applet nftables pulseaud
 #--------------------KDE Apps Theme--------------------lxappearance breeze breeze-gtk ttf-roboto
 #--------------------Emoji Support--------------------noto-fonts-emoji
 #--------------------Notification Support--------------------notification-daemon dunst
+#--------------------Keyring--------------------gnome-keyring libsecret seahorse
 #--------------------System Temperature--------------------lm_sensors
 
 
