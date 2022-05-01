@@ -11,7 +11,7 @@ sudo pacman -Syu
 
 
 printf "\n\nDownloading..."
-sudo pacman -S os-prober ntfs-3g xorg-server xorg-xrandr mesa xf86-video-amdgpu nvidia nvidia-utils nvidia-prime i3-gaps i3blocks i3status dmenu lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings
+sudo pacman -S os-prober ntfs-3g xorg-server xorg-xrandr mesa xf86-video-amdgpu nvidia nvidia-utils i3-gaps i3blocks i3status dmenu lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings
 sudo pacman -S konsole dolphin network-manager-applet nftables pulseaudio pulseaudio-alsa kmix lxappearance breeze breeze-gtk ttf-roboto noto-fonts-emoji notification-daemon dunst 
 sudo pacman -S gnome-keyring libsecret seahorse lm_sensors xdg-utils kde-cli-tools nvidia-settings
 #--------------------Installing grub--------------------os-prober ntfs-3g
@@ -116,12 +116,10 @@ printf "\n\nSetting HDPI Monitor..."
 #--------------------Setting HDPI Monitor
 if [[ -f ~/.Xresources ]]
 then
-	sudo rm ~/.Xresources
+	rm ~/.Xresources
 	cp x_resources.txt ~/.Xresources
-	mv ~/.Xresources ~/
 else
 	cp x_resources.txt ~/.Xresources
-	mv ~/.Xresources ~/
 fi
 
 
@@ -131,11 +129,13 @@ printf "\n\nSetting Xorg..."
 if [[ -f /etc/X11/xorg.conf ]]
 then
     sudo rm /etc/X11/xorg.conf
-	cp xorg_config.txt xorg.conf
-	sudo mv xorg.conf /etc/X11/
+	#cp xorg_config.txt xorg.conf
+	#sudo mv xorg.conf /etc/X11/
+	sudo cp xorg_config.txt /etc/X11/xorg.conf
 else
-	cp xorg_config.txt xorg.conf
-	sudo mv xorg.conf /etc/X11/
+	#cp xorg_config.txt xorg.conf
+	#sudo mv xorg.conf /etc/X11/
+	sudo cp xorg_config.txt /etc/X11/xorg.conf
 fi
 #easy setup external monitor: nvidia-xconfig
 #idk:
@@ -179,3 +179,6 @@ then
 fi
 
 COMMENT
+
+#THE END
+printf "\n"

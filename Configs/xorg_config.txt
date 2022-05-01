@@ -1,23 +1,27 @@
 Section "Monitor"
-    Identifier  "eDP-1"
+    Identifier  "Laptop"
     Option "PreferredMode" "1920x1080_60.00"
-    Option      "LeftOf"        "HDMI-1-0"
+    Option      "LeftOf"        "External"
 EndSection
 
 Section "Monitor"
-    Identifier  "HDMI-1-0"
-    Option "PreferredMode" "1920x1080_144.00"
-    Option      "RightOf"        "eDP-1"
+    Identifier  "External"
+    Modeline    "1920x1080x60" 144.00 1600 1280 900 1024
+    Option "PreferredMode" "1920x1080"
+    Option      "RightOf"        "Laptop"
 EndSection
+
 
 Section "Device"
     Identifier  "amd_igpu"
-    Option      "Monitor-Laptop" "eDP-1"
+    Modeline    "1920x1080x60" 144.00 1600 1280 900 1024
+    Option "PreferredMode" "1920x1080"
+    Option      "Monitor-eDP-1" "Laptop"
     Driver      "radeon"
 EndSection
 
 Section "Device"
     Identifier  "nvidia_gpu"
-    Option      "Monitor-External" "HDMI-1-0"
+    Option      "Monitor-HDMI-1-0" "External"
     Driver      "nvidia"
 EndSection
