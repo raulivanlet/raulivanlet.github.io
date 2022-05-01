@@ -1,23 +1,16 @@
 #!/bin/bash
 
 
-
 #--------------------Setting time for dualboot
 sudo timedatectl set-local-rtc 1
 
 
-
 #--------------------Installing all
-echo ""
-echo ""
-echo "Updating..."
+echo "\n\nUpdating..."
 sudo pacman -Syu
 
 
-
-echo ""
-echo ""
-echo "Downloading..."
+printf "\n\nDownloading..."
 sudo pacman -S os-prober ntfs-3g xorg-server xorg-xrandr mesa xf86-video-amdgpu nvidia nvidia-utils nvidia-prime i3-gaps i3blocks i3status dmenu lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings
 sudo pacman -S konsole dolphin network-manager-applet nftables pulseaudio pulseaudio-alsa kmix lxappearance breeze breeze-gtk ttf-roboto noto-fonts-emoji notification-daemon dunst 
 sudo pacman -S gnome-keyring libsecret seahorse lm_sensors xdg-utils kde-cli-tools nvidia-settings
@@ -41,15 +34,7 @@ sudo pacman -S gnome-keyring libsecret seahorse lm_sensors xdg-utils kde-cli-too
 #kdoctools (make)
 
 
-
-
-
-
-
-
-echo ""
-echo ""
-echo "Setting Up Grub..."
+printf "\n\nSetting Up Grub..."
 #--------------------Setting Grub
 if [[ -f /etc/default/grub ]]
 then
@@ -63,10 +48,7 @@ fi
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 
 
-
-echo ""
-echo ""
-echo "Setting Up Bin & .profile..."
+printf "\n\nSetting Up Bin & .profile..."
 #--------------------Setting bin folder and paths
 if [[ ! -d ~/bin ]] ;then
     mkdir ~/bin
@@ -78,10 +60,7 @@ if [[ ! -f ~/.profile ]] ;then
 fi
 
 
-
-echo ""
-echo ""
-echo "Setting Up I3..."
+printf "\n\nSetting Up I3..."
 #--------------------Configure I3
 if [[ -f ~/.config/i3/config ]]
 then
@@ -94,10 +73,7 @@ else
 fi
 
 
-
-echo ""
-echo ""
-echo "Setting Up I3 Bar..."
+printf "\n\nSetting Up I3 Bar..."
 #--------------------Configure I3 Status
 if [[ -f ~/.config/i3status/i3status.conf ]]
 then
@@ -110,10 +86,7 @@ else
 fi
 
 
-
-echo ""
-echo ""
-echo "Setting Up Pacman..."
+printf "\n\nSetting Up Pacman..."
 #--------------------Pacman can install 32 bit programs
 if [[ -f /etc/pacman.conf ]]
 then
@@ -126,10 +99,7 @@ else
 fi
 
 
-
-echo ""
-echo ""
-echo "Setting Mouse Acceleration..."
+printf "\n\nSetting Mouse Acceleration..."
 #--------------------Disable Mouse Acceleration
 if [[ -f /etc/X11/xorg.conf.d/50-mouse-acceleration.conf ]]
 then
@@ -142,10 +112,7 @@ else
 fi
 
 
-
-echo ""
-echo ""
-echo "Setting HDPI Monitor..."
+printf "\n\nSetting HDPI Monitor..."
 #--------------------Setting HDPI Monitor
 if [[ -f ~/.Xresources ]]
 then
@@ -158,10 +125,7 @@ else
 fi
 
 
-
-echo ""
-echo ""
-echo "Setting Xorg..."
+printf "\n\nSetting Xorg..."
 #--------------------Setting Xorg
 #sudo vim /etc/X11/xorg.conf
 if [[ -f /etc/X11/xorg.conf ]]
@@ -179,10 +143,7 @@ fi
 #xrandr --output HDMI-1 --auto --above LVDS1
 
 
-
-echo ""
-echo ""
-echo "Setting Display Manager..."
+printf "\n\nSetting Display Manager..."
 #--------------------Install Display Manager
 #systemctl enable lightdm.service
 #printf "[Seat:*] greeter-session=lightdm-gtk-greeter"
@@ -195,19 +156,17 @@ echo "Setting Display Manager..."
 
 
 
-echo "Multiline comment 1"
 : '
 echo ""
 echo ""
 echo "Cleaning..."
 '
 
-echo "Multiline comment 2"
+
+
 : << 'COMMENT'
 
-echo ""
-echo ""
-echo "Cleaning..."
+printf "\n\nCleaning..."
 sudo pacman -Scc
 if [[ -f ~/.bash_history ]]
 then
