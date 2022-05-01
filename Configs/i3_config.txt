@@ -24,6 +24,8 @@ bar {
 	status_command i3status -c /home/raul/.config/i3status/i3status.conf
 }
 
+
+
 mode "resize" {
 	bindsym Left resize shrink width 5 px or 5 ppt
 	bindsym Down resize grow height 5 px or 5 ppt
@@ -99,10 +101,10 @@ bindsym $win+f fullscreen toggle
 
 bindsym $win+Return exec --no-startup-id dmenu_run
 bindsym $win+k exec exec i3-sensible-terminal
-bindsym $win+l exec dolphin
+bindsym $win+l exec thunar
 bindsym $win+i exec chrome
 bindsym $win+c exec code
-bindsym $win+m exec virt-manager
-bindsym $win+o exec libreoffice
-bindsym $win+d exec discord
-bindsym $win+s exec steam
+#bindsym $win+m exec virt-manager
+#bindsym $win+o exec libreoffice
+#bindsym $win+d exec discord
+#bindsym $win+s exec steam
