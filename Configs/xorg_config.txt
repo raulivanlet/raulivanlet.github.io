@@ -1,0 +1,22 @@
+#/etc/X11/xorg.conf
+
+Section "Monitor"
+    Identifier  "eDP-1"
+EndSection
+
+Section "Monitor"
+    Identifier  "HDMI-1-0"
+    Option      "RightOf"        "eDP-1"
+EndSection
+
+Section "Device"
+    Identifier  "amd_igpu"
+    Option      "Monitor-Laptop" "eDP-1"
+    Driver      "radeon"
+EndSection
+
+Section "Device"
+    Identifier  "nvidia_gpu"
+    Option      "Monitor-External" "HDMI-1-0"
+    Driver      "noveau"
+EndSection

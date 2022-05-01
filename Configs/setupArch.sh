@@ -165,7 +165,8 @@ echo "Setting Xorg..."
 #--------------------Setting Xorg
 #setup monitors: nvidia-xconfig
 #sudo vim /etc/X11/xorg.conf
-
+#xrandr --setprovideroutputsource radeon Intel
+#xrandr --output HDMI-1 --auto --above LVDS1
 
 
 echo ""
