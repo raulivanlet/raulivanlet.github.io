@@ -6,14 +6,12 @@ sudo timedatectl set-local-rtc 1
 
 
 #--------------------Installing all
-echo "\n\nUpdating..."
-sudo pacman -Syu
+#echo "\n\nUpdating..."
+#sudo pacman -Syu
 
 
-printf "\n\nDownloading..."
-sudo pacman -S os-prober ntfs-3g xorg-server i3-gaps i3blocks i3status dmenu lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings
-sudo pacman -S konsole dolphin git network-manager-applet nftables pulseaudio pulseaudio-alsa kmix notification-daemon dunst 
-sudo pacman -S gnome-keyring libsecret seahorse lm_sensors xdg-utils kde-cli-tools nvidia-settings
+#printf "\n\nDownloading..."
+#sudo pacman -S os-prober ntfs-3g xorg-server i3-gaps i3blocks i3status dmenu lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings konsole dolphin git network-manager-applet nftables pulseaudio pulseaudio-alsa kmix notification-daemon dunst gnome-keyring libsecret seahorse lm_sensors xdg-utils kde-cli-tools nvidia-settings
 #--------------------Installing grub--------------------os-prober ntfs-3g
 #--------------------Installing Xorg--------------------xorg-server xorg-xrandr mesa
 #--------------------Installing Drivers--------------------xf86-video-amdgpu nvidia nvidia-utils nvidia-prime
@@ -110,10 +108,10 @@ fi
 
 #--------------------Install Display Manager
 printf "\n\nSetting Display Manager..."
-#systemctl enable lightdm.service
-#printf "[Seat:*] greeter-session=lightdm-gtk-greeter"
-#sudo vim /etc/lightdm/lightdm.conf
-
+if [[ -f /etc/lightdm/lightdm.conf ]] ;then
+	systemctl enable lightdm.service
+	sudo cp v_lightdm_config.txt /etc/lightdm/lightdm.conf
+fi
 
 
 
