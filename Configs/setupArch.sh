@@ -163,10 +163,21 @@ echo ""
 echo ""
 echo "Setting Xorg..."
 #--------------------Setting Xorg
-#setup monitors: nvidia-xconfig
 #sudo vim /etc/X11/xorg.conf
+if [[ -f /etc/X11/xorg.conf ]]
+then
+    sudo rm /etc/X11/xorg.conf
+	cp xorg_config.txt xorg.conf
+	sudo mv xorg.conf /etc/X11/
+else
+	cp xorg_config.txt xorg.conf
+	sudo mv xorg.conf /etc/X11/
+fi
+#easy setup external monitor: nvidia-xconfig
+#idk:
 #xrandr --setprovideroutputsource radeon Intel
 #xrandr --output HDMI-1 --auto --above LVDS1
+
 
 
 echo ""
@@ -176,6 +187,12 @@ echo "Setting Display Manager..."
 #systemctl enable lightdm.service
 #printf "[Seat:*] greeter-session=lightdm-gtk-greeter"
 #sudo vim /etc/lightdm/lightdm.conf
+
+
+
+
+
+
 
 
 echo "Multiline comment 1"
