@@ -15,9 +15,9 @@ set $ws10 "10"
 
 #gaps inner 5
 #gaps outer 3
-font pango:Ubuntu Regular 10
-exec --no-startup-id dex --autostart --environment i3
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+font pango:Ubuntu Regular 8
+#exec --no-startup-id dex --autostart --environment i3
+#exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
 
 bar {

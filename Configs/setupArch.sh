@@ -151,6 +151,33 @@ echo ""
 echo ""
 echo "Setting Display Manager..."
 #--------------------Install Display Manager
-systemctl enable lightdm.service
-printf "[Seat:*] greeter-session=lightdm-gtk-greeter"
+#systemctl enable lightdm.service
+#printf "[Seat:*] greeter-session=lightdm-gtk-greeter"
 #sudo vim /etc/lightdm/lightdm.conf
+
+
+echo "Multiline comment 1"
+: '
+echo ""
+echo ""
+echo "Cleaning..."
+'
+
+echo "Multiline comment 2"
+: << 'COMMENT'
+
+echo ""
+echo ""
+echo "Cleaning..."
+sudo pacman -Scc
+if [[ -f ~/.bash_history ]]
+then
+	rm ~/.bash_history
+fi
+
+if [[ -f ~/.bash_history ]]
+then
+	rm ~/.bash_history
+fi
+
+COMMENT
