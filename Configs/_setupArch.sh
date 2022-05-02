@@ -108,42 +108,14 @@ fi
 
 
 
+: '
 #--------------------Install Display Manager
 printf "\n\nSetting Display Manager..."
 if [[ -f /etc/lightdm/lightdm.conf ]] ;then
 	systemctl enable lightdm.service
 	sudo cp v_lightdm_config.txt /etc/lightdm/lightdm.conf
 fi
-
-
-
-
-
-
-
-: '
-echo ""
-echo ""
-echo "Cleaning..."
 '
-
-
-
-: << 'COMMENT'
-
-printf "\n\nCleaning..."
-sudo pacman -Scc
-if [[ -f ~/.bash_history ]]
-then
-	rm ~/.bash_history
-fi
-
-if [[ -f ~/.bash_history ]]
-then
-	rm ~/.bash_history
-fi
-
-COMMENT
 
 
 
