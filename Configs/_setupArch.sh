@@ -96,16 +96,16 @@ fi
 cp x_resources.txt ~/.Xresources
 
 
-
+:'
 #--------------------Setting Xorg
 printf "\n\nSetting Xorg..."
-#sudo vim /etc/X11/xorg.conf
 if [[ -f /etc/X11/xorg.conf ]] ;then
     sudo rm /etc/X11/xorg.conf
 fi
-#sudo cp xorg_config.txt /etc/X11/xorg.conf
+sudo cp xorg_config.txt /etc/X11/xorg.conf
 # nvidia-xconfig
-
+#X -configure
+'
 
 
 : '
