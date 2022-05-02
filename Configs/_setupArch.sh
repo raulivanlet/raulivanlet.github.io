@@ -11,7 +11,7 @@ sudo pacman -Syu
 
 
 printf "\n\nDownloading..."
-sudo pacman -S os-prober ntfs-3g xorg-server mesa xf86-video-amdgpu i3-gaps i3blocks i3status dmenu lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings alacritty thunar 
+sudo pacman -S os-prober ntfs-3g xorg-server mesa xf86-video-amdgpu i3-gaps i3blocks i3status dmenu lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings alacritty thunar chromium 
 sudo pacman -S nftables network-manager-applet pulseaudio pulseaudio-alsa
 #sudo pacman -S notification-daemon dunst gnome-keyring libsecret seahorse lm_sensors xdg-utils kde-cli-tools nvidia-settings
 #--------------------Installing grub--------------------os-prober ntfs-3g
@@ -19,7 +19,7 @@ sudo pacman -S nftables network-manager-applet pulseaudio pulseaudio-alsa
 #--------------------Installing Drivers--------------------xf86-video-amdgpu nvidia nvidia-utils nvidia-prime
 #--------------------Install I3--------------------i3-gaps i3blocks i3status dmenu
 #--------------------Install Display Manager--------------------lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings
-#--------------------Install Apps-------------------- alacritty thunar git
+#--------------------Install Apps-------------------- alacritty thunar chromium git
 #--------------------Network--------------------nftables network-manager-applet
 #--------------------Music--------------------pulseaudio pulseaudio-alsa kmix
 #--------------------KDE Apps Theme--------------------lxappearance breeze breeze-gtk noto-fonts-emoji
