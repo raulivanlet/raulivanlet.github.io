@@ -113,6 +113,11 @@ sudo cp xorg_config.txt /etc/X11/xorg.conf
 
 
 
+#--------------------Install Display Manager
+printf "\n\nSetting Display Manager..."
+if [[ -f /etc/lightdm/lightdm.conf ]] ;then	
+	sudo cp v_lightdm_config.txt /etc/lightdm/lightdm.conf
+fi
 : '
 systemctl enable lightdm.service
 if [[ -f /etc/lightdm/lightdm-gtk-greeter.conf ]] ;then
@@ -120,11 +125,15 @@ if [[ -f /etc/lightdm/lightdm-gtk-greeter.conf ]] ;then
 	sudo cp lightdm_greeter_conf.txt /etc/lightdm/lightdm-gtk-greeter.conf
 fi
 '
-#--------------------Install Display Manager
+
+
+
+#--------------------Install Virtual Machine
 printf "\n\nSetting Display Manager..."
-if [[ -f /etc/lightdm/lightdm.conf ]] ;then	
-	sudo cp v_lightdm_config.txt /etc/lightdm/lightdm.conf
+if [[ -f ~/br10.xml ]] ;then
+	rm ~/br10.xml	
 fi
+cp br10.xml ~/
 
 
 
