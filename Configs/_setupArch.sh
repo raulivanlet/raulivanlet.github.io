@@ -11,6 +11,7 @@ printf "\n\nDownloading..."
 sudo pacman -S os-prober ntfs-3g xorg-server mesa xf86-video-amdgpu i3-gaps i3blocks i3status dmenu lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings alacritty thunar chromium 
 sudo pacman -S nftables network-manager-applet pulseaudio pulseaudio-alsa
 sudo pacman -S notification-daemon dunst gnome-keyring libsecret seahorse
+sudo pacman -S virt-manager libvirt qemu qemu-arch-extra dnsmasq dmidecode bridge-utils ovmf vde2 openbsd-netcat
 #--------------------Installing grub--------------------os-prober ntfs-3g
 #--------------------Installing Xorg--------------------xorg-server xorg-xrandr mesa
 #--------------------Installing Drivers--------------------xf86-video-amdgpu nvidia nvidia-utils nvidia-prime
@@ -115,7 +116,7 @@ sudo cp xorg_config.txt /etc/X11/xorg.conf
 
 #--------------------Install Display Manager
 printf "\n\nSetting Display Manager..."
-if [[ -f /etc/lightdm/lightdm.conf ]] ;then	
+if [[ -f /etc/lightdm/lightdm.conf ]] ;then
 	sudo cp v_lightdm_config.txt /etc/lightdm/lightdm.conf
 fi
 : '
@@ -131,9 +132,12 @@ fi
 #--------------------Install Virtual Machine
 printf "\n\nSetting Display Manager..."
 if [[ -f ~/br10.xml ]] ;then
-	rm ~/br10.xml	
+	rm ~/br10.xml
 fi
 cp br10.xml ~/
+sudo systemctl enable libvirtd.service
+sudo systemctl start libvirtd.service
+#sudo virsh net-start br10
 
 
 
