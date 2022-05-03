@@ -25,7 +25,7 @@ yes | sudo pacman -S lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings
 #--------------------Install Apps------------------------------------konsole dolphin chromium git
 yes | sudo pacman -S konsole dolphin chromium git
 
-#--------------------Network-----------------------------------------nftables network-manager-applet
+#--------------------Network-----------------------------------------nftables network-manager-applet ntp
 yes | sudo pacman -S nftables network-manager-applet ntp
 
 #--------------------Music-------------------------------------------pulseaudio pulseaudio-alsa kmix
@@ -44,7 +44,6 @@ yes | sudo pacman -S gnome-keyring libsecret seahorse
 yes | sudo pacman -S virt-manager libvirt qemu qemu-arch-extra dnsmasq dmidecode bridge-utils ovmf vde2 openbsd-netcat
 
 
-#--------------------Time--------------------------------------------ntp
 #--------------------Managing Application Extensions-----------------xdg-utils kde-cli-tools   <-----handlr - if it doesn't work
 #--------------------Other Xorg / Nvidia Settings--------------------nvidia-settings
 #--------------------System Temperature------------------------------lm_sensors
@@ -127,6 +126,7 @@ printf "\n\nSetting Display Manager..."
 if [[ ! -f ~/br10.xml ]] ;then
 	#rm ~/br10.xml
 	cp br10.xml ~/
+	systemctl enable ntpd.service
 	sudo systemctl enable libvirtd.service
 	sudo systemctl start libvirtd.service
 	sudo usermod -a -G libvirt $(whoami)
@@ -134,6 +134,7 @@ if [[ ! -f ~/br10.xml ]] ;then
 	#sudo virsh net-start br10
 	#--------------------Setting time for dualboot
 	#sudo timedatectl set-local-rtc 1
+	
 fi
 
 
