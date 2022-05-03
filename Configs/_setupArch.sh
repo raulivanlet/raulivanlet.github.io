@@ -112,7 +112,7 @@ cp x_resources.txt ~/.Xresources
 printf "\n\nSetting Display Manager..."
 if [[ -f /etc/lightdm/lightdm.conf ]] ;then
 	sudo rm /etc/lightdm/lightdm.conf
-	sudo cp v_lightdm_config.txt /etc/lightdm/lightdm.conf
+	sudo cp lightdm_config.txt /etc/lightdm/lightdm.conf
 	systemctl enable lightdm.service
 fi
 if [[ -f /etc/lightdm/lightdm-gtk-greeter.conf ]] ;then
@@ -122,7 +122,7 @@ fi
 
 
 #--------------------Install Virtual Machine
-printf "\n\nSetting Display Manager..."
+printf "\n\nSetting Virtual Machine..."
 if [[ ! -f ~/br10.xml ]] ;then
 	#rm ~/br10.xml
 	cp br10.xml ~/
@@ -134,7 +134,6 @@ if [[ ! -f ~/br10.xml ]] ;then
 	#sudo virsh net-start br10
 	#--------------------Setting time for dualboot
 	#sudo timedatectl set-local-rtc 1
-	
 fi
 
 
