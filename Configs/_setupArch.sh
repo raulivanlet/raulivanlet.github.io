@@ -10,7 +10,7 @@ sudo pacman -Syu
 printf "\n\nDownloading..."
 sudo pacman -S os-prober ntfs-3g xorg-server mesa xf86-video-amdgpu i3-gaps i3blocks i3status dmenu lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings alacritty thunar chromium 
 sudo pacman -S nftables network-manager-applet pulseaudio pulseaudio-alsa
-#sudo pacman -S notification-daemon dunst gnome-keyring libsecret seahorse lm_sensors xdg-utils kde-cli-tools nvidia-settings
+sudo pacman -S notification-daemon dunst gnome-keyring libsecret seahorse
 #--------------------Installing grub--------------------os-prober ntfs-3g
 #--------------------Installing Xorg--------------------xorg-server xorg-xrandr mesa
 #--------------------Installing Drivers--------------------xf86-video-amdgpu nvidia nvidia-utils nvidia-prime
