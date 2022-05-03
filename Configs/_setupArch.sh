@@ -99,6 +99,7 @@ fi
 cp x_resources.txt ~/.Xresources
 
 
+
 :'
 #--------------------Setting Xorg
 printf "\n\nSetting Xorg..."
