@@ -17,13 +17,22 @@ mkdir -p /mnt/boot
 mount /dev/$PART_1 /mnt/boot
 
 
-pacstrap /mnt base base-devel linux linux-firmware vim networkmanager
+pacstrap /mnt linux linux-firmware base base-devel vim networkmanager
 genfstab -U /mnt >> /mnt/etc/fstab
+
+:'
 arch-chroot /mnt
+
 ln -sf /usr/share/zoneinfo/Europe/Bucharest /etc/localtime
 
 
-#LOCALE_GEN = "en_US.UTF-8 UTF-8"
+printf "\n GET PART 1 NAME:"
+read LOCALE_GEN
+
+printf "\n GET PART 1 NAME:"
+read PART_1
+
+# = "en_US.UTF-8 UTF-8"
 printf "$LOCALE_GEN" >> /etc/locale.gen
 
 #LOCALE_CONF = "LANG=en_US.UTF-8"
@@ -59,3 +68,4 @@ visudo
 
 exit
 umount -R /mnt
+'

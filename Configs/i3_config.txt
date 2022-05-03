@@ -93,15 +93,15 @@ bindsym $win+Shift+r restart
 
 bindsym $alt+Escape kill
 bindsym $win+r mode "resize"
-#bindsym $win+q mode horizontal
-#bindsym $win+w mode vertical
+bindsym $win+q mode horizontal
+bindsym $win+w mode vertical
 bindsym $win+Shift+space floating toggle
 bindsym $win+f fullscreen toggle
 
 
 bindsym $win+Return exec --no-startup-id dmenu_run
 bindsym $win+k exec exec i3-sensible-terminal
-bindsym $win+l exec thunar
+bindsym $win+l exec dolphin
 bindsym $win+c exec code
 bindsym $win+i exec chromium
 bindsym $win+m exec virt-manager
