@@ -102,6 +102,5 @@ bindsym $win+f fullscreen toggle
 bindsym $win+Return exec --no-startup-id dmenu_run
 bindsym $win+k exec exec i3-sensible-terminal
 bindsym $win+l exec thunar
-#bindsym $win+i exec chrome
 bindsym $win+c exec code
 bindsym $win+i exec chromium
