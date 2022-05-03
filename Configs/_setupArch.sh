@@ -1,9 +1,6 @@
 #!/bin/bash
 
 
-#--------------------Setting time for dualboot
-sudo timedatectl set-local-rtc 1
-
 
 #--------------------Installing all
 printf "\n\nUpdating..."
@@ -21,6 +18,7 @@ sudo pacman -S nftables network-manager-applet pulseaudio pulseaudio-alsa
 #--------------------Install Display Manager--------------------lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings
 #--------------------Install Apps-------------------- alacritty thunar chromium git
 #--------------------Network--------------------nftables network-manager-applet
+#--------------------Time--------------------ntp
 #--------------------Music--------------------pulseaudio pulseaudio-alsa kmix
 #--------------------KDE Apps Theme--------------------lxappearance breeze breeze-gtk noto-fonts-emoji
 #--------------------Notification Support--------------------notification-daemon dunst
@@ -28,6 +26,11 @@ sudo pacman -S nftables network-manager-applet pulseaudio pulseaudio-alsa
 #--------------------System Temperature--------------------lm_sensors
 #--------------------Managing Application Extensions--------------------xdg-utils kde-cli-tools   <-----handlr - if it doesn't work
 #--------------------Other Xorg / Nvidia Settings--------------------nvidia-settings
+
+
+
+#--------------------Setting time for dualboot
+sudo timedatectl set-local-rtc 1
 
 
 
