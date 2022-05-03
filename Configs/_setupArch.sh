@@ -101,43 +101,43 @@ cp x_resources.txt ~/.Xresources
 
 
 
-:'
-#--------------------Setting Xorg
-printf "\n\nSetting Xorg..."
-if [[ -f /etc/X11/xorg.conf ]] ;then
-    sudo rm /etc/X11/xorg.conf
-fi
-sudo cp xorg_config.txt /etc/X11/xorg.conf
-# nvidia-xconfig
-#X -configure
-'
-
-
-
 #--------------------Install Display Manager
 printf "\n\nSetting Display Manager..."
 if [[ -f /etc/lightdm/lightdm.conf ]] ;then
+	sudo rm /etc/lightdm/lightdm.conf
 	sudo cp v_lightdm_config.txt /etc/lightdm/lightdm.conf
+	systemctl enable lightdm.service
 fi
-: '
-systemctl enable lightdm.service
 if [[ -f /etc/lightdm/lightdm-gtk-greeter.conf ]] ;then
 	sudo rm /etc/lightdm/lightdm-gtk-greeter.conf
 	sudo cp lightdm_greeter_conf.txt /etc/lightdm/lightdm-gtk-greeter.conf
 fi
-'
 
 
 
 #--------------------Install Virtual Machine
 printf "\n\nSetting Display Manager..."
-if [[ -f ~/br10.xml ]] ;then
-	rm ~/br10.xml
+if [[ ! -f ~/br10.xml ]] ;then
+	#rm ~/br10.xml
+	cp br10.xml ~/
+	sudo systemctl enable libvirtd.service
+	sudo systemctl start libvirtd.service
+	sudo usermod -a -G libvirt $(whoami)
+	newgrp libvirt
+	#sudo virsh net-start br10
 fi
-cp br10.xml ~/
-sudo systemctl enable libvirtd.service
-sudo systemctl start libvirtd.service
-#sudo virsh net-start br10
+
+
+
+
+#--------------------Setting Xorg
+printf "\n\nSetting Xorg..."
+if [[ -f /etc/X11/xorg.conf ]] ;then
+    sudo rm /etc/X11/xorg.conf
+	sudo cp xorg_config.txt /etc/X11/xorg.conf
+	# nvidia-xconfig
+	#X -configure
+fi
 
 
 
