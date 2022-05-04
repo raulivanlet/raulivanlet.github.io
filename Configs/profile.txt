@@ -1,2 +1,0 @@
-export PATH=$PATH:/home/raul/bin
-export QT_QPA_PLATFORMTHEME=qt5ct

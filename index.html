@@ -90,9 +90,11 @@
 					<p>mkinitcpio -P </p>
 
 				<h2>Install GRUB</h2>
-					<p>pacman -Sy grub efibootmgr <br>
+					<p>
+						pacman -Sy grub efibootmgr <br>
 						grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB <br>
-						grub-mkconfig -o /boot/grub/grub.cfg </p>
+						grub-mkconfig -o /boot/grub/grub.cfg
+					</p>
 
 				<h2>Enable Wifi / Ethernet</h2>
 					<p>systemctl enable NetworkManager </p>
@@ -109,9 +111,11 @@
 					</div>
 
 				<h2>Finished Basic ARCH Install</h2>
-					<p>exit <br>
+					<p>
+						exit <br>
 						umount -R /mnt <br>
-						reboot </p>
+						reboot
+					</p>
 		</div>
 
 		<!-- ________________________________________________ Setup Arch ________________________________________________ -->
@@ -119,91 +123,57 @@
 			<h1>Setup ARCH</h1>
 
 				<h2>Git Download Link</h2>
-					<p>https://github.com/raulivanlet/raulivanlet.github.io.git</p>
+					<p>https://github.com/raulivanlet/ArchLinux.git</p>
 
 				<h2>Configure Grub</h2>
-					<p>sudo pacman -S os-prober ntfs-3g <br>
-							<a href="Configs/grub.txt" download="grub">
-								sudo vim /etc/default/grub <br>
-							</a>
-						sudo grub-mkconfig -o /boot/grub/grub.cfg </p>
-
-				<h2>System Time</h2>
-					<p>sudo timedatectl set-local-rtc 1 </p>
-				
-				<h2>Add bin to PATH</h2>
-					<p>mkdir ~/bin && vim ~/.profile </p>
-					<div class="textFile">
-						<p>export PATH=$PATH:/home/[username]/bin <br>
-							export QT_QPA_PLATFORMTHEME=qt5ct </p>
-					</div>
-
-				<h2>Add 32 bit programs to pacman</h2>
-					<p>sudo vim /etc/pacman.conf </p>
-					<div class="textFile">
-						<p>[multilib] <br>
-							Include = /etc/pacman.d/mirrorlist </p>
-					</div>
+					<p>
+						sudo pacman -S os-prober ntfs-3g <br>
+						<a href="Configs/grub.txt" download="grub">
+							sudo vim /etc/default/grub <br>
+						</a>
+						sudo grub-mkconfig -o /boot/grub/grub.cfg
+					</p>
 
 				<h2>Install Drivers</h2>
-					<p>pacman -S xorg-server mesa xf86-video-amdgpu nvidia nvidia-utils nvidia-prime </p>
+					<p>pacman -S xorg-server xorg-xrandr mesa xf86-video-amdgpu nvidia </p>
 
 				<h2>Install I3</h2>
-					<p>pacman -S i3-gaps i3blocks i3status dmenu konsole dolphin chromium </p>
-
-				<h2>No Desktop Manager</h2>
-					<p>vim ~/.xinitrc </p>
-					<div class="textFile">
-						<p>exec i3 </p>
-					</div>
-					<p>[in console:] startx </p>
+					<p>pacman -S i3-gaps i3blocks i3status dmenu </p>
 
 				<h2>Display manager</h2>
-					<p>sudo pacman -S lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings <br>
+					<p>
+						sudo pacman -S lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings <br>
 						systemctl enable lightdm.service <br>
-						sudo vim /etc/lightdm/lightdm.conf </p>
+						sudo vim /etc/lightdm/lightdm.conf
+					</p>
 					<div class="textFile">
-						<p>[Seat:*] <br>
-							greeter-session=lightdm-gtk-greeter </p>
+						<p>
+							[Seat:*] <br>
+							greeter-session=lightdm-gtk-greeter
+						</p>
 					</div>
 
-				<h2>Configure I3</h2>
-					<a href="Configs/i3_config.txt" download="config">
-						<p>vim ~/.config/i3/config </p>
-					</a>
-					
-				<h2>Configure Data Bar</h2>
-					<a href="Configs/i3_status_conf.txt" download="i3status.conf">
-						<p>vim ~/.config/i3status/i3status.conf </p>
-					</a>
-					
-				<h2>Disable Mouse Acceleration</h2>
-					<p>/etc/X11/xorg.conf.d/50-mouse-acceleration.conf </p>
-					<div class="textFile">
-						<p>Section "InputClass"
-							Identifier "My Mouse"
-							MatchIsPointer "yes"
-							Option "AccelerationProfile" "-1"
-							Option "AccelerationScheme" "none"
-							Option "AccelSpeed" "-1"
-						EndSection </p>
-					</div>
-
-				<h2>Cool Apps</h2>
-					<p>sudo pacman -S neofetch htop vlc gwenview spectacle ark </p>
+				<h2>Needed Apps</h2>
+					<p>sudo pacman -S konsole dolphin chromium git gwenview spectacle ark </p>
 
 				<h2>Network</h2>
-					<p>sudo pacman -S network-manager-applet nftables <br>
-						run with D-menu or console: nm-applet</p>
+					<p>
+						sudo pacman -S nftables network-manager-applet ntp <br>
+						systemctl enable ntpd.service <br>
+						systemctl start ntpd.service <br>
+						timedatectl set-local-rtc 1 <br>
+						hwclock --systohc
+					</p>
+
 
 				<h2>Music Settings</h2>
 					<p>sudo pacman -S pulseaudio pulseaudio-alsa kmix </p>
 
 				<h2>KDE apps theme</h2>
-					<p>sudo pacman -S lxappearance breeze breeze-gtk ttf-roboto </p>
+					<p>sudo pacman -S lxappearance kde-cli-tools xdg-open breeze breeze-gtk </p>
 
-				<h2>Install Emoji support</h2>
-					<p>sudo pacman -S noto-fonts-emoji </p>
+				<h2>Install Text / Emoji support</h2>
+					<p>sudo pacman -S ttf-fira-mono ttf-liberation ttf-droid noto-fonts-emoji </p>
 
 				<h2>Notifications</h2>
 					<p>sudo pacman -S notification-daemon dunst </p>
@@ -211,20 +181,34 @@
 				<h2>Keyring</h2>
 					<p>sudo pacman -S gnome-keyring libsecret seahorse </p>
 
-				<!-- ==========Milascenous=========-->
-				<h2>System Temperature</h2>	
-					<p>sudo pacman -S lm_sensors <br>
-						[In console terminal] sensors </p>
-				
 				<h2>Install VM</h2>
-					<p>sudo pacman -S virt-manager libvirt qemu qemu-arch-extra dnsmasq dmidecode bridge-utils ovmf vde2 openbsd-netcat <br>
-						sudo systemctl enable libvirtd.service <br>
-						sudo systemctl start libvirtd.service <br>
-						<a href="Configs/br10.xml" download="br10.xml">
-							sudo vim ~/br10.xml <br>
-						</a>
-						Add this to a vm autostart script <br>
-						sudo virsh net-start br10 </p>
+					<p>
+						sudo pacman -S virt-manager qemu qemu-arch-extra libvirt edk2-ovmf dnsmasq iptables-nft<br>
+						systemctl enable libvirtd.service <br>
+						systemctl start libvirtd.service <br>
+						sudo usermod -a -G libvirt <br>
+						sudo vim br10.xml <br>
+						sudo virsh net-define br10.xml <br>
+						sudo virsh net-start br10 <br>
+						sudo virsh net-autostart br10
+					</p>
+						
+
+						<!--
+				<h2>Disable Mouse Acceleration</h2>
+					<p>/etc/X11/xorg.conf.d/50-mouse-acceleration.conf </p>
+						<div class="textFile">
+							<p>Section "InputClass"
+								Identifier "My Mouse"
+								MatchIsPointer "yes"
+								Option "AccelerationProfile" "-1"
+								Option "AccelerationScheme" "none"
+								Option "AccelSpeed" "-1"
+							EndSection </p>
+						</div>
+						-->
+				
+				
 		</div>
 
 		<!-- ________________________________________________ GIT / GITHUB Guide for Linux ________________________________________________ -->
