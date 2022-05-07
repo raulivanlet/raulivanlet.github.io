@@ -1,4 +1,28 @@
 
+//Help make partitions
+function Lsblk(){
+	var1 = document.getElementById("textInput").value;
+	if(var1 == "sda"){
+		document.getElementById("cgdisk").innerHTML = "cgdisk /dev/" + var1;
+		document.getElementById("cgdisk1").innerHTML = "mkfs.fat -F32 /dev/" + var1 + "1";
+		document.getElementById("cgdisk2").innerHTML = "mkswap /dev/" + var1 + "2";
+		document.getElementById("cgdisk3").innerHTML = "mkfs.ext4 /dev/" + var1 + "3";
+		document.getElementById("cgdisk4").innerHTML = "mount /dev/" + var1 + "3 /mnt";
+		document.getElementById("cgdisk5").innerHTML = "swapon /dev/" + var1 + "2";
+		document.getElementById("cgdisk6").innerHTML = "mount /dev/" + var1 + "1 /mnt/boot";
+	}
+	else{
+		document.getElementById("cgdisk").innerHTML = "cgdisk /dev/" + var1;
+		document.getElementById("cgdisk1").innerHTML = "mkfs.fat -F32 /dev/" + var1 + "p1";
+		document.getElementById("cgdisk2").innerHTML = "mkswap /dev/" + var1 + "p2";
+		document.getElementById("cgdisk3").innerHTML = "mkfs.ext4 /dev/" + var1 + "p3";
+		document.getElementById("cgdisk4").innerHTML = "mount /dev/" + var1 + "p3 /mnt";
+		document.getElementById("cgdisk5").innerHTML = "swapon /dev/" + var1 + "p2";
+		document.getElementById("cgdisk6").innerHTML = "mount /dev/" + var1 +"p1 /mnt/boot";
+	}
+}
+
+
 function MenuButton1() {
 	ShowMenuButton1();
 	HideMenuButton2();

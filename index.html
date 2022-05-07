@@ -34,9 +34,13 @@
 			</h1>
 				<h2>Show Disks and Partitions</h2>
 					<p>lsblk </p>
+					<form id="Form1">
+						<input id="textInput" type="text">
+					</form>
+					<button onclick="Lsblk()">Save</button>
 				
 				<h2>Enter Partition Tool in Disk sda or nvme0n1</h2>
-					<p>cgdisk /dev/sda or nvme0n1 </p>
+					<p id="cgdisk">cgdisk /dev/sda </p>
 					<ul>
 						<li> 500M     ef00     boot</li>
 						<li> 20G       8200     swap</li>
@@ -44,15 +48,15 @@
 					</ul>
 
 				<h2>Format Partitions</h2>
-					<p>mkfs.fat -F32 /dev/sda1 <br>
-						mkswap /dev/sda2 <br>
-						mkfs.ext4 /dev/sda3 </p>
+					<p id="cgdisk1">mkfs.fat -F32 /dev/sda1 </p>
+					<p id="cgdisk2">mkswap /dev/sda2 </p>
+					<p id="cgdisk3">mkfs.ext4 /dev/sda3 </p>
 
 				<h2>Mount Partitions</h2>
-					<p>mount /dev/sda3 /mnt <br>
-						swapon /dev/sda2 <br>
-						mkdir -p /mnt/boot <br>
-						mount /dev/sda1 /mnt/boot </p>
+					<p id="cgdisk4">mount /dev/sda3 /mnt </p>
+					<p id="cgdisk5">swapon /dev/sda2 </p>
+					<p >mkdir -p /mnt/boot </p>
+					<p id="cgdisk6">mount /dev/sda1 /mnt/boot </p>
 
 				<h2>Preinstall Packages</h2>
 					<p>pacstrap /mnt base base-devel linux linux-firmware vim networkmanager </p>
@@ -154,7 +158,7 @@
 					</div>
 
 				<h2>Needed Apps</h2>
-					<p>sudo pacman -S konsole dolphin chromium git gwenview spectacle ark </p>
+					<p>sudo pacman -S konsole dolphin chromium git gwenview spectacle ark brightnessctl spectacle htop </p>
 
 				<h2>Network</h2>
 					<p>
