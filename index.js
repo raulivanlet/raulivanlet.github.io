@@ -48,7 +48,7 @@ function MenuButton4() {
 	HideMenuButton1();
 	HideMenuButton2();
 	HideMenuButton3();
-	ShowMenuButoon4();
+	ShowMenuButton4();
 	HideMenuButton5();}
 
 function MenuButton5() {
