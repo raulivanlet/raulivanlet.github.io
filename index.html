@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="utf-8">
-	<title>Linux Crashcourse</title>
+	<title>Arch Linux for Gaming</title>
 	<link rel="stylesheet" href="index.css">
 	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
 <body>
 	<header>
 		<div class="header">
-			<button onclick="MenuButton1()"> Install Arch CLI </button>
+			<button onclick="MenuButton1()"> Install Arch ISO </button>
 		</div>
 		<div class="header">
 			<button onclick="MenuButton2()"> Setup Arch </button>
@@ -27,100 +29,114 @@
 	</header>
 	<main>
 
-		<!-- ________________________________________________  Install Arch CLI ________________________________________________ -->
+		<!-- ________________________________________________  Install Arch ISO ________________________________________________ -->
 		<div id="menu1">
 			<h1>
-				<a href="https://quantum-mirror.hu/mirrors/pub/archlinux/iso/2022.04.05/archlinux-2022.04.05-x86_64.iso" download="archLinux"> Install Arch </a>
+				Install Arch for Gaming
 			</h1>
-				
+			<h2>The folowing guide will show you how to install Arch Linux for gaming alongside windows</h2>
+
+			<h2>Create Arch bootable USB stick</h2>
+			<p>You first need to download the Arch ISO from
+				<a href="https://geo.mirror.pkgbuild.com/iso/2022.06.01/archlinux-2022.06.01-x86_64.iso"
+					download="Arch ISO"> here
+				</a>
+				and rufus from
+				<a href="https://github.com/pbatard/rufus/releases/download/v3.18/rufus-3.18.exe" download="rufus"> here
+				</a>
+				burn the ISO on a USB stick.
+			</p>
+
 			<h2>Show Disks and Partitions</h2>
-				<p>lsblk </p>
-				<form id="Form1">
-					<input id="textInput" type="text">
-				</form>
-				<button onclick="Lsblk()">Save</button>
-				
+			<p>Get the name of the disk you want to install arch onto (name is either /dev/sdx or /dev/nvme0nx). Enter the
+				name of the partition in the box.</p>
+			<p>lsblk </p>
+			<form id="Form1">
+				<input id="textInput" type="text">
+			</form>
+			<button onclick="Lsblk()">Save</button>
+
 			<h2>Enter Partition Tool in Disk sda or nvme0n1</h2>
-				<p id="cgdisk">cgdisk /dev/sda </p>
-				<ul>
-					<li> 500M     ef00     boot</li>
-					<li> 20G       8200     swap</li>
-					<li> ALL      8300     arch</li>
-				</ul>
+			<p id="cgdisk">cgdisk /dev/sda </p>
+			<ul>
+				<li> 500M ef00 boot</li>
+				<li> 20G 8200 swap</li>
+				<li> ALL 8300 arch</li>
+			</ul>
 
 			<h2>Format Partitions</h2>
-				<p id="cgdisk1">mkfs.fat -F32 /dev/sda1 </p>
-				<p id="cgdisk2">mkswap /dev/sda2 </p>
-				<p id="cgdisk3">mkfs.ext4 /dev/sda3 </p>
+			<p id="cgdisk1">mkfs.fat -F32 /dev/sda1 </p>
+			<p id="cgdisk2">mkswap /dev/sda2 </p>
+			<p id="cgdisk3">mkfs.ext4 /dev/sda3 </p>
 
 			<h2>Mount Partitions</h2>
-				<p id="cgdisk4">mount /dev/sda3 /mnt </p>
-				<p id="cgdisk5">swapon /dev/sda2 </p>
-				<p >mkdir -p /mnt/boot </p>
-				<p id="cgdisk6">mount /dev/sda1 /mnt/boot </p>
+			<p id="cgdisk4">mount /dev/sda3 /mnt </p>
+			<p id="cgdisk5">swapon /dev/sda2 </p>
+			<p>mkdir -p /mnt/boot </p>
+			<p id="cgdisk6">mount /dev/sda1 /mnt/boot </p>
 
 			<h2>Preinstall Packages</h2>
-				<p>pacstrap /mnt base base-devel linux linux-firmware vim networkmanager </p>
+			<p>pacstrap /mnt base base-devel linux linux-firmware vim networkmanager os-prober ntfs-3g</p>
 
 			<h2>Create drives linkin points</h2>
-				<p>genfstab -U /mnt >> /mnt/etc/fstab </p>
+			<p>genfstab -U /mnt >> /mnt/etc/fstab </p>
 
 			<h2>Boot into arch instalation</h2>
-				<p>arch-chroot /mnt </p>
+			<p>arch-chroot /mnt </p>
 
 			<h2>Set local time</h2>
-				<p>ln -sf /usr/share/zoneinfo/Europe/Bucharest /etc/localtime </p>
+			<p>ln -sf /usr/share/zoneinfo/Europe/Bucharest /etc/localtime </p>
 
 			<h2>Set local date format , currency ,etc</h2>
-				<p>vim /etc/locale.gen </p>
-				<div class="textFile">
-					<p>en_US.UTF-8 UTF-8 </p>
-				</div>
-						
+			<p>vim /etc/locale.gen </p>
+			<div class="textFile">
+				<p>en_US.UTF-8 UTF-8 </p>
+			</div>
+
 			<h2>Set language</h2>
-				<p>vim /etc/locale.conf </p>
-				<div class="textFile">
-					<p>LANG=en_US.UTF-8 </p>
-				</div>
-				<p>locale-gen </p>
+			<p>vim /etc/locale.conf </p>
+			<div class="textFile">
+				<p>LANG=en_US.UTF-8 </p>
+			</div>
+			<p>locale-gen </p>
 
 			<h2>Create root user</h2>
-				<p>vim /etc/hostname </p>
-				<div class="textFile">
-					<p>root</p>
-				</div>
-				<p>passwd </p>
+			<p>vim /etc/hostname </p>
+			<div class="textFile">
+				<p>root</p>
+			</div>
+			<p>passwd </p>
 
 			<h2>Initial RAMdisk</h2>
-				<p>mkinitcpio -P </p>
+			<p>mkinitcpio -P </p>
 
 			<h2>Install GRUB</h2>
-				<p>
-					pacman -Sy grub efibootmgr <br>
-					grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB <br>
-					grub-mkconfig -o /boot/grub/grub.cfg
-				</p>
+			<p>
+				pacman -Sy grub efibootmgr <br>
+				grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB <br>
+				grub-mkconfig -o /boot/grub/grub.cfg
+			</p>
 
 			<h2>Enable Wifi / Ethernet</h2>
-				<p>systemctl enable NetworkManager </p>
+			<p>systemctl enable NetworkManager </p>
 
 			<h2>Add non-root User</h2>
-				<p>useradd -g users -G wheel,storage,power -m [username] <br>
-					passwd [username] </p>
+			<p>useradd -g users -G wheel,storage,power -m [username] <br>
+				passwd [username] </p>
 
 			<h2>Enable Non-Root User To Use SUDO</h2>
-				<p>visudo </p>
-				<div class="textFile">
-					<p>##Uncomment to allow members of group wheel to execute any command <br>
-						%wheel ALL=(ALL:ALL) ALL </p>
-				</div>
+			<p>visudo </p>
+			<div class="textFile">
+				<p>##Uncomment to allow members of group wheel to execute any command <br>
+					%wheel ALL=(ALL:ALL) ALL </p>
+			</div>
 
 			<h2>Finished Basic ARCH Install</h2>
-				<p>
-					exit <br>
-					umount -R /mnt <br>
-					reboot
-				</p>
+			<p>
+				exit <br>
+				umount -R /mnt <br>
+				reboot
+			</p>
 		</div>
 
 		<!-- ________________________________________________ Setup Arch ________________________________________________ -->
@@ -128,69 +144,70 @@
 			<h1>Setup ARCH</h1>
 
 			<h2>Git Download Link</h2>
-				<p>https://github.com/raulivanlet/ArchLinux.git</p>
+			<p>https://github.com/raulivanlet/ArchLinux.git</p>
 
 			<h2>Configure Grub</h2>
-				<p>
-					sudo pacman -S os-prober ntfs-3g <br>
-					sudo vim /etc/default/grub <br>
-					sudo grub-mkconfig -o /boot/grub/grub.cfg
-				</p>
+			<p>
+				sudo pacman -S os-prober ntfs-3g <br>
+				sudo vim /etc/default/grub <br>
+				sudo grub-mkconfig -o /boot/grub/grub.cfg
+			</p>
 
 			<h2>Install Drivers</h2>
-				<p>pacman -S xorg-server xorg-xrandr mesa xf86-video-amdgpu nvidia </p>
+			<p>pacman -S xorg-server xorg-xrandr mesa xf86-video-amdgpu nvidia </p>
 
 			<h2>Install I3</h2>
-				<p>pacman -S i3-gaps i3blocks i3status dmenu </p>
+			<p>pacman -S i3-gaps i3blocks i3status dmenu </p>
 
 			<h2>Display manager</h2>
+			<p>
+				sudo pacman -S lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings <br>
+				systemctl enable lightdm.service <br>
+				sudo vim /etc/lightdm/lightdm.conf
+			</p>
+			<div class="textFile">
 				<p>
-					sudo pacman -S lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings <br>
-					systemctl enable lightdm.service <br>
-					sudo vim /etc/lightdm/lightdm.conf
+					[Seat:*] <br>
+					greeter-session=lightdm-gtk-greeter
 				</p>
-				<div class="textFile">
-					<p>
-						[Seat:*] <br>
-						greeter-session=lightdm-gtk-greeter
-					</p>
-				</div>
+			</div>
 
 			<h2>Needed Apps</h2>
-				<p>sudo pacman -S alacritty thunar chromium git gwenview vlc spectacle ark brightnessctl htop kiwix-desktop </p>
+			<p>sudo pacman -S alacritty thunar chromium git gwenview vlc spectacle ark brightnessctl htop kiwix-desktop
+			</p>
 
 			<h2>Network</h2>
-				<p>
-					sudo pacman -S nftables network-manager-applet ntp <br>
-					systemctl enable ntpd.service <br>
-					systemctl start ntpd.service <br>
-					timedatectl set-local-rtc 1 <br>
-					hwclock --systohc
-				</p>
+			<p>
+				sudo pacman -S nftables network-manager-applet ntp <br>
+				systemctl enable ntpd.service <br>
+				systemctl start ntpd.service <br>
+				timedatectl set-local-rtc 1 <br>
+				hwclock --systohc
+			</p>
 
 			<h2>Music Settings</h2>
-				<p>sudo pacman -S pulseaudio pulseaudio-alsa kmix </p>
+			<p>sudo pacman -S pulseaudio pulseaudio-alsa kmix </p>
 
 			<h2>Install Text / Emoji support</h2>
-				<p>sudo pacman -S ttf-fira-mono ttf-liberation noto-fonts-emoji </p>
+			<p>sudo pacman -S ttf-fira-mono ttf-liberation noto-fonts-emoji </p>
 
 			<h2>Notifications</h2>
-				<p>sudo pacman -S notification-daemon dunst </p>
+			<p>sudo pacman -S notification-daemon dunst </p>
 
 			<h2>Keyring</h2>
-				<p>sudo pacman -S gnome-keyring libsecret seahorse </p>
+			<p>sudo pacman -S gnome-keyring libsecret seahorse </p>
 
 			<h2>Install VM</h2>
-				<p>
-					sudo pacman -S virt-manager qemu qemu-arch-extra libvirt edk2-ovmf dnsmasq iptables-nft<br>
-					systemctl enable libvirtd.service <br>
-					systemctl start libvirtd.service <br>
-					sudo usermod -a -G libvirt <br>
-					sudo vim br10.xml <br>
-					sudo virsh net-define br10.xml <br>
-					sudo virsh net-start br10 <br>
-					sudo virsh net-autostart br10
-				</p>
+			<p>
+				sudo pacman -S virt-manager qemu qemu-arch-extra libvirt edk2-ovmf dnsmasq iptables-nft<br>
+				systemctl enable libvirtd.service <br>
+				systemctl start libvirtd.service <br>
+				sudo usermod -a -G libvirt <br>
+				sudo vim br10.xml <br>
+				sudo virsh net-define br10.xml <br>
+				sudo virsh net-start br10 <br>
+				sudo virsh net-autostart br10
+			</p>
 		</div>
 
 		<!-- ________________________________________________ GIT / GITHUB Guide for Linux ________________________________________________ -->
@@ -198,29 +215,29 @@
 			<h1>GIT/Github</h1>
 
 			<h2>Install GIT</h2>
-				<p>sudo pacman -S git <br>
-					git version </p>
-				
+			<p>sudo pacman -S git <br>
+				git version </p>
+
 			<h2>Setup config</h2>
-				<p>git config --global user.email "[user email]" <br>
-					git config --global user.name "[name for commits ,not github username]" <br>
-					git config --global credential.helper cache <br>
-					git config --global credential.helper 'cache --timeout=7200' </p>
+			<p>git config --global user.email "[user email]" <br>
+				git config --global user.name "[name for commits ,not github username]" <br>
+				git config --global credential.helper cache <br>
+				git config --global credential.helper 'cache --timeout=7200' </p>
 
 			<h2>Clone repo</h2>
-				<p>git clone [github/AUR https/SSH link] </p>
+			<p>git clone [github/AUR https/SSH link] </p>
 
 			<h2>Check new changes</h2>
-				<p>git status </p>
+			<p>git status </p>
 
 			<h2>Save all changes</h2>
-				<p>git add -A </p>
+			<p>git add -A </p>
 
 			<h2>Add changes to local repo</h2>
-				<p>git commit -m "Updated for ..." </p>
+			<p>git commit -m "Updated for ..." </p>
 
 			<h2>Add changes to cloud repo</h2>
-				<p>git push </p>
+			<p>git push </p>
 		</div>
 
 		<!-- ________________________________________________ Build Software From Source ________________________________________________ -->
@@ -228,17 +245,17 @@
 			<h1>Build from Source</h1>
 
 			<h2>Download Libs</h2>
-				<p>sudo pacman -S dase-devel </p>
+			<p>sudo pacman -S dase-devel </p>
 
 			<h2>Clone App</h2>
-				<p>git clone [url]</p>
+			<p>git clone [url]</p>
 
 			<h2>Navigate to Folder</h2>
-				<p>cd [folder]/[folder]/[folder]</p>
+			<p>cd [folder]/[folder]/[folder]</p>
 
 			<h2>Build from Source</h2>
-				<p>less PKGBUILD <br>
-					makepkg -si </p>
+			<p>less PKGBUILD <br>
+				makepkg -si </p>
 		</div>
 
 		<!-- ________________________________________________ Compile C / C++ / C# Code witn MinGW ________________________________________________ -->
@@ -246,21 +263,22 @@
 			<h1>Compile and Execute</h1>
 
 			<h2>Install C/C++ compilers</h2>
-				<p>sudo pacman -S gcc </p>
+			<p>sudo pacman -S gcc </p>
 
 			<h2>Compile C/C++ Files</h2>
-				<p>[gcc / g++] -o [executable file] [MainFile.c/.cpp] </p>
+			<p>[gcc / g++] -o [executable file] [MainFile.c/.cpp] </p>
 
 			<h2>Execute the Executable File</h2>
-				<p>./[executable filename] </p>
+			<p>./[executable filename] </p>
 
 			<h2>Download Arduino IDE and add user to group</h2>
-				<p>ls -l /dev/ttyUSB0* <br>
-					sudo gpasswd -a raul [uucp] </p>
+			<p>ls -l /dev/ttyUSB0* <br>
+				sudo gpasswd -a raul [uucp] </p>
 		</div>
 
 	</main>
 
-	<script src="index.js"></script> 
+	<script src="index.js"></script>
 </body>
+
 </html>
